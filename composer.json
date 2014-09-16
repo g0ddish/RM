@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
         "barryvdh/laravel-debugbar": "1.*",
-        "cartalyst/sentry": "2.1.*"
+        "cartalyst/sentry": "2.1.*",
+        "fitztrev/laravel-html-minify": "1.*"
 	},
 	"autoload": {
 		"classmap": [
