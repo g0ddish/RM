@@ -3,9 +3,9 @@ ResearchMonster
 
 ResearchMonster
 
-This is Laravel v4.2.8
+This is Laravel, LaravelDebugBar & Sentry
 
-This project requires composer https://getcomposer.org/doc/00-intro.md
+This project requires composer https://getcomposer.org/
 
 ```
 composer self-update
@@ -15,6 +15,14 @@ composer update
 
 This will install the project dependancies.
 
+Create an SQL database and import this file
+```
++-- vendor\cartalyst\sentry\schema\mysql.sql
+```
+Edit this file with the correct info
+```
++-- app\config\database.php
+```
 As of PHP 5.4.0 you can use the built in web server for development.
 
 ```
