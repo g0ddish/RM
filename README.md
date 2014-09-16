@@ -10,7 +10,7 @@ This project requires composer https://getcomposer.org/doc/00-intro.md
 ```
 composer self-update
 composer install
-compser update
+composer update
 ```
 
 This will install the project dependancies.
