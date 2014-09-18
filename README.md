@@ -3,6 +3,8 @@ ResearchMonster
 
 ResearchMonster
 
+![alt text](https://travis-ci.org/g0ddish/ResearchMonster.svg?branch=master "Travis CI")
+
 This is Laravel, LaravelDebugBar & Sentry
 
 This project requires composer https://getcomposer.org/
