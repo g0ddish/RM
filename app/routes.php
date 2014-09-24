@@ -13,4 +13,6 @@
 
 
 Route::resource('/', 'HomeController');
+Route::resource('/login', 'LoginController');
+
 //Route::resource('nerds', 'NerdController');
