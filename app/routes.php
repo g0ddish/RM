@@ -15,6 +15,8 @@
 Route::resource('/', 'HomeController');
 Route::resource('/login', 'LoginController');
 Route::resource('/register', 'RegisterController');
+Route::resource('/profile', 'ProfileController');
+Route::resource('/projects', 'ProjectController');
 Route::get('/logout', function()
 {
     Sentry::logout();
