@@ -19,5 +19,11 @@ class HomeController extends BaseController {
     {
         $this->layout->title = APPNAME;
         $this->layout->content = View::make('hello');
+       /* Sentry::register(array(
+            'student_id' => '100871258',
+            'email' => 'ysprikut@georgebrown.ca',
+            'password' => 'lol',
+            'activated' => '1',
+        ));*/
     }
 }
