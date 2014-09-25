@@ -19,7 +19,7 @@ This will install the project dependancies.
 
 Create an SQL database and import this file
 ```
-+-- vendor\cartalyst\sentry\schema\mysql.sql
++-- ourdb.sql
 ```
 Edit this file with the correct info
 ```
