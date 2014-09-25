@@ -9,11 +9,23 @@ class BaseController extends Controller {
 	 */
 	protected function setupLayout()
 	{
-        if ( ! is_null($this->layout))
-		{
+        if ( ! Sentry::check())
+        {
+            if ( ! is_null($this->layout))
+            {
+                $this->layout = View::make($this->layout);
+            }
+        }
+        else
+        {
+            // User is logged in
+            $this->layout = "layouts.masterUser";
+            if ( ! is_null($this->layout))
+            {
+                $this->layout = View::make($this->layout);
+            }
+        }
 
-			$this->layout = View::make($this->layout);
-		}
 	}
 
 }

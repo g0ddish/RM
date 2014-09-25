@@ -5,6 +5,7 @@
 
     <div class="col-md-4">
          <img style="position:relative;z-index: 100; margin-top:30px" src="{{asset('img/bots/monster11.png')}}" alt="Monster 1" />
+         {{{ $message or 'Default' }}}
     </div>
 
     <div class="col-md-4" style="margin-top: 30px">

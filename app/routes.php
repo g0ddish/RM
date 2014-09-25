@@ -14,5 +14,9 @@
 
 Route::resource('/', 'HomeController');
 Route::resource('/login', 'LoginController');
-
 Route::resource('/register', 'RegisterController');
+Route::get('/logout', function()
+{
+    Sentry::logout();
+    return Redirect::to('./')->with('message', "<div class='alert alert-success'>Logged out</div>");
+});
