@@ -5,6 +5,9 @@
     {{ HTML::script('js/bootstrap.min.js') }}
     {{ HTML::style('css/bootstrap.min.css') }}
     <style>
+    body{
+    background-color: #55AA55;
+    }
 .navbar-custom {
   background-color: #116611;
   border-color: #0c4a0c;
