@@ -18,6 +18,8 @@ Route::resource('/register', 'RegisterController');
 Route::resource('/profile', 'ProfileController');
 Route::resource('/projects', 'ProjectController');
 Route::resource('/control', 'AdminController');
+Route::post('/control/groups', 'AdminController@storeGroup');
+
 Route::get('/logout', function()
 {
     Sentry::logout();

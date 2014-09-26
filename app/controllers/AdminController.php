@@ -36,9 +36,78 @@ class AdminController extends \BaseAuthController {
 	 */
 	public function store()
 	{
-        $this->layout->title = APPNAME;
-        $this->layout->content = View::make('login.store');
+
+
 	}
+
+    public function storeGroup(){
+
+        $this->layout->title = APPNAME;
+        if (Input::has('groupname') && !Input::has('editid'))
+        {
+            $name = Input::get('groupname');
+            $am = Input::get('adminmenu');
+            $am = isset($am) ? 1 : 0;
+            try {
+                $group = Sentry::createGroup(array(
+                    'name' => $name,
+                    'permissions' => array(
+                        'admin' => $am,
+                        'users' => 1,
+                    ),
+                ));
+            }
+        catch (Cartalyst\Sentry\Groups\NameRequiredException $e)
+        {
+            echo 'Name field is required';
+        }
+        catch (Cartalyst\Sentry\Groups\GroupExistsException $e)
+        {
+            $id = Input::get('editid');
+
+            $group = Sentry::findGroupByName($id);
+                $group->name = $name;
+                $group->permissions = array(
+                    'admin' => $am,
+                    'users' => 1,
+                );
+        }
+            $groups = Sentry::findAllGroups();
+            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
+            $this->layout->content->with('message', $group);
+        }elseif(Input::has('editid')){
+
+            $id = Input::get('editid');
+            $name = Input::get('groupname');
+            $am = Input::get('adminmenu');
+            $am = isset($am) ? 1 : 0;
+            $group = Sentry::findGroupByName($id);
+            $group->name = $name;
+            $group->permissions = array(
+                'admin' => $am,
+                'users' => 1,
+            );
+            if ($group->save())
+            {
+                // Group information was updated
+            }
+            else
+            {
+                // Group information was not updated
+            }
+            $groups = Sentry::findAllGroups();
+            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
+            $this->layout->content->with('message', $group);
+        }elseif(Input::has('delid')){
+            $id = Input::get('delid');
+            $group = Sentry::findGroupByName($id);
+            $group->delete();
+            $groups = Sentry::findAllGroups();
+            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
+        }
+        $groups = Sentry::findAllGroups();
+        $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
+    }
 
 
 	/**
@@ -51,8 +120,8 @@ class AdminController extends \BaseAuthController {
 	{ //GET
         if($id == "groups") {
             $this->layout->title = APPNAME;
-            $this->layout->content = View::make('main.admin.groups');
-        }
+            $groups = Sentry::findAllGroups();
+            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);        }
 	}
 
 
