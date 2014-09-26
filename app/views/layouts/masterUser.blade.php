@@ -4,6 +4,8 @@
     {{ HTML::script('js/jquery.min.js') }}
     {{ HTML::script('js/bootstrap.min.js') }}
     {{ HTML::style('css/bootstrap.min.css') }}
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+
     <style>
     body{
     background-color: #55AA55;
@@ -135,11 +137,11 @@
       </button>
       <a class="navbar-brand" href="#"><img class="img-responsive" src="{{asset('img/monsters/mon2.png')}}"/></a>
     </div>
-    <?php $user = Sentry::getUser(); ?>
+    <?php $user = Sentry::getUser();  $segment = Request::segment(1); ?>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="<?php echo action('HomeController@index'); ?>">Home</a></li>
+        <li class="<?php  if($segment=="")echo "active"?>"><a href="<?php echo action('HomeController@index'); ?>">Home</a></li>
         <li><a href="<?php echo action('HomeController@index'); ?>">Projects</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
@@ -155,7 +157,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li><a href="<?php echo action('ProfileController@index'); echo '/'.$user->student_id;?>"><?php echo $user->student_id;?></a></li>
+       <li class="<?php  if($segment=="profile")echo "active"?>"><a href="<?php echo action('ProfileController@index'); echo '/'.$user->student_id;?>"><?php echo $user->student_id;?></a></li>
        <li><a href="./logout">Logout</a></li>
       </ul>
 
