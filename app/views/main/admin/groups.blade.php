@@ -99,7 +99,8 @@
 
  });
   </script>
-<div class="col-md-2 pull-right" style="padding-top:60px; padding-bottom: 10px;"><a  data-toggle="modal" data-target="#myModal" class="btn btn-block btn-default">Add New Group</a></div>
+  <div class="col-md-2" style="padding-top:60px; padding-bottom: 10px;"><a href="./" class="btn btn-block btn-warning"><span class="glyphicon glyphicon-arrow-left"></span> Admin Panel</a></div>
+<div class="col-md-2 pull-right" style="padding-top:60px; padding-bottom: 10px;"><a  data-toggle="modal" data-target="#myModal" class="btn btn-block btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Add New Group</a></div>
 <div class="col-md-12">
 <p>
 <?php  if(isset($group)){ echo "<div class='alert alert-success'>New group created successfully!";}?>

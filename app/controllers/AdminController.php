@@ -40,7 +40,110 @@ class AdminController extends \BaseAuthController {
 
 	}
 
-    public function storeGroup(){
+    public function storeUser()
+    {
+        $this->layout->title = APPNAME;
+        if (Input::has('sid') && Input::has('email') && Input::has('pass') && !Input::has('edit-field') && strlen(Input::get('sid')) == 9)
+        {
+           $sid = Input::get('sid');
+           $email = Input::get('email');
+           $pass = Input::get('pass');
+           $fname = Input::get('fname');
+           $lname = Input::get('lname');
+
+            try
+            {
+                // Create the user
+                $user = Sentry::createUser(array(
+                    'student_id' => $sid,
+                    'email'     => $email,
+                    'password'  => $pass,
+                    'activated' => true,
+                    'first_name' => $fname,
+                    'last_name' => $lname,
+                ));
+
+                $permissions = Input::get('permissions');
+                foreach($permissions as $id=>$permission){
+                    if($permission == "on") {
+                        $group = Sentry::findGroupById($id);
+                        $user->addGroup($group);
+                    }
+                }
+                if ($user->save())
+                {
+                    // User information was updated
+                }
+                else
+                {
+                    // User information was not updated
+                }
+
+            }
+            catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
+            {
+                echo 'Login field is required.';
+            }
+            catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+            {
+                echo 'Password field is required.';
+            }
+            catch (Cartalyst\Sentry\Users\UserExistsException $e)
+            {
+                echo 'User with this login already exists.';
+            }
+            catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e)
+            {
+                echo 'Group was not found.';
+            }
+
+
+
+            $users = Sentry::findAllUsers();
+            $this->layout->content = View::make('main.admin.users')->with('users', $users);
+        }elseif(Input::has('edit-field')){
+            $eid = Input::get('edit-field');
+            $user = Sentry::findUserById($eid);
+            $sid = Input::get('sid');
+            $email = Input::get('email');
+            $pass = Input::get('pass');
+            $fname = Input::get('fname');
+            $lname = Input::get('lname');
+
+            $user->student_id = $sid;
+            $user->email = $email;
+            $user->password = $pass;
+            $user->first_name = $fname;
+            $user->last_name = $lname;
+                $permissions = Input::get('permissions');
+                foreach($permissions as $id=>$permission){
+                    if($permission == "on") {
+                        $group = Sentry::findGroupById($id);
+                        $user->addGroup($group);
+                    }
+                }
+                if ($user->save())
+                {
+                    // User information was updated
+                }
+                else
+                {
+                    // User information was not updated
+                }
+
+            $users = Sentry::findAllUsers();
+            $this->layout->content = View::make('main.admin.users')->with('users', $users);
+        }elseif(Input::has('delid')){
+            $eid = Input::get('delid');
+            $user = Sentry::findUserById($eid);
+            $user->delete();
+            $users = Sentry::findAllUsers();
+            $this->layout->content = View::make('main.admin.users')->with('users', $users);
+        }
+    }
+
+
+        public function storeGroup(){
 
         $this->layout->title = APPNAME;
         if (Input::has('groupname') && !Input::has('editid'))
@@ -121,7 +224,12 @@ class AdminController extends \BaseAuthController {
         if($id == "groups") {
             $this->layout->title = APPNAME;
             $groups = Sentry::findAllGroups();
-            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);        }
+            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
+        }elseif($id == "users"){
+            $this->layout->title = APPNAME;
+            $users = Sentry::findAllUsers();
+            $this->layout->content = View::make('main.admin.users')->with('users', $users);
+        }
 	}
 
 

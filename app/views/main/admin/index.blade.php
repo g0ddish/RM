@@ -11,8 +11,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
-                          <a href="#" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Users</a>
-                          <a href="./control/groups" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Groups</a>
+                          <a href="<?php echo action('AdminController@show', 'users');?>" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Users</a>
+                          <a href="<?php echo action('AdminController@show', 'groups');?>" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Groups</a>
                           <a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span> <br/>Apps</a>
                           <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-bookmark"></span> <br/>Bookmarks</a>
                           <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>Reports</a>
