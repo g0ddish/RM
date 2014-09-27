@@ -157,7 +157,8 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li class="<?php  if($segment=="profile")echo "active"?>"><a href="<?php echo action('ProfileController@index'); echo '/'.$user->student_id;?>"><?php echo $user->student_id;?></a></li>
+       <li class="<?php  if(Request::segment(2)== Sentry::getUser()->student_id)echo "active"; ?>"><a href="<?php echo action('ProfileController@index'); echo '/'.$user->student_id; ?>"><?php echo $user->student_id;?></a></li>
+       <?php  if(Request::segment(2)== Sentry::getUser()->student_id){ echo "<li><a href=\"./edit\">Edit Profile</a></li>";} ?>
        <li><a href="./logout">Logout</a></li>
       </ul>
 

@@ -1,5 +1,5 @@
 <div class="col-md-12" style="background-color: #55AA55; padding-top:60px;">
-   {{ isset($name) ? $name : "<div class='alert alert-warning'>You haven't filled out all of your profile yet. <a href='./profile'>Do that here.</a></div>" }}
+   {{ isset($name) ? $name : "<div class='alert alert-warning'>You haven't filled out all of your profile yet. <a href='./profile/edit'>Do that here.</a></div>" }}
    <div class="col-md-9">
       <div class="panel panel-default">
          <div class="panel-body">
