@@ -50,7 +50,16 @@ class ProfileController extends \BaseAuthController {
 	public function show($id)
 	{ //GET
         $this->layout->title = APPNAME;
-        $this->layout->content = View::make('main.profile.index');
+        try
+        {
+          //  $currentuser = Sentry::getUser();
+            $user = Sentry::findUserByLogin($id);
+        }
+        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+        {
+            echo 'User was not found.';
+        }
+        $this->layout->content = View::make('main.profile.index')->with('user', $user);
 	}
 
 
