@@ -53,7 +53,9 @@ class ProfileController extends \BaseAuthController {
 
         if($id == "edit"){
             $user = Sentry::getUser();
-            $this->layout->content = View::make('main.profile.edit')->with('user', $user);
+            $programs = Program::all();
+            $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs);
+
         }else {
             try {
                 //  $currentuser = Sentry::getUser();
