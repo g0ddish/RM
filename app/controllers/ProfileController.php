@@ -79,6 +79,41 @@ class ProfileController extends \BaseAuthController {
 		//
 	}
 
+    public function storeUser(){
+        $user = Sentry::getUser();
+        if(Input::has('del-prog')){
+            $del = Input::get('del-prog');
+            $ar = array();
+            foreach($del as $key=>$val){
+                $ar[] = $key;
+            }
+            foreach($ar as $delid){
+                $progs = Program::where('ProgramName', '=', $delid)->get();
+                foreach($progs as $prog){
+                    $user->programs()->detach($prog->id);
+                }
+            }
+
+
+        }elseif(Input::has('program') && !Input::has('del-prog')){
+            $id = Input::get('program');
+            $progs = Program::where('ProgramName', '=', $id)->take(1)->get();
+            foreach($progs as $prog){
+                $user->programs()->attach($prog->id);
+            }
+
+        }
+
+       //$user = Sentry::getUser();
+       //$prgs= $user->programs()->get(); var_dump($prgs); $user->programs()->attach(714);
+        $this->layout->title = APPNAME;
+        $programs = Program::all();
+
+
+        $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs);
+
+    }
+
 
 	/**
 	 * Update the specified resource in storage.

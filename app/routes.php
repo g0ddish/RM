@@ -20,6 +20,7 @@ Route::resource('/projects', 'ProjectController');
 Route::resource('/control', 'AdminController');
 Route::post('/control/groups', 'AdminController@storeGroup');
 Route::post('/control/users', 'AdminController@storeUser');
+Route::post('/profile/edit', 'ProfileController@storeUser');
 
 Route::get('/logout', function()
 {

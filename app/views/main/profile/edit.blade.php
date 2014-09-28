@@ -18,26 +18,50 @@ $progs[] = $program->ProgramName;
   });
   </script>
 <div class="col-md-12" style="height: 100%; background-color: #55AA55; padding-top:60px;">
-     <div class="ui-widget col-md-4">
-       <label for="tags">Tags: </label>
-       <input class="form-control" id="tags">
-     </div>
+
 <div class="col-md-6 col-md-offset-3">
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Basic Info</h3>
   </div>
   <div class="panel-body"><?php// var_dump($programs[0]); ?>
-   <form role="form">
-     <div class="form-group">
-       <label for="exampleInputEmail1">Email address</label>
-       <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-     </div>
+   <div class="form-group">
+          <label for="sid">Student ID</label>
+          <p id="sid"><?php echo $user->student_id; ?></p>
+          </div>
+      {{ Form::open(array('url' => 'profile/edit')) }}
+   <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" value="<?php echo $user->first_name; ?>" class="form-control" id="fname" name="fname" placeholder="Enter First Name">
+        </div>
+           <div class="form-group">
+                  <label for="lname">Last Name</label>
+                  <input type="text" value="<?php echo $user->last_name; ?>" class="form-control" id="lname" name="lname" placeholder="Enter Last Name">
+                </div>
+        <div class="form-group">
+               <label for="lname">Email address</label>
+               <input type="text" class="form-control" value="<?php echo $user->email; ?>" id="lname" name="lname" placeholder="Enter Email">
+             </div>
+       <div class="form-group" style="">
+          <label for="tags" style="display: block;">Program</label>
+          <?php $prgs= $user->programs()->get();
 
-     <div class="form-group">
-       <label for="exampleInputPassword1">Password</label>
-       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-     </div>
+           foreach($prgs as $program){
+
+           ?>
+           <div class="checkbox">
+               <label>
+                 <input type="checkbox" name="del-prog[<?php echo $program->ProgramName;?>]"  value="" > <?php echo $program->ProgramName;?>
+               </label>
+             </div>
+            <?php
+           }
+           ?>
+            <p class="help-block">Checked Programs will be removed.</p>
+         <input class="form-control" style="" name="program" id="tags">
+        </div>
+
+
      <div class="form-group">
        <label for="exampleInputFile">File input</label>
        <input type="file" id="exampleInputFile">

@@ -57,7 +57,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      {{ Form::open(array('url' => 'control/groups')) }}
+      {{ Form::open(array('url' => 'control/groups')) }}$prgs= $user->programs()->get(); var_dump($prgs); $user->programs()->attach(125);
       <div class="modal-body">
 
           <div class="form-group">

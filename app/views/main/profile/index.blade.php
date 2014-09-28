@@ -1,6 +1,6 @@
 <div class="col-md-12" style="height: 100%; background-color: #55AA55; padding-top:60px;">
 <div class="col-md-3">
- <img height="256" width="256" src="{{asset('img/avatars/10633980_566385213488545_6934520668813179828_o.jpg')}}"/>
+<img src="http://placehold.it/256x256">
 </div>
 <div class="col-md-3">
 <div class="panel panel-default">
@@ -13,7 +13,8 @@
    $groups = $user->getGroups();
    foreach($groups as $group):
     ?>
-    <span class="label label-primary"><?php echo $group->name; ?></span>
+    <span style="position: relative" class="label label-primary"><?php if($group->name == "Administrator"):?><img width="16px" class='img-responsive' style="position:absolute;  left: -9px;
+                                                                                                                                                         top: -5px" src="{{asset('img/monsters/mon2small.png')}}"/><?php endif; echo $group->name; ?></span>
 
 <?php endforeach; ?>
   </div>
