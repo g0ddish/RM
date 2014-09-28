@@ -6,6 +6,7 @@ class ProfileController extends \BaseAuthController {
      */
     protected  $layout = 'layouts.masterUser';
 
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -13,6 +14,10 @@ class ProfileController extends \BaseAuthController {
 	 */
 	public function index()
 	{
+        $redir = $this->check();
+        if(isset($redir)){
+            return $redir;
+        }
         $this->layout->title = APPNAME;
         $this->layout->content = View::make('main.profile.index');
 	}
@@ -41,6 +46,8 @@ class ProfileController extends \BaseAuthController {
 	}
 
 
+
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -49,22 +56,30 @@ class ProfileController extends \BaseAuthController {
 	 */
 	public function show($id)
 	{ //GET
-        $this->layout->title = APPNAME;
-
-        if($id == "edit"){
-            $user = Sentry::getUser();
-            $programs = Program::all();
-            $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs);
-
+        $redir = $this->check();
+        if($redir){
+            return $redir;
         }else {
-            try {
-                //  $currentuser = Sentry::getUser();
-                $user = Sentry::findUserByLogin($id);
-            } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-                echo 'User was not found.';
+
+            $this->layout->title = APPNAME;
+
+            if ($id == "edit") {
+                $user = Sentry::getUser();
+                $programs = Program::all();
+                $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs);
+
+            } else {
+                try {
+                    //  $currentuser = Sentry::getUser();
+                    $user = Sentry::findUserByLogin($id);
+                    $userprograms = $user->programs();
+                } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+                    echo 'User was not found.';
+                }
+                $this->layout->content = View::make('main.profile.index')->with('user', $user);
             }
-            $this->layout->content = View::make('main.profile.index')->with('user', $user);
         }
+
 	}
 
 
@@ -80,6 +95,10 @@ class ProfileController extends \BaseAuthController {
 	}
 
     public function storeUser(){
+        $redir = $this->check();
+        if(isset($redir)){
+            return $redir;
+        }
         $user = Sentry::getUser();
         if(Input::has('del-prog')){
             $del = Input::get('del-prog');
@@ -103,6 +122,44 @@ class ProfileController extends \BaseAuthController {
             }
 
         }
+
+        if(Input::has('email') && Input::has('fname') && Input::has('lname')){
+            $email = Input::get('email');
+            $fname = Input::get('fname');
+            $lname = Input::get('lname');
+            $user->email = $email;
+            $user->first_name = $fname;
+            $user->last_name = $lname;
+            $user->save();
+        }
+
+        if (Input::hasFile('photo') && Input::file('photo')->isValid())
+        {
+            $formatTable = array(
+                'image/jpeg',
+                'image/png',
+                'image/gif',
+                'image/tga',
+                'image/tif',
+                'image/bmp',
+            );
+            $file = Input::file('photo');
+            $mime = $file->getMimeType();
+
+            foreach($formatTable as $mimecheck){
+                if($mime == $mimecheck){
+                    $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+                    $destinationPath = "public/uploads";
+
+                    $succes = $file->move($destinationPath, $filename);
+                    $bodytag = str_replace("public/", "", $succes->getPathname());
+                    $user->avatar = $bodytag;
+                    $user->save();
+                }
+            }
+        }
+
+
 
        //$user = Sentry::getUser();
        //$prgs= $user->programs()->get(); var_dump($prgs); $user->programs()->attach(714);

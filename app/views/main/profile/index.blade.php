@@ -1,6 +1,10 @@
 <div class="col-md-12" style="height: 100%; background-color: #55AA55; padding-top:60px;">
 <div class="col-md-3">
+<?php if(!is_null($user->avatar)): ?>
+       {{ HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive', 'width' => '256px', 'height' => '256px')) }}
+<?php else: ?>
 <img src="http://placehold.it/256x256">
+<?php endif; ?>
 </div>
 <div class="col-md-3">
 <div class="panel panel-default">
@@ -11,6 +15,10 @@
   <p><h3><span class="label label-default"><?php echo $user->first_name . " " . $user->last_name; ?></span></h3></p>
    <?php
    $groups = $user->getGroups();
+   $uprograms = $user->programs()->get();
+   foreach($uprograms as $program){
+   echo "<p><span class='label label-default'>$program->ProgramName</span></p>";
+   }
    foreach($groups as $group):
     ?>
     <span style="position: relative" class="label label-primary"><?php if($group->name == "Administrator"):?><img width="16px" class='img-responsive' style="position:absolute;  left: -9px;

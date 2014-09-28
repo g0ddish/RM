@@ -2,6 +2,15 @@
 
 class BaseAuthController extends Controller {
 
+
+    public function check(){
+        if ( ! Sentry::check())
+        {
+            $this->layout = null;
+            return Redirect::action('HomeController@index')->with('message', "<div class='alert alert-danger'>You don't have access to this page.</div>");
+        }
+    }
+
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -9,18 +18,9 @@ class BaseAuthController extends Controller {
 	 */
 	protected function setupLayout()
 	{
-        if ( ! Sentry::check())
-        {
-            return Redirect::to('./')->with('message', "<div class='alert alert-danger'>You don't have access to this page.</div>");
-        }
-        else
-        {
-            if ( ! is_null($this->layout))
-            {
+            if (!is_null($this->layout)) {
                 $this->layout = View::make($this->layout);
             }
-        }
-
 	}
 
 }
