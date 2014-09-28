@@ -29,7 +29,7 @@ $progs[] = $program->ProgramName;
           <label for="sid">Student ID</label>
           <p id="sid"><?php echo $user->student_id; ?></p>
           </div>
-      {{ Form::open(array('url' => 'profile/edit')) }}
+      {{ Form::open(array('url' => 'profile/edit', 'files' => true)) }}
    <div class="form-group">
           <label for="fname">First Name</label>
           <input type="text" value="<?php echo $user->first_name; ?>" class="form-control" id="fname" name="fname" placeholder="Enter First Name">
@@ -39,8 +39,8 @@ $progs[] = $program->ProgramName;
                   <input type="text" value="<?php echo $user->last_name; ?>" class="form-control" id="lname" name="lname" placeholder="Enter Last Name">
                 </div>
         <div class="form-group">
-               <label for="lname">Email address</label>
-               <input type="text" class="form-control" value="<?php echo $user->email; ?>" id="lname" name="lname" placeholder="Enter Email">
+               <label for="email">Email address</label>
+               <input type="email" class="form-control" value="<?php echo $user->email; ?>" id="email" name="email" placeholder="Enter Email">
              </div>
        <div class="form-group" style="">
           <label for="tags" style="display: block;">Program</label>
@@ -63,8 +63,14 @@ $progs[] = $program->ProgramName;
 
 
      <div class="form-group">
-       <label for="exampleInputFile">File input</label>
-       <input type="file" id="exampleInputFile">
+       <div class="col-md-12">
+       <div class="col-md-4">
+       {{ HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive')) }}
+       </div>
+       </div>
+       <label for="photo">File input</label>
+
+        {{ Form::file('photo') }}
        <p class="help-block">Example block-level help text here.</p>
      </div>
      <div class="checkbox">
@@ -84,8 +90,10 @@ $progs[] = $program->ProgramName;
   <div class="panel-heading">
     <h3 class="panel-title">Summary</h3>
   </div>
-  <div class="panel-body">
-<textarea class="ckeditor" name="editor1"></textarea>
+  <div class="panel-body">{{ Form::open(array('url' => 'profile/edit')) }}
+<textarea class="ckeditor" name="editor1">{{$user->summary}}</textarea>
+<button class="btn btn-default" type="submit">Save</button>
+{{ Form::close() }}
   </div>
 </div>
 </div>
@@ -94,9 +102,15 @@ $progs[] = $program->ProgramName;
   <div class="panel-heading">
     <h3 class="panel-title">Experience</h3>
   </div>
-  <div class="panel-body">
-<textarea class="ckeditor" name="editor1"></textarea>
+  <div class="panel-body">{{ Form::open(array('url' => 'profile/edit')) }}
+<textarea class="ckeditor" name="editor2">{{$user->experience}}</textarea>
+<button class="btn btn-default" type="submit">Save</button>
+{{ Form::close() }}
+
+
   </div>
 </div>
 </div>
+
+
 </div>

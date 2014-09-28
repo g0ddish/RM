@@ -44,7 +44,7 @@
     <h3 class="panel-title">Summary</h3>
   </div>
   <div class="panel-body">
-    Panel content
+    {{$user->summary}}
   </div>
 </div>
 </div>
@@ -64,7 +64,7 @@
     <h3 class="panel-title">Experience</h3>
   </div>
   <div class="panel-body">
-    Panel content
+    {{$user->experience}}
   </div>
 </div>
 </div>

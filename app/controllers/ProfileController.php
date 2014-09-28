@@ -100,6 +100,16 @@ class ProfileController extends \BaseAuthController {
             return $redir;
         }
         $user = Sentry::getUser();
+        if(Input::has('editor1')){
+            $summary = Input::get('editor1');
+            $user->summary = $summary;
+        }
+        if(Input::has('editor2')){
+            $experience = Input::get('editor2');
+            $user->experience = $experience;
+        }
+
+
         if(Input::has('del-prog')){
             $del = Input::get('del-prog');
             $ar = array();
@@ -130,7 +140,7 @@ class ProfileController extends \BaseAuthController {
             $user->email = $email;
             $user->first_name = $fname;
             $user->last_name = $lname;
-            $user->save();
+
         }
 
         if (Input::hasFile('photo') && Input::file('photo')->isValid())
@@ -154,11 +164,11 @@ class ProfileController extends \BaseAuthController {
                     $succes = $file->move($destinationPath, $filename);
                     $bodytag = str_replace("public/", "", $succes->getPathname());
                     $user->avatar = $bodytag;
-                    $user->save();
+
                 }
             }
         }
-
+        $user->save();
 
 
        //$user = Sentry::getUser();

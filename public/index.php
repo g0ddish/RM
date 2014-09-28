@@ -5,7 +5,7 @@
  * @package  Laravel
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
-define("APPNAME", "ResearchMonster v.1");
+define("APPNAME", "ResearchMonster v.6");
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

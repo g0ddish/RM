@@ -13,6 +13,13 @@ class AdminController extends \BaseAuthController {
 	 */
 	public function index()
 	{
+        if ( Sentry::getUser()->hasAnyAccess(['admin']) )
+        {
+
+        }elseif ( Sentry::getUser()->hasAnyAccess(['users']) )
+        {
+            return Redirect::to('/')->with('message', "<div class='alert alert-info'>ur a user harry</div>");
+        }
         $this->layout->title = APPNAME;
         $this->layout->content = View::make('main.admin.index');
 	}
@@ -116,6 +123,10 @@ class AdminController extends \BaseAuthController {
             $user->first_name = $fname;
             $user->last_name = $lname;
                 $permissions = Input::get('permissions');
+                $grps = Sentry::findAllGroups();
+                foreach($grps as $grp){
+                    $user->removeGroup($grp);
+                }
                 foreach($permissions as $id=>$permission){
                     if($permission == "on") {
                         $group = Sentry::findGroupById($id);

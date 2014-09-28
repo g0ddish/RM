@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2014 at 02:09 AM
+-- Generation Time: Sep 29, 2014 at 01:35 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -675,6 +675,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `avatar` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `summary` text COLLATE utf8_unicode_ci NOT NULL,
+  `experience` text COLLATE utf8_unicode_ci NOT NULL,
   `permissions` text COLLATE utf8_unicode_ci,
   `activated` tinyint(4) NOT NULL DEFAULT '0',
   `activation_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -696,11 +698,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `student_id`, `email`, `avatar`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `created_at`, `updated_at`) VALUES
-(2, '100864964', 'alex@solutionblender.ca', '', '$2y$10$s6H.ce/zSiKgC4.tEOpvRe9XL70qn59Wbp6fIWOZDKPo3HGB9ZhGy', NULL, 1, NULL, NULL, '2014-09-27 23:37:04', '$2y$10$7DtXlpjdkAEBc8q6bQBFTO5q0xUTZs8CpkGIYBYewkRs0XKDY0mD6', NULL, 'Alex', 'Hughes', '2014-09-25 21:34:32', '2014-09-28 03:37:04'),
-(3, '100871258', 'ysprikut@georgebrown.ca', '', '$2y$10$03EYt.19FqJa31ANrQy4.OUuzfsdu9Ia/Q1jTTRW/WOZhVdfjg0U6', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-09-25 21:35:26', '2014-09-25 21:35:26'),
-(4, '100000000', 'frank@newemail', '', '$2y$10$ye./eF6HBejOo8nJAz/3zevYG0D/yDmcCgDKLksVZz.Rw.XA8BZ8a', NULL, 1, NULL, NULL, NULL, NULL, NULL, 'NotFrank', 'Edited', '2014-09-28 01:29:31', '2014-09-28 02:14:26'),
-(10, '100123123', 'proof@acl.com', '', '$2y$10$xNevth7wwvmpWE7DGq6gIufTo617ajKSraUs3ywUnzh5pOe.6NYbK', NULL, 1, NULL, NULL, NULL, NULL, NULL, 'Working', 'ACL', '2014-09-28 01:37:15', '2014-09-28 01:37:15');
+INSERT INTO `users` (`id`, `student_id`, `email`, `avatar`, `password`, `summary`, `experience`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `created_at`, `updated_at`) VALUES
+(2, '100864964', 'alex@solutionblender.ca', 'uploads\\e5M0AeHpEkAU0Ztm2oVc.png', '$2y$10$xNvk8acZ4bHUYldOKtdiQ.I.BAo4NQ63ligl4OrtiF0lYpdKz1lJS', '<p><strong>alex@solutionblender.ca</strong></p>\r\n\r\n<p><strong>Objective</strong></p>\r\n\r\n<p>To secure a summer position where I can utilize my strong computer skills as I work to complete my post-secondary education at George Brown College, preferably in the web and mobile field.</p>\r\n\r\n<p><strong>Education</strong></p>\r\n\r\n<p>George Brown College &ndash; 2 of 3 years complete towards an Advance Programmer Analyst Diploma</p>\r\n\r\n<p>Charlottetown Rural High School &ndash; Grade 12 Academic &ndash; Graduated July 2011.&nbsp;&nbsp;</p>\r\n\r\n<p><strong>Programming Competency</strong></p>\r\n\r\n<ul>\r\n	<li>Familiar with Terminal/DOS, Git, Linux flavors, &amp; VPS administration.</li>\r\n	<li>PHP, Composer, Laravel, PHPFuel &amp; Phalcon.</li>\r\n	<li>HTML, CSS, JS, jQuery &amp; played with AngularJS</li>\r\n	<li>C#, ASP &amp; WCF</li>\r\n	<li>Java/Android &amp; PhoneGap</li>\r\n</ul>\r\n\r\n<p><strong>Accomplishments</strong></p>\r\n\r\n<ul>\r\n	<li>Represented Prince Edward Island on the Men&rsquo;s Fencing Team at the Canada Winter Games in Whitehorse, 2006.</li>\r\n	<li>Class 5 Drivers License (Standard and Automatic Transmission) and Defensive Driving Course.</li>\r\n	<li>Attained the rank of Flight Sergeant with 60 Confederation Squadron, Royal Canadian Air Cadets.</li>\r\n	<li>Kiwanis Club Award for Community Service PE (2007).</li>\r\n	<li>Lieutenant Governor Student Aide de Camp Award PE(2007).</li>\r\n	<li>Sherwood Parkdale Minor Soccer League PE(Ages 6-15).</li>\r\n	<li>Attended UPEI courses Information Technology 111D and Student Video Game Programming (2009).</li>\r\n	<li>Strong computer literacy skills.</li>\r\n</ul>\r\n\r\n<p><strong>References</strong> :&nbsp; Available upon request</p>\r\n', '<p><strong>Work Experience</strong></p>\r\n\r\n<p><strong>Canadian Food Inspection Agency (CFIA)</strong>: Inspection Assistant&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Sep 2012 &ndash; Dec 2012</strong></p>\r\n\r\n<ul>\r\n	<li>Collecting soil samples from various potato fields around Prince Edward Island.</li>\r\n	<li>Filling in forms/documentation related to the samples.</li>\r\n	<li>Loading and transporting samples from fields to local CFIA offices.</li>\r\n	<li>Transporting samples from local offices to the CFIA labs in Charlottetown, PEI for testing.</li>\r\n	<li>Security cleared to &lsquo;Reliability&rsquo; status level by the Federal Government.</li>\r\n</ul>\r\n\r\n<p><strong>Murphy&rsquo;s Pharmacy (Charlottetown)</strong>:&nbsp; Cashier / Merchandiser&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Nov. 2010 - Sep 2012</strong></p>\r\n\r\n<ul>\r\n	<li>Processed cash, debit and credit transactions.</li>\r\n	<li>Dealt effectively with customers&rsquo; questions and concerns.</li>\r\n	<li>Maintained clean working environment.</li>\r\n	<li>Stocking, facing, organizing, and cleaning shelves and aisles.</li>\r\n	<li>Building in-store displays.</li>\r\n	<li>Providing technical support &lsquo;as needed&rsquo;&nbsp; for cash registers and other computer equipment</li>\r\n</ul>\r\n\r\n<p><strong>Catherine Parkman Law Office</strong>: Office Assistant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Jun. 2009 - Aug. 2010</strong></p>\r\n\r\n<ul>\r\n	<li>File and organize information</li>\r\n	<li>Run errands to banks (deposits), law firms, court house and registry office</li>\r\n	<li>Data entry as needed</li>\r\n	<li>IT support as required</li>\r\n	<li>Operate office equipment such as scanners, copiers and fax machines</li>\r\n	<li>Familiar with MS Office suite of applications</li>\r\n	<li>Worked to support other office staff&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</li>\r\n</ul>\r\n\r\n<p><strong>Shoppers Drug Mart (Charlottetown) </strong>Merchandiser<strong>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mar. 2009 - Apr. 2009</strong></p>\r\n\r\n<ul>\r\n	<li>Short term contract setting up new store (Queen Street Store). Working with a team we were responsible for setting up displays, stocking shelves and other duties as assigned by the Team Lead in order to have the store ready for the Grand Opening.</li>\r\n</ul>\r\n', NULL, 1, NULL, NULL, '2014-09-28 19:24:16', '$2y$10$IDXBaFICbV5FOsZwDipBHewjA9WXWatnMX7E/0TZa5u23zc0tbWUG', NULL, 'Alex', 'Hughes', '2014-09-25 21:34:32', '2014-09-29 02:56:57'),
+(3, '100871258', 'ysprikut@georgebrown.ca', '', '$2y$10$03EYt.19FqJa31ANrQy4.OUuzfsdu9Ia/Q1jTTRW/WOZhVdfjg0U6', '', '', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-09-25 21:35:26', '2014-09-25 21:35:26'),
+(4, '100000000', 'frank@newemail', '', '$2y$10$ye./eF6HBejOo8nJAz/3zevYG0D/yDmcCgDKLksVZz.Rw.XA8BZ8a', '', '', NULL, 1, NULL, NULL, NULL, NULL, NULL, 'NotFrank', 'Edited', '2014-09-28 01:29:31', '2014-09-28 02:14:26'),
+(10, '100123123', 'proof@acl.com', '', '$2y$10$xNevth7wwvmpWE7DGq6gIufTo617ajKSraUs3ywUnzh5pOe.6NYbK', '', '', NULL, 1, NULL, NULL, NULL, NULL, NULL, 'Working', 'ACL', '2014-09-28 01:37:15', '2014-09-28 01:37:15');
 
 -- --------------------------------------------------------
 
@@ -713,7 +715,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   `user_id` int(10) unsigned NOT NULL,
   `group_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `users_groups`
@@ -726,8 +728,28 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (4, 4, 2),
 (5, 4, 3),
 (6, 4, 4),
-(7, 2, 1),
-(8, 2, 4);
+(10, 2, 1),
+(11, 2, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_programs`
+--
+
+CREATE TABLE IF NOT EXISTS `users_programs` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `program_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `users_programs`
+--
+
+INSERT INTO `users_programs` (`id`, `user_id`, `program_id`) VALUES
+(14, 2, 248);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
