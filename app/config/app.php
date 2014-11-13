@@ -123,9 +123,11 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
         'Cartalyst\Sentry\SentryServiceProvider',
-        'Fitztrev\LaravelHtmlMinify\LaravelHtmlMinifyServiceProvider'
+        'Fitztrev\LaravelHtmlMinify\LaravelHtmlMinifyServiceProvider',
+        'Intervention\Image\ImageServiceProvider'
 
-	),
+
+    ),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -192,7 +194,9 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
         'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        'Image' => 'Intervention\Image\Facades\Image'
 
-	),
+
+    ),
 
 );

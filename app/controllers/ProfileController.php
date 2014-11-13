@@ -164,7 +164,7 @@ class ProfileController extends \BaseAuthController {
                     $succes = $file->move($destinationPath, $filename);
                     $bodytag = str_replace("public/", "", $succes->getPathname());
                     $user->avatar = $bodytag;
-
+                    $img = Image::make($bodytag)->resize(612, 612)->save();
                 }
             }
         }
