@@ -8,3 +8,4 @@ script: composer install
 before_script:
   - "mkdir -p ~/.composer"
   - cp .travis.composer.config.json ~/.composer/config.json
+  - composer self-update
