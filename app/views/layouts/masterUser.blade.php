@@ -137,16 +137,27 @@
       </button>
       <a class="navbar-brand" href="#"><img class="img-responsive" src="{{asset('img/monsters/mon2.png')}}"/></a>
     </div>
-    <?php $user = Sentry::getUser();  $segment = Request::segment(1); ?>
+    <?php $user = Sentry::getUser();  $segment = Request::segment(1);
+        $permis = $user->getMergedPermissions();
+      ?>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="<?php  if($segment=="")echo "active"?>"><a href="<?php echo action('HomeController@index'); ?>">Home</a></li>
-        <li><a href="<?php echo action('HomeController@index'); ?>">Projects</a></li>
+        <li class="<?php  if($segment=="")echo "active"?>"><a href="<?php echo action('index'); ?>">Home</a></li>
+        <li><a href="<?php echo action('index'); ?>">Projects</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
+          <?php
+             foreach($permis as $perm => $val){
+            if($perm == "crudprojects"){
+            echo "<li><a href='./'>Add Project</a></li>";
+            echo "<li><a href='./'>View My Projects</a></li>";
+            }
+            }
+            ?>
+
+
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li class="divider"></li>

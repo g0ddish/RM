@@ -38,6 +38,12 @@
                       <input type="checkbox" name="adminmenu"> Admin Menu
                     </label>
                   </div>
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" name="crudprojects"> Add/Edit Projects
+                      </label>
+                  </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

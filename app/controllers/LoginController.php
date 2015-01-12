@@ -53,8 +53,8 @@ class LoginController extends \BaseController {
                 'password' => $pass,
             );
             $user = Sentry::authenticate($credentials, false);
-            $this->layout->content = View::make('login.success')->with('user', $user);
-            echo "<meta http-equiv=\"refresh\" content=\"5\"; />";
+            return Redirect::to('./');
+
 
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)

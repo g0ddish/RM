@@ -161,6 +161,8 @@ class AdminController extends \BaseAuthController {
         {
             $name = Input::get('groupname');
             $am = Input::get('adminmenu');
+            $crudp = Input::get('crudprojects');
+            $crudp = isset($crudp) ? 1: 0;
             $am = isset($am) ? 1 : 0;
             try {
                 $group = Sentry::createGroup(array(
@@ -168,6 +170,7 @@ class AdminController extends \BaseAuthController {
                     'permissions' => array(
                         'admin' => $am,
                         'users' => 1,
+                        'crudprojects' => $crudp
                     ),
                 ));
             }
@@ -184,6 +187,7 @@ class AdminController extends \BaseAuthController {
                 $group->permissions = array(
                     'admin' => $am,
                     'users' => 1,
+                    'crudprojects' => $crudp,
                 );
         }
             $groups = Sentry::findAllGroups();
@@ -194,12 +198,15 @@ class AdminController extends \BaseAuthController {
             $id = Input::get('editid');
             $name = Input::get('groupname');
             $am = Input::get('adminmenu');
+            $crudp = Input::get('crudprojects');
+            $crudp = isset($crudp) ? 1: 0;
             $am = isset($am) ? 1 : 0;
             $group = Sentry::findGroupByName($id);
             $group->name = $name;
             $group->permissions = array(
                 'admin' => $am,
                 'users' => 1,
+                'crudprojects' => $crudp,
             );
             if ($group->save())
             {
