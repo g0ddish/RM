@@ -4,7 +4,7 @@
 
 This project, like most PHP projects, requires [Composer](https://getcomposer.org)
 composer 
-By Alex and Keegan
+By Alex Hughes and Keegan Caradonna
 
 ###Dependencies
 
