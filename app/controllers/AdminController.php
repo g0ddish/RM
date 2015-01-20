@@ -13,15 +13,18 @@ class AdminController extends \BaseAuthController {
 	 */
 	public function index()
 	{
-        if ( Sentry::getUser()->hasAnyAccess(['admin']) )
+        $user =  Sentry::getUser();
+        if ($user != null && $user->hasAnyAccess(['admin']) )
         {
-
-        }elseif ( Sentry::getUser()->hasAnyAccess(['users']) )
+            $this->layout->title = APPNAME;
+            $this->layout->content = View::make('main.admin.index');
+        }elseif ($user != null && $user->hasAnyAccess(['users']) )
         {
             return Redirect::to('/')->with('message', "<div class='alert alert-info'>ur a user harry</div>");
+        }else{
+            return Redirect::to('/');
         }
-        $this->layout->title = APPNAME;
-        $this->layout->content = View::make('main.admin.index');
+
 	}
 
 

@@ -147,7 +147,7 @@
         <li class="<?php  if($segment=="")echo "active"?>"><a href="<?php echo action('index'); ?>">Home</a></li>
         <li><a href="<?php echo action('index'); ?>">Projects</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
           <?php
              foreach($permis as $perm => $val){

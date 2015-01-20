@@ -42,15 +42,15 @@
             <h3 class="panel-title">Project Tags</h3>
          </div>
          <div class="panel-body">
+             <?php   $skills =  Skill::all(); $one = true; ?>
             <div class="list-group">
-               <a href="#" class="list-group-item active">
-               PHP
-               </a>
-               <a href="#" class="list-group-item">C#</a>
-               <a href="#" class="list-group-item">Balsamiq</a>
-               <a href="#" class="list-group-item">AutoCAD</a>
-               <a href="#" class="list-group-item">SQL</a>
-               <a href="#" class="list-group-item">More...</a>
+                @foreach ($skills as $skill)
+                    <?php if($one): ?>
+                    <a href="#" class="list-group-item active">{{{ $skill->name }}}</a>
+                    <?php $one = false; else: ?>
+                        <a href="#" class="list-group-item">{{{ $skill->name }}}</a>
+                    <?php endif; ?>
+                @endforeach
             </div>
          </div>
       </div>

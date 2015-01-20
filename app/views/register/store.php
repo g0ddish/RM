@@ -18,6 +18,7 @@
           {
               $user = Sentry::createUser(array(
                   'student_id'     => Input::get('id'),
+                  'email' => Input::get('email'),
                   'password'  => $pass,
                   'activated' => true,
               ));
@@ -32,7 +33,6 @@
           }
           catch (Cartalyst\Sentry\Users\UserExistsException $e)
           {
-
               echo 'User with this login already exists.';
           }
           Mail::send('emails.welcome', array('id' => Input::get('id'), 'pass' => $pass), function ($message) {

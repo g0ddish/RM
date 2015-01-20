@@ -8,4 +8,9 @@ class User extends SentryModel {
     {
         return $this->belongsToMany('Program', 'users_programs', 'user_id', 'program_id');
     }
+
+    public function skills()
+    {
+        return $this->belongsToMany('Skill', 'users_skills', 'user_id', 'skill_id');
+    }
 }
