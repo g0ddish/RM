@@ -32,6 +32,7 @@
           }
           catch (Cartalyst\Sentry\Users\UserExistsException $e)
           {
+
               echo 'User with this login already exists.';
           }
           Mail::send('emails.welcome', array('id' => Input::get('id'), 'pass' => $pass), function ($message) {
