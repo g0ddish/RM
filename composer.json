@@ -8,7 +8,9 @@
         "barryvdh/laravel-debugbar": "1.*",
         "cartalyst/sentry": "2.1.*",
         "fitztrev/laravel-html-minify": "1.*",
-        "intervention/image": "2.*"
+        "intervention/image": "2.*",
+	    "guzzlehttp/guzzle": "~4.0"
+
 	},
 	"autoload": {
 		"classmap": [

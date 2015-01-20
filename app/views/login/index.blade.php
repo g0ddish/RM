@@ -4,7 +4,7 @@
     <div class="panel-body">
 {{ Form::open(array('action' => 'LoginController@store')) }}
    <div class="form-group">
-     <label for="id">ID</label>
+     <label for="id">Student ID</label>
      <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID">
    </div>
    <div class="form-group">

@@ -5,10 +5,11 @@
     {{ HTML::script('js/bootstrap.min.js') }}
     {{ HTML::style('css/bootstrap.min.css') }}
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <style>
     body{
     background-color: #55AA55;
+      font-family: 'Oswald', sans-serif;
     }
 .navbar-custom {
   background-color: #116611;
@@ -168,9 +169,11 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li class="<?php  if(Request::segment(2)== Sentry::getUser()->student_id)echo "active"; ?>"><a href="<?php echo action('ProfileController@index'); echo '/'.$user->student_id; ?>"><?php echo $user->student_id;?></a></li>
+       <li class="<?php  if(Request::segment(2)== Sentry::getUser()->student_id)echo "active"; ?>"><?php
+         echo link_to('profile/'.$user->student_id, $user->student_id, $attributes = array(), $secure = null);
+         ?></li>
        <?php  if(Request::segment(2)== Sentry::getUser()->student_id){ echo "<li><a href=\"./edit\">Edit Profile</a></li>";} ?>
-       <li><a href="./logout">Logout</a></li>
+       <li><?php echo link_to('logout', "Logout");?></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->

@@ -37,7 +37,7 @@ class RegisterController extends \BaseController {
 	public function store()
 	{
         $this->layout->title = APPNAME;
-        $this->layout->content = View::make('login.store');
+        $this->layout->content = View::make('register.store');
 	}
 
 
