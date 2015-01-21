@@ -1,3 +1,25 @@
+{{ HTML::script('js/tag-it.js') }}
+{{ HTML::style('css/jquery.tagit.css') }}
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+
+<script>
+    if (window.jQuery) {
+        // jQuery is loaded
+    } else {
+alert("nope");
+    }
+
+    $( document ).ready(function() {
+        $("#myTags").tagit({
+            autocomplete: {delay: 0, minLength: 0},
+            availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"],
+            fieldName: "skills"
+        });
+
+
+    });
+
+</script>
 <div class="col-md-12" style="height: 100%; background-color: #55AA55; padding-top:60px;">
 
 <div class="col-md-6 col-md-offset-3">
@@ -12,12 +34,15 @@
               <input type="text" class="form-control" id="title" placeholder="Enter Title">
           </div>
           <div class="form-group">
-              <label for="skills">Skills</label>
-              <input type="text" class="form-control" id="skills" placeholder="Required Skills">
+              <label for="myTags">Skills</label>
+              <ul id="myTags">
+                  <!-- Existing list items will be pre-added to the tags -->
+              </ul>
           </div>
           <div class="form-group">
               <label for="desc">Description</label>
-              <textarea name="desc" id="desc" class="form-control"></textarea>
+
+
           </div>
           <div class="form-group">
               <label for="exampleInputFile">Associated Files</label>

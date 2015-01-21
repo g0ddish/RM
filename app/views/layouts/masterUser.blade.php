@@ -3,7 +3,8 @@
     <title>{{ $title }}</title>
     {{ HTML::script('js/jquery.min.js') }}
     {{ HTML::script('js/bootstrap.min.js') }}
-    {{ HTML::style('css/bootstrap.min.css') }}
+
+  {{ HTML::style('css/bootstrap.min.css') }}
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <style>
@@ -142,12 +143,13 @@
       <a class="navbar-brand" href="#"><img class="img-responsive" src="{{asset('img/monsters/mon2.png')}}"/></a>
     </div>
     <?php $user = Sentry::getUser();
-          $segment = Request::segment(1); ?>
+          $segment = Request::segment(1);
+          $segment2 = Request::segment(2); ?>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="<?php  if($segment=="")echo "active"?>"><a href="<?php echo action('index'); ?>">Home</a></li>
-        <li><a href="<?php echo action('index'); ?>">Projects</a></li>
+        <li class="<?php  if($segment=="projects")echo "active"?>"><?php echo link_to('projects', "Projects", $attributes = array(), $secure = null)."</li>"; ?>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
