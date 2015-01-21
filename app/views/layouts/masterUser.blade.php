@@ -124,6 +124,9 @@
   color: #c0c0c0;
 }
     </style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -138,9 +141,8 @@
       </button>
       <a class="navbar-brand" href="#"><img class="img-responsive" src="{{asset('img/monsters/mon2.png')}}"/></a>
     </div>
-    <?php $user = Sentry::getUser();  $segment = Request::segment(1);
-        $permis = $user->getMergedPermissions();
-      ?>
+    <?php $user = Sentry::getUser();
+          $segment = Request::segment(1); ?>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -150,11 +152,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
           <?php
-             foreach($permis as $perm => $val){
-            if($perm == "crudprojects"){
-              echo "<li>".link_to('projects/add', "Add Project", $attributes = array(), $secure = null)."</li>";
+            if($user->hasProjectCRUDPermission()){
+              echo "<li>".link_to('projects/create', "Add Project", $attributes = array(), $secure = null)."</li>";
               echo "<li>".link_to('projects/mine', "View My Projects", $attributes = array(), $secure = null)."</li>";
-            }
             }
             ?>
             <li class="divider"></li>

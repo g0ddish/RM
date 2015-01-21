@@ -5,6 +5,7 @@
     {{ HTML::script('js/bootstrap.min.js') }}
     {{ HTML::style('css/bootstrap.min.css') }}
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
         body{
