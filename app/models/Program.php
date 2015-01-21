@@ -10,5 +10,4 @@ class Program extends Eloquent {
         return $this->belongsToMany('User');
     }
 
-
 }
