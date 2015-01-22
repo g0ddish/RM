@@ -1,22 +1,19 @@
 {{ HTML::script('js/tag-it.js') }}
 {{ HTML::style('css/jquery.tagit.css') }}
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-
 <script>
-    if (window.jQuery) {
-        // jQuery is loaded
-    } else {
-alert("nope");
-    }
-
+        <?php
+             $array = array();
+        foreach($skills as $skill => $val){
+           $array[] = $val->name;
+        }
+        ?>
     $( document ).ready(function() {
         $("#myTags").tagit({
             autocomplete: {delay: 0, minLength: 0},
-            availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"],
+            availableTags: {{ json_encode($array)  }},
             fieldName: "skills"
         });
-
-
     });
 
 </script>

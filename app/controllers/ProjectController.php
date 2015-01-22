@@ -31,7 +31,7 @@ class ProjectController extends \BaseAuthController {
 	public function create()
 	{
 		$this->layout->title = APPNAME;
-		$this->layout->content = View::make('main.project.create');
+		$this->layout->content = View::make('main.project.create')->with('skills', Skill::all());
 	}
 
 
