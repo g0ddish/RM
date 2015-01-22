@@ -1,5 +1,6 @@
 <style>
     .event .panel-body {
+        color: #ffffff;
         background: #A0CFA0;
         border: 1px solid #55AA55;
         padding:0;
@@ -66,7 +67,7 @@
         padding: 3px;
         width: 5em;
         border-radius: 50%;
-        border: 1px solid #CCC;
+        border: 1px solid #55AA55;
         box-sizing: content-box;
         z-index: 1;
         top:4px;
@@ -91,6 +92,7 @@
         color: white;
     }
     .tab-content {
+        color: #000000;
         background: white;
         border-radius: 0 10px;
         padding: 10px;
@@ -120,7 +122,7 @@
         .event .profile {
             position: relative;
             z-index: 0;
-            border-left: 2px solid white;
+            border-left: 2px solid #55AA55;
             top: -5px;
             padding-left: 55px;
             height: 100%;
@@ -128,10 +130,8 @@
         }
         .event .profile strong {
             display: block;
-            color: white;
+            color: #ffffff;
             font:20px bold 'Fredoka One', serif;
-            -webkit-text-stroke-width: .6px;
-            -webkit-text-stroke-color: #55AA55;
             margin-bottom: 5px;
         }
         .event .author .profile i {
@@ -154,7 +154,7 @@
             padding: 3px;
             width: 30%;
             border-radius: 50%;
-            border: 1px solid #CCC;
+            border: 1px solid #55AA55;
             box-sizing: content-box;
             z-index: 1;
             top:13px;
