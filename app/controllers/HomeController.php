@@ -29,7 +29,7 @@ class HomeController extends BaseController {
 
             // User is logged in
             $this->layout->title = APPNAME;
-            $this->layout->content = View::make('main.index');
+            $this->layout->content = View::make('main.index')->with('projects', Project::all());
           /*  $user = Sentry::getUser();
 
             $skillz = $user->skills;

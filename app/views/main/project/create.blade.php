@@ -12,7 +12,7 @@
         $("#myTags").tagit({
             autocomplete: {delay: 0, minLength: 0},
             availableTags: {{ json_encode($array)  }},
-            fieldName: "skills"
+            fieldName: "skills[]"
         });
     });
 
@@ -25,22 +25,29 @@
     <h3 class="panel-title">Create Project</h3>
   </div>
   <div class="panel-body">
-      {{ Form::open(array('url' => 'project/store')) }}
+      {{ Form::open(array('url' => 'projects')) }}
           <div class="form-group">
               <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="Enter Title">
+              <input type="text" class="form-control" name="title" id="title" placeholder="">
+              <p class="help-block">Ex. Web Design for Prestige Worldwide</p>
           </div>
           <div class="form-group">
               <label for="myTags">Skills</label>
               <ul id="myTags">
                   <!-- Existing list items will be pre-added to the tags -->
               </ul>
+              <p class="help-block">Ex. AutoCAD, PHP, Java</p>
           </div>
           <div class="form-group">
               <label for="desc">Description</label>
-
+                    <textarea name="desc" class="form-control"></textarea>
 
           </div>
+      <div class="form-group">
+          <label for="start">Start Date</label>
+          <input type="text" class="form-control" name="start" id="start" placeholder="">
+
+      </div>
           <div class="form-group">
               <label for="exampleInputFile">Associated Files</label>
               <input type="file" id="exampleInputFile">

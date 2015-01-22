@@ -42,8 +42,23 @@ class ProjectController extends \BaseAuthController {
 	 */
 	public function store()
 	{
-        $this->layout->title = APPNAME;
-        $this->layout->content = View::make('login.store');
+
+		if (Input::has('title') && Input::has('skills') && Input::has('desc') && Input::has('start'))
+		{
+			$title = Input::get('title');
+			$skills = Input::get('skills');
+			$desc = Input::get('desc');
+			$start = Input::get('start');
+			$project = new Project();
+			$project->title = $title;
+			$project->description = $desc;
+			$project->start_date = strtotime($start);
+			$project->user()->associate(Sentry::getUser());
+			$project->save();
+			$project->skills()->sync($skills);
+			$this->layout->title = APPNAME;
+			$this->layout->content = View::make('main.project.store');
+		}
 	}
 
 
