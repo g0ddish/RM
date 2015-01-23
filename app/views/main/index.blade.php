@@ -185,8 +185,9 @@
    <div class="col-md-9">
       <div class="panel panel-default">
          <div class="panel-body">
+             <?php $i = 0; ?>
                  @foreach ($projects as $project)
-
+                     <?php $i++; ?>
                  <div class="panel panel-default event">
                      <div class="panel-body">
                          <div class="rsvp col-xs-2 col-sm-2">
@@ -201,18 +202,22 @@
                              <div class="visible-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elitero..</div>
                              <div class="hidden-xs">
                                  <ul class="nav nav-tabs" role="tablist">
-                                     <li role="presentation" class="active"><a href="#location" aria-controls="location" role="tab" data-toggle="tab">Description</a></li>
-                                     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Skills</a></li>
+                                     <li role="presentation" class="active"><a href="#desc-{{$i}}" aria-controls="desc-{{$i}}" role="tab" data-toggle="tab">Description</a></li>
+                                     <li role="presentation"><a href="#skills-{{$i}}" aria-controls="skills-{{$i}}" role="tab" data-toggle="tab">Skills</a></li>
                                  </ul>
                                  <!-- Tab panes -->
                                  <div class="tab-content">
-                                     <div role="tabpanel" class="tab-pane active" id="location">Location</div>
-                                     <div role="tabpanel" class="tab-pane" id="profile">
-                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis feugiat sem, eu sagittis libero. Duis non odio ut nibh volutpat tempus eget interdum elit.
+                                     <div role="tabpanel" class="tab-pane active" id="desc-{{$i}}">
+                                         {{{ $project->description }}}
+
                                      </div>
+                                     <div role="tabpanel" class="tab-pane" id="skills-{{$i}}">
+                                         @foreach ($project->skills()->get() as $skill)
+                                             <p class="label label-success">{{{ $skill->name }}}</p>
+                                         @endforeach                                     </div>
                                  </div>
                              </div><?php $authors = $project->user()->get();
-                             $primary;
+                             $primary;  //I was inebriated don't laugh
                              $creator;
                              foreach ($authors as $author){
                                  $creator = $author->first_name . " " . $author->last_name;

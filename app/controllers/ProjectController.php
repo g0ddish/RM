@@ -55,7 +55,12 @@ class ProjectController extends \BaseAuthController {
 			$project->start_date = strtotime($start);
 			$project->user()->associate(Sentry::getUser());
 			$project->save();
-			$project->skills()->sync($skills);
+			$skillarr = array();
+			foreach($skills as $skill){
+				$skillarr[] = Skill::where('name', '=', $skill)->firstOrFail()->id;
+			}
+			$project->skills()->sync($skillarr);
+			//var_dump($skills);
 			$this->layout->title = APPNAME;
 			$this->layout->content = View::make('main.project.store');
 		}
