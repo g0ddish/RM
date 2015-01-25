@@ -14,7 +14,7 @@ By Alex Hughes and Keegan Caradonna
   - jQuery
   - CKEditor
 
-After cloning the repository run.
+After cloning the repository run
 
 ```
 composer install
@@ -22,34 +22,32 @@ composer install
 
 ###Database
 
-Create an SQL database and import the file ourdb.sql.
+Create an SQL database and import the file ourdb.sql
 
 After edit app\config\database.php with the correct info
 
-As of PHP 5.4.0 you can use the built in web server for development.
+As of PHP 5.4.0 you can use the built in web server for development
 
 ```
 php artisan serve
 ```
 
 ### Version
-0.5.0
+0.7.0
 
 
 ### Development
 
-Want to contribute? Send me an email.
+Want to contribute? Send me an email
 
 
 ### Todo's
 
- - Write Tests
- - Rethink Github Save
+ - Be a boss like usual
  - Add Code Comments
- - Add Night Mode
 
 License
 ----
 
-We retain all rights.
+We retain all rights
 

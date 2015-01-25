@@ -122,6 +122,7 @@ class AdminController extends \BaseAuthController {
 
             $user->student_id = $sid;
             $user->email = $email;
+            if(!empty($pass))
             $user->password = $pass;
             $user->first_name = $fname;
             $user->last_name = $lname;

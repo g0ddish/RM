@@ -12,6 +12,181 @@
     background-color: #55AA55;
       font-family: 'Oswald', sans-serif;
     }
+    .event .panel-body {
+      color: #ffffff;
+      background: #A0CFA0;
+      border: 1px solid #55AA55;
+      padding:0;
+      margin:0;
+      height:86px;
+    }
+    .event .panel-body > div {
+      padding: 0 10px;
+    }
+    .event .panel-body .rsvp {
+      border-left: none;
+      padding: 0;
+      text-align: center;
+      position: relative;
+      background: #66B266;
+      color: white;
+      height: 100%;
+    }
+
+    .event .rsvp > div {
+      font-size: 12px;
+      position: absolute;
+      bottom: 0;
+      background: #55AA55;
+      width: 100%;
+    }
+
+    .event .rsvp i {
+      font-size: 2em;
+      display: block;
+      position:relative;
+      top:17%;
+      margin-bottom:5px;
+    }
+    .event .rsvp i:last-of-type{
+      font-size:1.5em;
+      margin-top:-23px;
+    }
+
+    .event .rsvp span {
+      cursor: pointer;
+      padding: 0 5px;
+      margin: 5px 0;
+      width:45%;
+    }
+    .event .rsvp span:first-of-type{
+      border-right: 1px solid white;
+    }
+    .event .rsvp span:hover{
+      color: #55AA55;
+    }
+
+    .event .info{
+      font-size: 28px;
+    }
+
+    .event .info > div, .event .info > ul{
+      font-size: 12px;
+    }
+
+    .event .author .profile-image {
+      position: absolute;
+      background: white;
+      padding: 3px;
+      width: 5em;
+      border-radius: 50%;
+      border: 1px solid #55AA55;
+      box-sizing: content-box;
+      z-index: 1;
+      top:4px;
+    }
+
+    .event .author img {
+      width:100%;
+      border-radius:50%;
+    }
+
+    /* Overwrites */
+    .nav-tabs a {
+      background: #66B266;
+      color: white;
+    }
+    .info .nav-tabs li.active a {
+      background-color: #55AA55;
+      color: white;
+    }
+    .info .nav-tabs li:hover a, .info .nav-tabs li.active:hover a {
+      background: #55AA55;
+      color: white;
+    }
+    .tab-content {
+      color: #000000;
+      background: white;
+      border-radius: 0 10px;
+      padding: 10px;
+    }
+
+    /* Small devices (tablets, 768px and up) */
+    @media (min-width: 768px) {
+      .event .panel-body {
+        height:158px;
+      }
+
+      .event .rsvp {
+        min-height:100%;
+      }
+
+      .event .rsvp i {
+        font-size:4em;
+        top:5%;
+      }
+
+      .event .panel-body .author {
+        position: relative;
+        color: #66B266;
+        padding:10px;
+        height:100%;
+      }
+      .event .profile {
+        position: relative;
+        z-index: 0;
+        border-left: 2px solid #55AA55;
+        top: -5px;
+        padding-left: 55px;
+        height: 100%;
+        left: 10%;
+      }
+      .event .profile strong {
+        display: block;
+        color: #ffffff;
+        font:20px bold 'Fredoka One', serif;
+        margin-bottom: 5px;
+      }
+      .event .author .profile i {
+        color:  #55AA55;
+        padding-left: 0;
+      }
+      .event .profile .links {
+        position: absolute;
+        bottom: 0;
+      }
+      .event .profile article {
+        padding:0 41px 0 0;
+      }
+      .event .author .profile i:hover{
+        color:  #55AA55;
+      }
+      .event .author .profile-image {
+        position: absolute;
+        background: white;
+        padding: 3px;
+        width: 30%;
+        border-radius: 50%;
+        border: 1px solid #55AA55;
+        box-sizing: content-box;
+        z-index: 1;
+        top:13px;
+      }
+      .event .author img {
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    /* Medium devices (desktops, 992px and up) */
+    @media (min-width: 992px) {
+      .event .profile {
+        left: 17%;
+      }
+    }
+
+    /* Large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {  }
 .navbar-custom {
   background-color: #116611;
   border-color: #0c4a0c;
@@ -127,7 +302,6 @@
     </style>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 <body>
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -159,8 +333,8 @@
               echo "<li>".link_to('projects/mine', "View My Projects", $attributes = array(), $secure = null)."</li>";
             }
             ?>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+          <!--  <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>-->
           </ul>
         </li>
       </ul>

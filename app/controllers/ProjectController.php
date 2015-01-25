@@ -19,7 +19,7 @@ class ProjectController extends \BaseAuthController {
             return $redir;
         }
         $this->layout->title = APPNAME;
-        $this->layout->content = View::make('main.project.index');
+        $this->layout->content = View::make('main.project.index')->with('projects', Project::all());
 	}
 
 

@@ -1,3 +1,21 @@
+<style>
+    .btn{
+        margin: 4px;
+        box-shadow: 1px 1px 5px #888888;
+    }
+    .btn:hover{
+      color: #ffffff;
+    }
+    .btn:active{
+        outline: none;
+    }
+    .btn-fresh {
+        color: #fff;
+        background-color: #51bf87;
+        border-bottom:2px solid #41996c;
+    }
+</style>
+
 <div class="col-md-12" style="height: 100%; background-color: #55AA55; padding-top:60px;">
     <div class="col-md-3">
     <?php if(!is_null($user->avatar)): ?>
@@ -12,7 +30,7 @@
         <h3 class="panel-title">Basic Info</h3>
       </div>
       <div class="panel-body">
-      <p><h3><span class="label label-default"><?php echo $user->first_name . " " . $user->last_name; ?></span></h3></p>
+      <p><h4 style="margin-bottom: 18px;"><span class="label label-default"><?php echo $user->first_name . " " . $user->last_name; ?></span></h4></p>
        <?php
        $groups = $user->getGroups();
        $uprograms = $user->programs()->get();
@@ -56,7 +74,7 @@
   </div>
   <div class="panel-body">
       @foreach ($skills as $skill)
-          <p class="label label-success">{{{ $skill->name }}}</p>
+          <a class="btn btn-fresh text-uppercase">{{{ $skill->name }}}</a>
       @endforeach
   </div>
 </div>
