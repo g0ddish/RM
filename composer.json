@@ -1,8 +1,8 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
+	"name": "g0ddish/RM",
+	"description": "Research Monster",
 	"keywords": ["framework", "laravel"],
-	"license": "MIT",
+	"license": "N/A",
 	"require": {
 		"laravel/framework": "4.2.*",
         "barryvdh/laravel-debugbar": "1.*",

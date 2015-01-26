@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2015 at 08:23 PM
+-- Generation Time: Jan 26, 2015 at 08:35 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -655,10 +655,22 @@ CREATE TABLE IF NOT EXISTS `projects` (
 `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` text NOT NULL,
+  `user_id` int(10) NOT NULL,
   `start_date` varchar(100) NOT NULL,
   `created_at` varchar(100) NOT NULL,
   `updated_at` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `title`, `description`, `user_id`, `start_date`, `created_at`, `updated_at`) VALUES
+(20, 'Web Design for Prestige Worldwide', 'Hard job for some bros', 2, '1453517043', '2015-01-23 02:44:03', '2015-01-23 02:44:03'),
+(21, 'Android App for Ryerson', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then', 2, '0', '2015-01-23 03:05:47', '2015-01-23 03:05:47'),
+(22, 'Kitty Treat Dispenser', 'Meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow', 22, '0', '2015-01-23 03:20:10', '2015-01-23 03:20:10'),
+(23, 'Meow', 'Meow', 22, '0', '2015-01-23 03:37:24', '2015-01-23 03:37:24'),
+(24, 'Meow', 'Mew', 22, '0', '2015-01-23 03:37:47', '2015-01-23 03:37:47');
 
 -- --------------------------------------------------------
 
@@ -682,7 +694,21 @@ CREATE TABLE IF NOT EXISTS `project_skills` (
 `id` int(11) NOT NULL,
   `project_id` int(10) NOT NULL,
   `skill_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `project_skills`
+--
+
+INSERT INTO `project_skills` (`id`, `project_id`, `skill_id`) VALUES
+(21, 20, 4),
+(22, 20, 1),
+(23, 20, 3),
+(24, 21, 3),
+(25, 21, 1),
+(26, 22, 3),
+(27, 22, 4),
+(28, 24, 4);
 
 -- --------------------------------------------------------
 
@@ -722,7 +748,7 @@ CREATE TABLE IF NOT EXISTS `throttle` (
   `last_attempt_at` timestamp NULL DEFAULT NULL,
   `suspended_at` timestamp NULL DEFAULT NULL,
   `banned_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `throttle`
@@ -731,7 +757,8 @@ CREATE TABLE IF NOT EXISTS `throttle` (
 INSERT INTO `throttle` (`id`, `user_id`, `ip_address`, `attempts`, `suspended`, `banned`, `last_attempt_at`, `suspended_at`, `banned_at`) VALUES
 (2, 2, '127.0.0.1', 0, 0, 0, NULL, NULL, NULL),
 (3, 2, '::1', 0, 0, 0, NULL, NULL, NULL),
-(4, 11, '::1', 0, 0, 0, NULL, NULL, NULL);
+(4, 11, '::1', 0, 0, 0, NULL, NULL, NULL),
+(5, 22, '::1', 0, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -758,16 +785,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `student_id`, `email`, `avatar`, `password`, `summary`, `experience`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `created_at`, `updated_at`) VALUES
-(2, '100864964', 'alex@solutionblender.ca', 'uploads\\e5M0AeHpEkAU0Ztm2oVc.png', '$2y$10$xNvk8acZ4bHUYldOKtdiQ.I.BAo4NQ63ligl4OrtiF0lYpdKz1lJS', '<p><strong>alex@solutionblender.ca</strong></p>\r\n\r\n<p><strong>Objective</strong></p>\r\n\r\n<p>To secure a summer position where I can utilize my strong computer skills as I work to complete my post-secondary education at George Brown College, preferably in the web and mobile field.</p>\r\n\r\n<p><strong>Education</strong></p>\r\n\r\n<p>George Brown College &ndash; 2 of 3 years complete towards an Advance Programmer Analyst Diploma</p>\r\n\r\n<p>Charlottetown Rural High School &ndash; Grade 12 Academic &ndash; Graduated July 2011.&nbsp;&nbsp;</p>\r\n\r\n<p><strong>Programming Competency</strong></p>\r\n\r\n<ul>\r\n	<li>Familiar with Terminal/DOS, Git, Linux flavors, &amp; VPS administration.</li>\r\n	<li>PHP, Composer, Laravel, PHPFuel &amp; Phalcon.</li>\r\n	<li>HTML, CSS, JS, jQuery &amp; played with AngularJS</li>\r\n	<li>C#, ASP &amp; WCF</li>\r\n	<li>Java/Android &amp; PhoneGap</li>\r\n</ul>\r\n\r\n<p><strong>Accomplishments</strong></p>\r\n\r\n<ul>\r\n	<li>Represented Prince Edward Island on the Men&rsquo;s Fencing Team at the Canada Winter Games in Whitehorse, 2006.</li>\r\n	<li>Class 5 Drivers License (Standard and Automatic Transmission) and Defensive Driving Course.</li>\r\n	<li>Attained the rank of Flight Sergeant with 60 Confederation Squadron, Royal Canadian Air Cadets.</li>\r\n	<li>Kiwanis Club Award for Community Service PE (2007).</li>\r\n	<li>Lieutenant Governor Student Aide de Camp Award PE(2007).</li>\r\n	<li>Sherwood Parkdale Minor Soccer League PE(Ages 6-15).</li>\r\n	<li>Attended UPEI courses Information Technology 111D and Student Video Game Programming (2009).</li>\r\n	<li>Strong computer literacy skills.</li>\r\n</ul>\r\n\r\n<p><strong>References</strong> :&nbsp; Available upon request</p>\r\n', '<p><strong>Work Experience</strong></p>\r\n\r\n<p><strong>Canadian Food Inspection Agency (CFIA)</strong>: Inspection Assistant&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Sep 2012 &ndash; Dec 2012</strong></p>\r\n\r\n<ul>\r\n	<li>Collecting soil samples from various potato fields around Prince Edward Island.</li>\r\n	<li>Filling in forms/documentation related to the samples.</li>\r\n	<li>Loading and transporting samples from fields to local CFIA offices.</li>\r\n	<li>Transporting samples from local offices to the CFIA labs in Charlottetown, PEI for testing.</li>\r\n	<li>Security cleared to &lsquo;Reliability&rsquo; status level by the Federal Government.</li>\r\n</ul>\r\n\r\n<p><strong>Murphy&rsquo;s Pharmacy (Charlottetown)</strong>:&nbsp; Cashier / Merchandiser&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Nov. 2010 - Sep 2012</strong></p>\r\n\r\n<ul>\r\n	<li>Processed cash, debit and credit transactions.</li>\r\n	<li>Dealt effectively with customers&rsquo; questions and concerns.</li>\r\n	<li>Maintained clean working environment.</li>\r\n	<li>Stocking, facing, organizing, and cleaning shelves and aisles.</li>\r\n	<li>Building in-store displays.</li>\r\n	<li>Providing technical support &lsquo;as needed&rsquo;&nbsp; for cash registers and other computer equipment</li>\r\n</ul>\r\n\r\n<p><strong>Catherine Parkman Law Office</strong>: Office Assistant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Jun. 2009 - Aug. 2010</strong></p>\r\n\r\n<ul>\r\n	<li>File and organize information</li>\r\n	<li>Run errands to banks (deposits), law firms, court house and registry office</li>\r\n	<li>Data entry as needed</li>\r\n	<li>IT support as required</li>\r\n	<li>Operate office equipment such as scanners, copiers and fax machines</li>\r\n	<li>Familiar with MS Office suite of applications</li>\r\n	<li>Worked to support other office staff&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</li>\r\n</ul>\r\n\r\n<p><strong>Shoppers Drug Mart (Charlottetown) </strong>Merchandiser<strong>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mar. 2009 - Apr. 2009</strong></p>\r\n\r\n<ul>\r\n	<li>Short term contract setting up new store (Queen Street Store). Working with a team we were responsible for setting up displays, stocking shelves and other duties as assigned by the Team Lead in order to have the store ready for the Grand Opening.</li>\r\n</ul>\r\n', NULL, 1, NULL, NULL, '2015-01-21 17:38:05', '$2y$10$y7q3mcnRc8PhhezbwFRTDutRspgw9BoGHKLQyFmdIpjQW.3OZ1sVq', NULL, 'Alex', 'Hughes', '2014-09-25 21:34:32', '2015-01-21 22:38:05'),
+(2, '100864964', 'alex@solutionblender.ca', 'uploads\\UZBue6pWGzhoANwkMjWQ.jpg', '$2y$10$xNvk8acZ4bHUYldOKtdiQ.I.BAo4NQ63ligl4OrtiF0lYpdKz1lJS', '<p><strong>alex@solutionblender.ca</strong></p>\r\n\r\n<p><strong>Objective</strong></p>\r\n\r\n<p>To secure a summer position where I can utilize my strong computer skills as I work to complete my post-secondary education at George Brown College, preferably in the web and mobile field.</p>\r\n\r\n<p><strong>Education</strong></p>\r\n\r\n<p>George Brown College &ndash; 2 of 3 years complete towards an Advance Programmer Analyst Diploma</p>\r\n\r\n<p>Charlottetown Rural High School &ndash; Grade 12 Academic &ndash; Graduated July 2011.&nbsp;&nbsp;</p>\r\n\r\n<p><strong>Programming Competency</strong></p>\r\n\r\n<ul>\r\n	<li>Familiar with Terminal/DOS, Git, Linux flavors, &amp; VPS administration.</li>\r\n	<li>PHP, Composer, Laravel, PHPFuel &amp; Phalcon.</li>\r\n	<li>HTML, CSS, JS, jQuery &amp; played with AngularJS</li>\r\n	<li>C#, ASP &amp; WCF</li>\r\n	<li>Java/Android &amp; PhoneGap</li>\r\n</ul>\r\n\r\n<p><strong>Accomplishments</strong></p>\r\n\r\n<ul>\r\n	<li>Represented Prince Edward Island on the Men&rsquo;s Fencing Team at the Canada Winter Games in Whitehorse, 2006.</li>\r\n	<li>Class 5 Drivers License (Standard and Automatic Transmission) and Defensive Driving Course.</li>\r\n	<li>Attained the rank of Flight Sergeant with 60 Confederation Squadron, Royal Canadian Air Cadets.</li>\r\n	<li>Kiwanis Club Award for Community Service PE (2007).</li>\r\n	<li>Lieutenant Governor Student Aide de Camp Award PE(2007).</li>\r\n	<li>Sherwood Parkdale Minor Soccer League PE(Ages 6-15).</li>\r\n	<li>Attended UPEI courses Information Technology 111D and Student Video Game Programming (2009).</li>\r\n	<li>Strong computer literacy skills.</li>\r\n</ul>\r\n\r\n<p><strong>References</strong> :&nbsp; Available upon request</p>\r\n', '<p><strong>Work Experience</strong></p>\r\n\r\n<p><strong>Canadian Food Inspection Agency (CFIA)</strong>: Inspection Assistant&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Sep 2012 &ndash; Dec 2012</strong></p>\r\n\r\n<ul>\r\n	<li>Collecting soil samples from various potato fields around Prince Edward Island.</li>\r\n	<li>Filling in forms/documentation related to the samples.</li>\r\n	<li>Loading and transporting samples from fields to local CFIA offices.</li>\r\n	<li>Transporting samples from local offices to the CFIA labs in Charlottetown, PEI for testing.</li>\r\n	<li>Security cleared to &lsquo;Reliability&rsquo; status level by the Federal Government.</li>\r\n</ul>\r\n\r\n<p><strong>Murphy&rsquo;s Pharmacy (Charlottetown)</strong>:&nbsp; Cashier / Merchandiser&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Nov. 2010 - Sep 2012</strong></p>\r\n\r\n<ul>\r\n	<li>Processed cash, debit and credit transactions.</li>\r\n	<li>Dealt effectively with customers&rsquo; questions and concerns.</li>\r\n	<li>Maintained clean working environment.</li>\r\n	<li>Stocking, facing, organizing, and cleaning shelves and aisles.</li>\r\n	<li>Building in-store displays.</li>\r\n	<li>Providing technical support &lsquo;as needed&rsquo;&nbsp; for cash registers and other computer equipment</li>\r\n</ul>\r\n\r\n<p><strong>Catherine Parkman Law Office</strong>: Office Assistant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Jun. 2009 - Aug. 2010</strong></p>\r\n\r\n<ul>\r\n	<li>File and organize information</li>\r\n	<li>Run errands to banks (deposits), law firms, court house and registry office</li>\r\n	<li>Data entry as needed</li>\r\n	<li>IT support as required</li>\r\n	<li>Operate office equipment such as scanners, copiers and fax machines</li>\r\n	<li>Familiar with MS Office suite of applications</li>\r\n	<li>Worked to support other office staff&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</li>\r\n</ul>\r\n\r\n<p><strong>Shoppers Drug Mart (Charlottetown) </strong>Merchandiser<strong>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mar. 2009 - Apr. 2009</strong></p>\r\n\r\n<ul>\r\n	<li>Short term contract setting up new store (Queen Street Store). Working with a team we were responsible for setting up displays, stocking shelves and other duties as assigned by the Team Lead in order to have the store ready for the Grand Opening.</li>\r\n</ul>\r\n', NULL, 1, NULL, NULL, '2015-01-25 02:09:54', '$2y$10$WRUy1L5sX7YRz5Jau0.qpe5jfQe1TXhs/G67SmFxxJtT23ZiOPKFG', NULL, 'Alex', 'Hughes', '2014-09-25 21:34:32', '2015-01-25 07:09:54'),
 (18, '100821418', 'alex.hughes000@gmail.com', '', '$2y$10$Ruc4dU3jQXIYjFQu9jsSGO0BrXupGcc72JaudfgiPZVFC1djM5qBS', '', '', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2015-01-20 20:52:20', '2015-01-20 20:52:20'),
-(19, '100821417', 'keegancaradonna@gmail.com', '', '$2y$10$sipqq.RD/Nj2vYEMpRlGXu9QTOe6MD6GYgSvoEa1VJOfQmqJuUHG2', '', '', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2015-01-20 20:54:16', '2015-01-20 20:54:16');
+(19, '100821417', 'keegancaradonna@gmail.com', '', '$2y$10$sipqq.RD/Nj2vYEMpRlGXu9QTOe6MD6GYgSvoEa1VJOfQmqJuUHG2', '', '', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2015-01-20 20:54:16', '2015-01-20 20:54:16'),
+(22, '100000001', 'ahughes12@georgebrown.ca', 'uploads\\2iAxGGXrcMSGQGZEpcV1.jpg', '$2y$10$8z8jopgtBjLJs.KEkjt5Yu6RxZxcv.Kpyf0tWnMjw4BikxTVedsK.', '', '', NULL, 1, NULL, NULL, '2015-01-23 12:18:02', '$2y$10$KO6CSzx10VoxLyeLg6XIy.SuQ2au9jeO3xoMl07y/QSb1Zl6yO9RW', NULL, 'Chairman', 'Meow', '2015-01-23 08:12:27', '2015-01-23 17:18:02');
 
 -- --------------------------------------------------------
 
@@ -779,7 +807,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 `id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `group_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users_groups`
@@ -787,7 +815,9 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (10, 2, 1),
-(11, 2, 4);
+(11, 2, 4),
+(22, 22, 2),
+(23, 22, 4);
 
 -- --------------------------------------------------------
 
@@ -799,14 +829,15 @@ CREATE TABLE IF NOT EXISTS `users_programs` (
 `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `program_id` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users_programs`
 --
 
 INSERT INTO `users_programs` (`id`, `user_id`, `program_id`) VALUES
-(14, 2, 248);
+(14, 2, 248),
+(15, 22, 248);
 
 -- --------------------------------------------------------
 
@@ -818,7 +849,7 @@ CREATE TABLE IF NOT EXISTS `users_skills` (
 `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `skill_id` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users_skills`
@@ -826,7 +857,9 @@ CREATE TABLE IF NOT EXISTS `users_skills` (
 
 INSERT INTO `users_skills` (`id`, `user_id`, `skill_id`) VALUES
 (1, 2, 1),
-(2, 2, 2);
+(2, 2, 2),
+(3, 9, 0),
+(4, 9, 0);
 
 --
 -- Indexes for dumped tables
@@ -927,7 +960,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=954;
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `project_files`
 --
@@ -937,7 +970,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `project_skills`
 --
 ALTER TABLE `project_skills`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `skills`
 --
@@ -947,27 +980,27 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `throttle`
 --
 ALTER TABLE `throttle`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `users_programs`
 --
 ALTER TABLE `users_programs`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `users_skills`
 --
 ALTER TABLE `users_skills`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
