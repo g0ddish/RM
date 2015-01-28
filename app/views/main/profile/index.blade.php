@@ -57,6 +57,18 @@
       </div>
     </div>
     </div>
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Skills</h3>
+            </div>
+            <div class="panel-body">
+                @foreach ($skills as $skill)
+                    <a class="btn btn-fresh text-uppercase">{{{ $skill->name }}}</a>
+                @endforeach
+            </div>
+        </div>
+    </div>
 <div class="col-md-12" style="margin-top:5px;">
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -67,18 +79,7 @@
   </div>
 </div>
 </div>
-<div class="col-md-12">
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Skills</h3>
-  </div>
-  <div class="panel-body">
-      @foreach ($skills as $skill)
-          <a class="btn btn-fresh text-uppercase">{{{ $skill->name }}}</a>
-      @endforeach
-  </div>
-</div>
-</div>
+
 <div class="col-md-12">
 <div class="panel panel-default">
   <div class="panel-heading">

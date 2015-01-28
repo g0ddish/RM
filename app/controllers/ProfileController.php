@@ -66,7 +66,7 @@ class ProfileController extends \BaseAuthController {
             if ($id == "edit") {
                 $user = Sentry::getUser();
                 $programs = Program::all();
-                $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs);
+                $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs)->with('skills', Skill::all());;
 
             } else {
                 try {
@@ -133,6 +133,20 @@ class ProfileController extends \BaseAuthController {
 
         }
 
+        if(Input::has('skills')){
+            $skills = Input::get('skills');
+            $skillarr = array();
+            foreach($skills as $skill){
+                $skillarr[] = Skill::where('name', '=', $skill)->firstOrFail()->id;
+            }
+            if(!empty($skillarr)) {
+                $user->skills()->sync($skillarr);
+            }
+        }else{
+            $user->skills()->detach();
+            $user->save();
+        }
+
         if(Input::has('email') && Input::has('fname') && Input::has('lname')){
             $email = Input::get('email');
             $fname = Input::get('fname');
@@ -178,7 +192,7 @@ class ProfileController extends \BaseAuthController {
         $programs = Program::all();
 
 
-        $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs);
+        $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs)->with('skills', Skill::all());
 
     }
 

@@ -1,3 +1,21 @@
+{{ HTML::script('js/tag-it.js') }}
+{{ HTML::style('css/jquery.tagit.css') }}
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+<Script>
+    <?php
+         $array = array();
+    foreach($skills as $skill => $val){
+       $array[] = $val->name;
+    }
+    ?>
+    $( document ).ready(function() {
+        $("#myTags").tagit({
+            autocomplete: {delay: 0, minLength: 0},
+            availableTags: {{ json_encode($array)  }},
+            fieldName: "skills[]"
+        });
+    });
+</Script>
 <?php
 $progs = array();
 foreach($programs as $program){
@@ -57,7 +75,6 @@ $progs[] = $program->ProgramName;
             <?php
            }
            ?>
-            <p class="help-block">Checked Programs will be removed.</p>
          <input class="form-control" style="" name="program" id="tags">
         </div>
 
@@ -71,13 +88,18 @@ $progs[] = $program->ProgramName;
        <label for="photo">File input</label>
 
         {{ Form::file('photo') }}
-       <p class="help-block">Example block-level help text here.</p>
      </div>
-     <div class="checkbox">
-       <label>
-         <input type="checkbox"> Check me out
-       </label>
-     </div>
+      <div class="form-group">
+          <label for="myTags">Skills</label>
+          <ul id="myTags">
+              <?php $uskills= $user->skills()->get();
+              foreach($uskills as $uskill){
+                  echo "<li>". $uskill->name."</li>";
+                }
+              ?>
+          </ul>
+          <p class="help-block">Ex. AutoCAD, PHP, Java</p>
+      </div>
      <button type="submit" class="btn btn-default">Submit</button>
    </form>
   </div>

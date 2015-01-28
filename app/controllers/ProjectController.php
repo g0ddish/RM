@@ -30,8 +30,13 @@ class ProjectController extends \BaseAuthController {
 	 */
 	public function create()
 	{
-		$this->layout->title = APPNAME;
-		$this->layout->content = View::make('main.project.create')->with('skills', Skill::all());
+		$user = Sentry::getUser();
+		if($user->hasProjectCRUDPermission()) {
+			$this->layout->title = APPNAME;
+			$this->layout->content = View::make('main.project.create')->with('skills', Skill::all());
+		}else{
+			return Redirect::to('/');
+		}
 	}
 
 
@@ -42,7 +47,8 @@ class ProjectController extends \BaseAuthController {
 	 */
 	public function store()
 	{
-
+		$user = Sentry::getUser();
+		if($user->hasProjectCRUDPermission()) {
 		if (Input::has('title') && Input::has('skills') && Input::has('desc') && Input::has('start'))
 		{
 			$title = Input::get('title');
@@ -63,6 +69,9 @@ class ProjectController extends \BaseAuthController {
 			//var_dump($skills);
 			$this->layout->title = APPNAME;
 			$this->layout->content = View::make('main.project.store');
+		}
+		}else{
+			return Redirect::to('/');
 		}
 	}
 
