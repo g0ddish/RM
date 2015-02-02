@@ -3,8 +3,7 @@
     <title>{{ $title }}</title>
     {{ HTML::script('js/jquery.min.js') }}
     {{ HTML::script('js/bootstrap.min.js') }}
-
-  {{ HTML::style('css/bootstrap.min.css') }}
+    {{ HTML::style('css/bootstrap.min.css') }}
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <style>
@@ -323,9 +322,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="<?php  if($segment=="")echo "active"?>"><a href="<?php echo action('index'); ?>">Home</a></li>
-
-
-
           <?php
           if(!$user->hasProjectCRUDPermission()): ?>
         <li class="dropdown">
@@ -337,7 +333,6 @@
             echo "<li>".link_to('projects/mine', "View My Projects", $attributes = array(), $secure = null)."</li>";
             endif;
             ?>
-
           <?php
           if($user->hasProjectCRUDPermission()): ?>
         <li class="dropdown">
@@ -360,7 +355,7 @@
        <?php  if(Request::segment(2)== Sentry::getUser()->student_id){ echo "<li><a href=\"./edit\">Edit Profile</a></li>";} ?>
        <li><?php echo link_to('logout', "Logout");?></li>
       </ul>
-
+</ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

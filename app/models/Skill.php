@@ -8,7 +8,7 @@ class Skill extends Eloquent {
 //http://en.wikipedia.org/w/api.php?action=query&titles=PHP&prop=extracts&continue=&explaintext=&exsentences=1&format=json
     public function users()
     {
-        return $this->belongsToMany('User');
+        return $this->belongsToMany('User', 'users_skills');
     }
 
 

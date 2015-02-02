@@ -82,10 +82,18 @@
              <?php   $skills =  Skill::all(); $one = true; $noskill = true; ?>
             <div class="list-group">
                 @foreach ($skills as $skill)
+
+
                     <?php if($one && !$noskill): ?>
                     <a href="#" class="list-group-item active">{{{ $skill->name }}}</a>
                     <?php $one = false; else: ?>
-                        <a href="#" class="list-group-item">{{{ $skill->name }}}</a>
+                        <a href="#" class="list-group-item">
+                            {{{ $skill->name }}}
+                            <span class="badge">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span><?php echo $skill->users()->count(); ?></span>
+                            <span class="badge"><span style="margin-right:2px;" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>  14</span>
+                        </a>
+
                     <?php endif; ?>
                 @endforeach
             </div>

@@ -136,8 +136,17 @@ class ProfileController extends \BaseAuthController {
         if(Input::has('skills')){
             $skills = Input::get('skills');
             $skillarr = array();
-            foreach($skills as $skill){
-                $skillarr[] = Skill::where('name', '=', $skill)->firstOrFail()->id;
+            foreach($skills as $skillName){
+                $foundskill = Skill::where('name', '=', $skillName)->first();
+                if(isset($foundskill)){
+                    $skillarr[] = $foundskill->id;
+                }else{
+                    $newSkill = new Skill();
+                    $newSkill->name = $skillName;
+                    $newSkill->save();
+                    $skillarr[] = $newSkill->id;
+                }
+
             }
             if(!empty($skillarr)) {
                 $user->skills()->sync($skillarr);
