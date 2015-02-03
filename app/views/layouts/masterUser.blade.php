@@ -330,7 +330,6 @@
             <?php
             echo "<li>".link_to('projects', "Search Projects", $attributes = array(), $secure = null)."</li>";
                   echo "<li class='divider'></li>";
-            echo "<li>".link_to('projects/mine', "View My Projects", $attributes = array(), $secure = null)."</li>";
             endif;
             ?>
           <?php
@@ -340,7 +339,6 @@
           <ul class="dropdown-menu" role="menu">
          <?php
               echo "<li>".link_to('projects/create', "Add Project", $attributes = array(), $secure = null)."</li>";
-              echo "<li>".link_to('projects/mine', "View My Projects", $attributes = array(), $secure = null)."</li>";
             endif;
             ?>
           <!--  <li class="divider"></li>
