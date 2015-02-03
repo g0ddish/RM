@@ -64,6 +64,7 @@
                                  <div class="links hidden-sm">
                                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                  </div>
+                                 <a class="btn btn-success">More Info</a>
                              </div>
 
                          </div>
