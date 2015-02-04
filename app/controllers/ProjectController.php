@@ -91,11 +91,16 @@ class ProjectController extends \BaseAuthController {
             return $redir;
         }else {
 
-            $this->layout->title = APPNAME;
+			if (is_numeric($id))
+			{
+				$this->layout->title = APPNAME;
+				$this->layout->content = View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all());
 
-            $this->layout->content = View::make('main.project.index');
+			}
+
             }
     }
+
 
 
 
@@ -120,7 +125,34 @@ class ProjectController extends \BaseAuthController {
 	 */
 	public function update($id)
 	{
-		//
+		$user = Sentry::getUser();
+		if ($user->hasProjectCRUDPermission() ) {
+			if (Input::has('title') && Input::has('desc') && Input::has('start')) {
+				$project = Project::find($id);
+				$title = Input::get('title');
+				$skills = Input::get('skills');
+				$desc = Input::get('desc');
+				$start = Input::get('start');
+			//	$project = new Project();
+				$project->title = $title;
+				$project->description = $desc;
+				$project->start_date = strtotime($start);
+				//$project->user()->associate(Sentry::getUser());
+				$project->save();
+				$skillarr = array();
+				if(empty($skills)){
+					$project->skills()->detach();
+				}else {
+					foreach ($skills as $skill) {
+						$skillarr[] = Skill::where('name', '=', $skill)->firstOrFail()->id;
+					}
+					$project->skills()->sync($skillarr);
+				}
+				$this->layout->title = APPNAME;
+				$this->layout->content = View::make('main.project.delete')->with('message', "Updated project $id");
+			}
+
+		}
 	}
 
 
@@ -132,7 +164,13 @@ class ProjectController extends \BaseAuthController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$user = Sentry::getUser();
+		if ($user->hasProjectCRUDPermission() ) {
+			$project = Project::find($id);
+			$project->delete();
+			$this->layout->title = APPNAME;
+			$this->layout->content = View::make('main.project.delete')->with('message', "Deleted project $id");
+		}
 	}
 
 

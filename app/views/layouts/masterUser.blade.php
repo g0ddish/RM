@@ -7,6 +7,7 @@
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <style>
+
     body{
     background-color: #55AA55;
       font-family: 'Oswald', sans-serif;
@@ -29,7 +30,7 @@
       position: relative;
       background: #66B266;
       color: white;
-      height: 100%;
+      height: auto;
     }
 
     .event .rsvp > div {
@@ -113,11 +114,12 @@
     /* Small devices (tablets, 768px and up) */
     @media (min-width: 768px) {
       .event .panel-body {
-        height:158px;
+        height:auto;
+
       }
 
       .event .rsvp {
-        min-height:100%;
+        min-height:130px;
       }
 
       .event .rsvp i {
@@ -129,7 +131,8 @@
         position: relative;
         color: #66B266;
         padding:10px;
-        height:100%;
+
+        height:auto;
       }
       .event .profile {
         position: relative;
@@ -137,7 +140,7 @@
         border-left: 2px solid #55AA55;
         top: -5px;
         padding-left: 55px;
-        height: 100%;
+        height:auto;
         left: 10%;
       }
       .event .profile strong {
@@ -151,7 +154,7 @@
         padding-left: 0;
       }
       .event .profile .links {
-        position: absolute;
+        position: relative;
         bottom: 0;
       }
       .event .profile article {

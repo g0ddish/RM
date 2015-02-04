@@ -42,7 +42,8 @@
                                              <p class="label label-success">{{{ $skill->name }}}</p>
                                          @endforeach                                     </div>
                                  </div>
-                             </div><?php $authors = $project->user()->get();
+                             </div><?php
+                             $authors = $project->user()->get();
                              $primary;  //I was inebriated don't laugh
                              $creator;
                              foreach ($authors as $author){
@@ -50,8 +51,7 @@
                                  $primary = $author;
                                  break;
                              }
-
-                             ?>
+                                 ?>
                          </div>
                          <div class="author col-xs-2 col-sm-3">
                              <div class="profile-image">
@@ -64,7 +64,7 @@
                                  <div class="links hidden-sm">
                                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                  </div>
-                                 <a class="btn btn-success">More Info</a>
+                                 <a href="./projects/{{$project->id}}" class="btn btn-success">More Info</a>
                              </div>
 
                          </div>
