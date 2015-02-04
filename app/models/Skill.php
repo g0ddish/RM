@@ -11,5 +11,10 @@ class Skill extends Eloquent {
         return $this->belongsToMany('User', 'users_skills');
     }
 
+    public function projects()
+    {
+        return $this->belongsToMany('Project', 'project_skills');
+    }
+
 
 }

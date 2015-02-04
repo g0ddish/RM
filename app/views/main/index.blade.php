@@ -92,7 +92,8 @@
                             {{{ $skill->name }}}
                             <span class="badge">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span><?php echo $skill->users()->count(); ?></span>
-                            <span class="badge"><span style="margin-right:2px;" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>  14</span>
+                            <span class="badge"><span style="margin-right:2px;" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                <?php echo $skill->projects()->count(); ?> </span>
                         </a>
 
                     <?php endif; ?>
