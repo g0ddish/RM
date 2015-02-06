@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: ResearchMonster
+        psr4_prefix: ResearchMonster
+        src_path: app
