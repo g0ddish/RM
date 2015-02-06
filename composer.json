@@ -1,25 +1,34 @@
 {
-	"name": "g0ddish/RM",
-	"description": "Research Monster",
+	"name": "laravel/laravel",
+	"description": "The Laravel Framework.",
 	"keywords": ["framework", "laravel"],
-	"license": "N/A",
+	"license": "MIT",
+	"type": "project",
 	"require": {
-		"laravel/framework": "4.2.*",
-        "barryvdh/laravel-debugbar": "1.*",
-        "cartalyst/sentry": "2.1.*",
-        "fitztrev/laravel-html-minify": "1.*",
-        "intervention/image": "2.*",
-	    "guzzlehttp/guzzle": "~4.0"
-
+		"laravel/framework": "5.0.*",
+		 "barryvdh/laravel-debugbar": "1.*",
+        "cartalyst/sentry": "dev-feature/laravel-5",
+       "graham-campbell/htmlmin": "~3.0",
+	    "guzzlehttp/guzzle": "~4.0",
+	  "illuminate/html": "5.0.*@dev"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.0",
+		"phpspec/phpspec": "~2.1"
 	},
 	"autoload": {
 		"classmap": [
-			"app/commands",
-			"app/controllers",
-			"app/models",
-			"app/database/migrations",
-			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"database",
+			"app/Http/Controllers",
+			"app/Models"
+		],
+		"psr-4": {
+			"ResearchMonster\\": "app/"
+		}
+	},
+	"autoload-dev": {
+		"classmap": [
+			"tests/TestCase.php"
 		]
 	},
 	"scripts": {
@@ -32,11 +41,17 @@
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [
+			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate"
 		]
 	},
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "stable"
+	"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/cartalyst/sentry/"
+    }
+]
 }
