@@ -8,15 +8,15 @@ By Alex Hughes and Keegan Caradonna
 
 ###Dependencies
 
-    - PHP >= 5.4
-    - Mcrypt PHP Extension
-    - OpenSSL PHP Extension
-    - Mbstring PHP Extension
-    - Laravel
-    - Sentry
-    - Twitter Bootstrap
-    - jQuery
-    - CKEditor
+- PHP >= 5.4
+- Mcrypt PHP Extension
+- OpenSSL PHP Extension
+- Mbstring PHP Extension
+- Laravel
+- Sentry
+- Twitter Bootstrap
+- jQuery
+- CKEditor
 
 After cloning the repository run
 
