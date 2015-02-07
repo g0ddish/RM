@@ -32,9 +32,8 @@ After edit .env.example with the correct info and rename it to .env
 
 As of PHP 5.4.0 you can use the built in web server for development
 
-```
-php artisan serve
-```
+    php artisan serve
+
 
 ### Version
 0.9.0
@@ -62,5 +61,5 @@ Want to contribute? Send me an email
 License
 ----
 
-We retain all rights
+We retain all rights.
 
