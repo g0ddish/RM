@@ -13,7 +13,6 @@ By Alex Hughes and Keegan Caradonna
   - Twitter Bootstrap
   - jQuery
   - CKEditor
-  
   - PHP >= 5.4
   - Mcrypt PHP Extension
   - OpenSSL PHP Extension
