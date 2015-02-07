@@ -13,6 +13,11 @@ By Alex Hughes and Keegan Caradonna
   - Twitter Bootstrap
   - jQuery
   - CKEditor
+  
+  - PHP >= 5.4
+  - Mcrypt PHP Extension
+  - OpenSSL PHP Extension
+  - Mbstring PHP Extension
 
 After cloning the repository run
 
@@ -24,7 +29,7 @@ composer install
 
 Create an SQL database and import the file ourdb.sql
 
-After edit app\config\database.php with the correct info
+After edit .env.example with the correct info and rename it to .env
 
 As of PHP 5.4.0 you can use the built in web server for development
 
@@ -33,7 +38,7 @@ php artisan serve
 ```
 
 ### Version
-0.7.0
+0.9.0
 
 
 ### Development
