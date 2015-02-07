@@ -1,7 +1,12 @@
 <?php
 namespace ResearchMonster\Http\Controllers;
 
-class ProjectController extends \BaseAuthController {
+use View;
+use Sentry;
+use Project;
+use Redirect;
+use Skill;
+class ProjectController extends Controller {
     /**
      * The layout that should be used for responses.
      */
@@ -15,12 +20,7 @@ class ProjectController extends \BaseAuthController {
 	 */
 	public function index()
 	{
-        $redir = $this->check();
-        if(isset($redir)){
-            return $redir;
-        }
-        $this->layout->title = APPNAME;
-        $this->layout->content = View::make('main.project.index')->with('projects', Project::all());
+		return view($this->layout, ['content' =>  View::make('main.project.index')->with('projects', Project::all()), 'title'=> APPNAME]);
 	}
 
 
@@ -95,20 +95,14 @@ class ProjectController extends \BaseAuthController {
 	 * @return Response
 	 */
 	public function show($id)
-	{ //GET
-        $redir = $this->check();
-        if($redir){
-            return $redir;
-        }else {
-
+	{
 			if (is_numeric($id))
 			{
-				$this->layout->title = APPNAME;
-				$this->layout->content = View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all());
+				//$this->layout->title = APPNAME;
+			//	$this->layout->content = View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all());
+				return view($this->layout, ['content' =>  View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all()), 'title'=> APPNAME]);
 
 			}
-
-            }
     }
 
 

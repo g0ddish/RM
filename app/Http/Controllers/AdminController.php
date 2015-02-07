@@ -1,7 +1,11 @@
 <?php
 namespace ResearchMonster\Http\Controllers;
 
-class AdminController extends \BaseAuthController {
+use View;
+use Sentry;
+use Project;
+use Redirect;
+class AdminController extends Controller {
     /**
      * The layout that should be used for responses.
      */
@@ -17,11 +21,12 @@ class AdminController extends \BaseAuthController {
         $user =  Sentry::getUser();
         if ($user != null && $user->hasAnyAccess(['admin']) )
         {
-            $this->layout->title = APPNAME;
-            $this->layout->content = View::make('main.admin.index');
+          //  $this->layout->title = APPNAME;
+            return view($this->layout, ['content' => View::make('main.admin.index'), 'title'=> APPNAME]);
+         //   $this->layout->content = View::make('main.admin.index');
         }elseif ($user != null && $user->hasAnyAccess(['users']) )
         {
-            return Redirect::to('/')->with('message', "<div class='alert alert-info'>ur a user harry</div>");
+            return Redirect::to('/');
         }else{
             return Redirect::to('/');
         }
