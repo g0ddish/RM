@@ -1,5 +1,5 @@
-{{ HTML::script('js/tag-it.js') }}
-{{ HTML::style('css/jquery.tagit.css') }}
+{!! HTML::script('js/tag-it.js') !!}
+{!! HTML::style('css/jquery.tagit.css') !!}
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <script>
         <?php
@@ -11,7 +11,7 @@
     $( document ).ready(function() {
         $("#myTags").tagit({
             autocomplete: {delay: 0, minLength: 0},
-            availableTags: {{ json_encode($array)  }},
+            availableTags: {!! json_encode($array)  !!},
             fieldName: "skills[]"
         });
     });
@@ -25,7 +25,7 @@
     <h3 class="panel-title">Create Project</h3>
   </div>
   <div class="panel-body">
-      {{ Form::open(array('url' => 'projects')) }}
+      {!! Form::open(array('url' => 'projects')) !!}
           <div class="form-group">
               <label for="title">Title</label>
               <input type="text" class="form-control" name="title" id="title" placeholder="">
@@ -54,7 +54,7 @@
               <p class="help-block">Diagrams, Images, PDF...</p>
           </div>
           <button type="submit" class="btn btn-success btn-lg">List My Project</button>
-          {{ Form::close() }}
+          {!! Form::close() !!}
   </div>
 </div>
 </div>

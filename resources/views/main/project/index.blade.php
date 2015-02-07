@@ -2,9 +2,15 @@
             if(!isset($user->first_name) && !isset($user->last_name) && !isset($user->email) && !isset($user->avatar)):
         ;?>
    {{ "<div class='alert alert-warning'>You haven't filled out all of your profile yet. <a href='./profile/edit'>Do that here.</a></div>" }}
-   <?php endif; ?>
-            {{ Session::get('message')}}
+   <?php endif;
+        $message = Session::get('message');
+    if(isset($message)){
+        $message = "<div class='alert alert-success'>$message</div>";
+    }
+    ?>
+
    <div class="col-md-9">
+       {!! $message or '' !!}
       <div class="panel panel-default">
          <div class="panel-body">
              <?php $i = 0; ?>
@@ -61,6 +67,7 @@
                                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                  </div>
                              </div>
+                         <a href="./{!! $project->id !!}" class="btn btn-success">More Info</a>
 
                          </div>
                      </div>

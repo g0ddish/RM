@@ -6,6 +6,7 @@ use Sentry;
 use Project;
 use Redirect;
 use Skill;
+use Input;
 class ProjectController extends Controller {
     /**
      * The layout that should be used for responses.
@@ -33,8 +34,7 @@ class ProjectController extends Controller {
 	{
 		$user = Sentry::getUser();
 		if($user->hasProjectCRUDPermission()) {
-			$this->layout->title = APPNAME;
-			$this->layout->content = View::make('main.project.create')->with('skills', Skill::all());
+			return view($this->layout, ['content' =>  View::make('main.project.create')->with('skills', Skill::all()), 'title'=> APPNAME]);
 		}else{
 			return Redirect::to('/');
 		}
@@ -77,8 +77,10 @@ class ProjectController extends Controller {
 			}
 			$project->skills()->sync($skillarr);
 			//var_dump($skills);
-			$this->layout->title = APPNAME;
-			$this->layout->content = View::make('main.project.store');
+		//	$this->layout->title = APPNAME;
+		//	$this->layout->content = View::make('main.project.store');
+			return redirect('/')->with('message', 'Added project ' . $project->title);
+
 		}
 		}else{
 			return Redirect::to('/');
@@ -161,8 +163,8 @@ class ProjectController extends Controller {
 					}
 					$project->skills()->sync($skillarr);
 				}
-				$this->layout->title = APPNAME;
-				$this->layout->content = View::make('main.project.delete')->with('message', "Updated project $id");
+				return redirect('/')->with('message', 'Updated project ' . $project->title);
+			//	return view($this->layout, ['content' =>  View::make('main.project.single')->with('message', "Updated project $id"), 'title'=> APPNAME]);
 			}
 
 		}
@@ -181,8 +183,9 @@ class ProjectController extends Controller {
 		if ($user->hasProjectCRUDPermission() ) {
 			$project = Project::find($id);
 			$project->delete();
-			$this->layout->title = APPNAME;
-			$this->layout->content = View::make('main.project.delete')->with('message', "Deleted project $id");
+			//$this->layout->title = APPNAME;
+			return redirect('/')->with('message', 'Deleted project ' . $project->title);
+		//	$this->layout->content = View::make('main.project.delete')->with('message', "Deleted project $id");
 		}
 	}
 

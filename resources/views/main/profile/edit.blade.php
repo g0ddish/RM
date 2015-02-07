@@ -1,5 +1,5 @@
-{{ HTML::script('js/tag-it.js') }}
-{{ HTML::style('css/jquery.tagit.css') }}
+{!! HTML::script('js/tag-it.js') !!}
+{!! HTML::style('css/jquery.tagit.css') !!}
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <Script>
     <?php
@@ -11,7 +11,7 @@
     $( document ).ready(function() {
         $("#myTags").tagit({
             autocomplete: {delay: 0, minLength: 0},
-            availableTags: {{ json_encode($array)  }},
+            availableTags: {!! json_encode($array)  !!},
             fieldName: "skills[]"
         });
     });
@@ -21,7 +21,7 @@ $progs = array();
 foreach($programs as $program){
 $progs[] = $program->ProgramName;
 }?>
-{{ HTML::script('js/ckeditor/ckeditor.js') }}
+{!! HTML::script('js/ckeditor/ckeditor.js') !!}
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
 <style>
@@ -47,7 +47,7 @@ $progs[] = $program->ProgramName;
           <label for="sid">Student ID</label>
           <p id="sid"><?php echo $user->student_id; ?></p>
           </div>
-      {{ Form::open(array('url' => 'profile/edit', 'files' => true)) }}
+      {!! Form::open(array('url' => 'profile/edit', 'files' => true)) !!}
    <div class="form-group">
           <label for="fname">First Name</label>
           <input type="text" value="<?php echo $user->first_name; ?>" class="form-control" id="fname" name="fname" placeholder="Enter First Name">
@@ -63,31 +63,18 @@ $progs[] = $program->ProgramName;
        <div class="form-group" style="">
           <label for="tags" style="display: block;">Program</label>
           <?php $prgs= $user->programs()->get();
-
            foreach($prgs as $program){
-
-           ?>
-           <div class="checkbox">
-               <label>
-                 <input type="checkbox" name="del-prog[<?php echo $program->ProgramName;?>]"  value="" > <?php echo $program->ProgramName;?>
-               </label>
-             </div>
-            <?php
+                 echo $program->ProgramName;
            }
            ?>
-         <input class="form-control" style="" name="program" id="tags">
+         <input class="form-control" style="margin-top: 10px" name="program" id="tags">
         </div>
 
 
      <div class="form-group">
-       <div class="col-md-12">
-       <div class="col-md-4">
-       {{ HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive')) }}
-       </div>
-       </div>
-       <label for="photo">File input</label>
-
-        {{ Form::file('photo') }}
+         <label for="photo">Avatar</label>
+             {!! HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive', 'style' => 'max-width:200px; max-height:200px;')) !!}
+            <div style="margin-top: 20px"> {!! Form::file('photo') !!} </div>
      </div>
       <div class="form-group">
           <label for="myTags">Skills</label>
@@ -100,8 +87,6 @@ $progs[] = $program->ProgramName;
           </ul>
           <p class="help-block">Ex. AutoCAD, PHP, Java</p>
       </div>
-     <button type="submit" class="btn btn-default">Submit</button>
-   </form>
   </div>
 </div>
 </div>
@@ -112,10 +97,8 @@ $progs[] = $program->ProgramName;
   <div class="panel-heading">
     <h3 class="panel-title">Summary</h3>
   </div>
-  <div class="panel-body">{{ Form::open(array('url' => 'profile/edit')) }}
-<textarea class="ckeditor" name="editor1">{{$user->summary}}</textarea>
-<button class="btn btn-default" type="submit">Save</button>
-{{ Form::close() }}
+  <div class="panel-body">
+<textarea class="ckeditor" name="editor1">{!!$user->summary!!}</textarea>
   </div>
 </div>
 </div>
@@ -124,10 +107,10 @@ $progs[] = $program->ProgramName;
   <div class="panel-heading">
     <h3 class="panel-title">Experience</h3>
   </div>
-  <div class="panel-body">{{ Form::open(array('url' => 'profile/edit')) }}
-<textarea class="ckeditor" name="editor2">{{$user->experience}}</textarea>
-<button class="btn btn-default" type="submit">Save</button>
-{{ Form::close() }}
+  <div class="panel-body">
+<textarea class="ckeditor" name="editor2">{!!$user->experience!!}</textarea>
+<button style="margin-top: 30px" class="btn btn-lg btn-block btn-success" type="submit">Save</button>
+{!! Form::close() !!}
 
 
   </div>

@@ -5,6 +5,7 @@ use Skill;
 use Program;
 use Sentry;
 use View;
+use Input;
 class ProfileController extends BaseController {
     /**
      * The layout that should be used for responses.
@@ -65,7 +66,7 @@ class ProfileController extends BaseController {
             if ($id == "edit") {
                 $user = Sentry::getUser();
                 $programs = Program::all();
-                return view($this->layout, ['content' => View::make('main.profile.edit'), 'title'=> APPNAME, 'user'=>$user, 'programs' => $programs, 'skills'=> Skill::all()]);
+                return view($this->layout, ['content' => View::make('main.profile.edit')->with('skills', Skill::all())->with('programs', $programs)->with('user', $user), 'title'=> APPNAME, 'user'=>$user]);
 
               //  $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs)->with('skills', Skill::all());;
 
@@ -109,26 +110,12 @@ class ProfileController extends BaseController {
         }
 
 
-        if(Input::has('del-prog')){
-            $del = Input::get('del-prog');
-            $ar = array();
-            foreach($del as $key=>$val){
-                $ar[] = $key;
-            }
-            foreach($ar as $delid){
-                $progs = Program::where('ProgramName', '=', $delid)->get();
-                foreach($progs as $prog){
-                    $user->programs()->detach($prog->id);
-                }
-            }
-
-
-        }elseif(Input::has('program') && !Input::has('del-prog')){
+    if(Input::has('program')){
             $id = Input::get('program');
             $progs = Program::where('ProgramName', '=', $id)->take(1)->get();
-            foreach($progs as $prog){
-                $user->programs()->attach($prog->id);
-            }
+
+                $user->programs()->sync($progs);
+
 
         }
 
@@ -196,12 +183,10 @@ class ProfileController extends BaseController {
 
        //$user = Sentry::getUser();
        //$prgs= $user->programs()->get(); var_dump($prgs); $user->programs()->attach(714);
-        $this->layout->title = APPNAME;
-        $programs = Program::all();
+      //  $this->layout->title = APPNAME;
 
 
-        $this->layout->content = View::make('main.profile.edit')->with('user', $user)->with('programs', $programs)->with('skills', Skill::all());
-
+        return view($this->layout, ['content' => View::make('main.profile.edit')->with('user', $user)->with('programs', Program::all())->with('skills', Skill::all()), 'title'=> APPNAME]);
     }
 
 
