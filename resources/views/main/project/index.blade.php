@@ -19,14 +19,14 @@
                  <div class="panel panel-default event">
                      <div class="panel-body">
                          <div class="rsvp col-xs-2 col-sm-2">
-                             <i> {{{ date("j", $project->start_date)  }}}</i>
-                             <i> {{{ date("F", $project->start_date)  }}}</i>
+                             <i> {!! date("j", $project->start_date)  !!}</i>
+                             <i> {!! date("F", $project->start_date)  !!}</i>
                              <div class="hidden-xs">
                                  Deadline
                              </div>
                          </div>
                          <div class="info col-xs-8 col-sm-7">
-                             {{{ str_limit($project->title, 35) }}}
+                             {!! str_limit($project->title, 5) !!}
                              <div class="visible-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elitero..</div>
                              <div class="hidden-xs">
                                  <ul class="nav nav-tabs" role="tablist">

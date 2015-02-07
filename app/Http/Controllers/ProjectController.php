@@ -50,8 +50,7 @@ class ProjectController extends Controller {
 	{
 		$user = Sentry::getUser();
 		if($user->hasProjectCRUDPermission()) {
-		if (Input::has('title') && Input::has('skills') && Input::has('desc') && Input::has('start'))
-		{
+		if (Input::has('title') && Input::has('desc')) {
 			$title = Input::get('title');
 			$skills = Input::get('skills');
 			$desc = Input::get('desc');
@@ -62,12 +61,13 @@ class ProjectController extends Controller {
 			$project->start_date = strtotime($start);
 			$project->user()->associate(Sentry::getUser());
 			$project->save();
-			$skillarr = array();
-			foreach($skills as $skillName){
+			if (isset($skills)){
+				$skillarr = array();
+			foreach ($skills as $skillName) {
 				$foundskill = Skill::where('name', '=', $skillName)->first();
-				if(isset($foundskill)){
+				if (isset($foundskill)) {
 					$skillarr[] = $foundskill->id;
-				}else{
+				} else {
 					$newSkill = new Skill();
 					$newSkill->name = $skillName;
 					$newSkill->save();
@@ -76,10 +76,11 @@ class ProjectController extends Controller {
 
 			}
 			$project->skills()->sync($skillarr);
+		}
 			//var_dump($skills);
 		//	$this->layout->title = APPNAME;
-		//	$this->layout->content = View::make('main.project.store');
-			return redirect('/')->with('message', 'Added project ' . $project->title);
+		//	$this->layout->content = View::make('main.project.store'); str_limit($project->description, 235)
+			return redirect('/')->with('message', 'Added project ' . str_limit($project->title, 75));
 
 		}
 		}else{
@@ -163,7 +164,7 @@ class ProjectController extends Controller {
 					}
 					$project->skills()->sync($skillarr);
 				}
-				return redirect('/')->with('message', 'Updated project ' . $project->title);
+				return redirect('/')->with('message', 'Updated project ' . str_limit($project->title, 75));
 			//	return view($this->layout, ['content' =>  View::make('main.project.single')->with('message', "Updated project $id"), 'title'=> APPNAME]);
 			}
 
@@ -184,7 +185,7 @@ class ProjectController extends Controller {
 			$project = Project::find($id);
 			$project->delete();
 			//$this->layout->title = APPNAME;
-			return redirect('/')->with('message', 'Deleted project ' . $project->title);
+			return redirect('/')->with('message', 'Deleted project '  . str_limit($project->title, 75));
 		//	$this->layout->content = View::make('main.project.delete')->with('message', "Deleted project $id");
 		}
 	}
