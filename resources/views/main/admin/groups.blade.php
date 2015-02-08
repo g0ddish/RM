@@ -6,7 +6,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="deleteModalLabel">Delete Group</h4>
       </div>
-      {{ Form::open(array('url' => 'control/groups')) }}
+      {!! Form::open(array('url' => 'control/groups')) !!}
       <div class="modal-footer">
          <input type="hidden" id="deleteid" class="deleteid" name="delid"/>
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -25,7 +25,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="editModalLabel">Modal title</h4>
       </div>
-      {{ Form::open(array('url' => 'control/groups')) }}
+      {!! Form::open(array('url' => 'control/groups')) !!}
       <div class="modal-body">
 
                   <div class="form-group">
@@ -63,7 +63,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      {{ Form::open(array('url' => 'control/groups')) }}$prgs= $user->programs()->get(); var_dump($prgs); $user->programs()->attach(125);
+      {!! Form::open(array('url' => 'control/groups')) !!}
       <div class="modal-body">
 
           <div class="form-group">

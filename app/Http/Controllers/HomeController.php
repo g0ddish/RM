@@ -3,6 +3,7 @@ namespace ResearchMonster\Http\Controllers;
 
 use View;
 use Sentry;
+use Skill;
 use Project;
 class HomeController extends BaseController {
 
@@ -34,7 +35,7 @@ class HomeController extends BaseController {
             // User is logged in
          //   $this->layout->title = APPNAME;
          //   $this->layout->content = View::make('main.index')->with('projects', Project::all());
-            return view($this->layout, ['content' => View::make('main.index')->with('projects', Project::all()), 'title'=> APPNAME]);
+            return view($this->layout, ['content' => View::make('main.index')->with('projects', Project::take(20)->get())->with('skills', Skill::take(15)->get()), 'title'=> APPNAME]);
 
             /*  $user = Sentry::getUser();
 

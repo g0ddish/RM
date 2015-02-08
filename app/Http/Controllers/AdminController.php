@@ -5,7 +5,8 @@ use View;
 use Sentry;
 use Project;
 use Redirect;
-class AdminController extends Controller {
+use Input;
+class AdminController extends BaseController {
     /**
      * The layout that should be used for responses.
      */
@@ -58,8 +59,8 @@ class AdminController extends Controller {
 
     public function storeUser()
     {
-        $this->layout->title = APPNAME;
-        if (Input::has('sid') && Input::has('email') && Input::has('pass') && !Input::has('edit-field') && strlen(Input::get('sid')) == 9)
+    //    $this->layout->title = APPNAME;
+        if (Input::has('sid') && Input::has('email') && Input::has('pass') && !Input::has('edit-field'))
         {
            $sid = Input::get('sid');
            $email = Input::get('email');
@@ -116,7 +117,7 @@ class AdminController extends Controller {
 
 
             $users = Sentry::findAllUsers();
-            $this->layout->content = View::make('main.admin.users')->with('users', $users);
+            return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users), 'title'=> APPNAME]);
         }elseif(Input::has('edit-field')){
             $eid = Input::get('edit-field');
             $user = Sentry::findUserById($eid);
@@ -153,20 +154,21 @@ class AdminController extends Controller {
                 }
 
             $users = Sentry::findAllUsers();
-            $this->layout->content = View::make('main.admin.users')->with('users', $users);
+            return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users), 'title'=> APPNAME]);
+
         }elseif(Input::has('delid')){
             $eid = Input::get('delid');
             $user = Sentry::findUserById($eid);
             $user->delete();
             $users = Sentry::findAllUsers();
-            $this->layout->content = View::make('main.admin.users')->with('users', $users);
+            return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users), 'title'=> APPNAME]);
         }
     }
 
 
         public function storeGroup(){
 
-        $this->layout->title = APPNAME;
+      //  $this->layout->title = APPNAME;
         if (Input::has('groupname') && !Input::has('editid'))
         {
             $name = Input::get('groupname');
@@ -201,8 +203,7 @@ class AdminController extends Controller {
                 );
         }
             $groups = Sentry::findAllGroups();
-            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
-            $this->layout->content->with('message', $group);
+            return view($this->layout, ['content' =>  View::make('main.admin.groups')->with('groups', $groups)->with('message', $group), 'title'=> APPNAME]);
         }elseif(Input::has('editid')){
 
             $id = Input::get('editid');
@@ -227,17 +228,16 @@ class AdminController extends Controller {
                 // Group information was not updated
             }
             $groups = Sentry::findAllGroups();
-            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
-            $this->layout->content->with('message', $group);
+            return view($this->layout, ['content' =>  View::make('main.admin.groups')->with('groups', $groups)->with('message', $group), 'title'=> APPNAME]);
         }elseif(Input::has('delid')){
             $id = Input::get('delid');
             $group = Sentry::findGroupByName($id);
             $group->delete();
             $groups = Sentry::findAllGroups();
-            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
+            return view($this->layout, ['content' =>  View::make('main.admin.groups')->with('groups', $groups), 'title'=> APPNAME]);
         }
         $groups = Sentry::findAllGroups();
-        $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
+            return view($this->layout, ['content' =>  View::make('main.admin.groups')->with('groups', $groups), 'title'=> APPNAME]);
     }
 
 
@@ -250,13 +250,13 @@ class AdminController extends Controller {
 	public function show($id)
 	{ //GET
         if($id == "groups") {
-            $this->layout->title = APPNAME;
+          //  $this->layout->title = APPNAME;
             $groups = Sentry::findAllGroups();
-            $this->layout->content = View::make('main.admin.groups')->with('groups', $groups);
+            return view($this->layout, ['content' =>  View::make('main.admin.groups')->with('groups', $groups), 'title'=> APPNAME]);
         }elseif($id == "users"){
-            $this->layout->title = APPNAME;
+           // $this->layout->title = APPNAME;
             $users = Sentry::findAllUsers();
-            $this->layout->content = View::make('main.admin.users')->with('users', $users);
+            return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users), 'title'=> APPNAME]);
         }
 	}
 

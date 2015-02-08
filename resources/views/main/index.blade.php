@@ -80,7 +80,7 @@
             <h3 class="panel-title">Project Tags</h3>
          </div>
          <div class="panel-body">
-             <?php   $skills =  Skill::all(); $one = true; $noskill = true; ?>
+             <?php  $one = true; $noskill = true; ?>
             <div class="list-group">
                 @foreach ($skills as $skill)
 

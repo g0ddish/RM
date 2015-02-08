@@ -6,7 +6,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="deleteModalLabel">Delete User</h4>
       </div>
-      {{ Form::open(array('url' => 'control/users')) }}
+      {!! Form::open(array('url' => 'control/users')) !!}
       <div class="modal-footer">
          <input type="hidden" id="deleteid" class="deleteid" name="delid"/>
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -25,7 +25,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="editModalLabel">Modal title</h4>
       </div>
-      {{ Form::open(array('url' => 'control/users')) }}
+      {!! Form::open(array('url' => 'control/users')) !!}
       <div class="modal-body">
   <div class="form-group">
           <label for="sid">Student ID*</label> <input type="text" class="form-control" id="sid"
@@ -83,7 +83,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      {{ Form::open(array('url' => 'control/users')) }}
+      {!! Form::open(array('url' => 'control/users')) !!}
       <div class="modal-body">
 
         <div class="form-group">
