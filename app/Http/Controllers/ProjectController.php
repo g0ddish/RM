@@ -177,7 +177,7 @@ class ProjectController extends Controller {
 			$pid  = Input::get('interested');
 			$project = Project::find($pid);
 			$user->interestedProjects()->attach($project);
-			return redirect('/')->with('message', 'Registered interest in project ' . str_limit($project->title, 75) . var_dump($interest));
+			return redirect('/')->with('message', 'Registered interest in project ' . str_limit($project->title, 75));
 		}
 	}
 
