@@ -64,6 +64,7 @@ class ProfileController extends BaseController {
             //$this->layout->title = APPNAME;
 
             if ($id == "edit") {
+
                 $user = Sentry::getUser();
                 $programs = Program::all();
                 return view($this->layout, ['content' => View::make('main.profile.edit')->with('skills', Skill::all())->with('programs', $programs)->with('user', $user), 'title'=> APPNAME, 'user'=>$user]);
@@ -73,12 +74,12 @@ class ProfileController extends BaseController {
             } else {
                 try {
                     //  $currentuser = Sentry::getUser();
-                    $user = Sentry::findUserByLogin($id);
+                   $user = Sentry::findUserByLogin($id);
                     $userprograms = $user->programs();
                 } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
                     echo 'User was not found.';
                 }
-                return view($this->layout, ['content' => View::make('main.profile.index')->with('user', Sentry::getUser()), 'title'=> APPNAME]);
+                return view($this->layout, ['content' => View::make('main.profile.index')->with('user', $user), 'title'=> APPNAME]);
             //    $this->layout->content = View::make('main.profile.index')->with('user', $user);
             }
 
