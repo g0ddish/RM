@@ -61,14 +61,14 @@
 
                                  <strong>{!! $creator !!}</strong>
                                  <article>Founder of this project</article>
-                                 <div class="links hidden-sm" style="margin:3px; color:white;">
+                                 <div class="links hidden-sm" style="margin:3px;">
                              <?php
                              if($project->status_id == 1){
-                                 echo "<span class='glyphicon glyphicon-search' aria-hidden='true'></span>";
+                                 echo "<span style='color:#ffffff; font-size: 1.5em' class='glyphicon glyphicon-search' aria-hidden='true'></span>";
                              }else if($project->status_id == 2){
-                                 echo "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>";
+                                 echo "<span style='color:#ff0000; font-size: 1.5em' class='glyphicon glyphicon-remove' aria-hidden='true'></span>";
                              }else if($project->status_id == 3){
-                                 echo "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
+                                 echo "<span style='color:limegreen; font-size: 1.5em' class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
                              }   ?>
 
                                  </div>
