@@ -5,6 +5,7 @@ use View;
 use Input;
 use Redirect;
 use Sentry;
+use Agent;
 class LoginController extends BaseController {
     /**
      * The layout that should be used for responses.
@@ -45,11 +46,8 @@ class LoginController extends BaseController {
 	 */
 	public function store()
 	{
-
-        try
-        {
-            if (Input::has('id') && Input::has('password'))
-            {
+        if(Agent::isAndroidOS()){
+            if (Input::has('id') && Input::has('password')) {
                 $id = Input::get('id');
                 $pass = Input::get('password');
             }
@@ -57,42 +55,40 @@ class LoginController extends BaseController {
                 'student_id' => $id,
                 'password' => $pass,
             );
-            $user = Sentry::authenticate($credentials, false);
-            return Redirect::to('./');
+            $user = Sentry::findUserByCredentials($credentials, false);
+            echo json_encode($user);
+        }else {
+
+            try {
+                if (Input::has('id') && Input::has('password')) {
+                    $id = Input::get('id');
+                    $pass = Input::get('password');
+                }
+                $credentials = array(
+                    'student_id' => $id,
+                    'password' => $pass,
+                );
+                $user = Sentry::authenticate($credentials, false);
+                return Redirect::to('./');
 
 
+            } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
+                return view($this->layout, ['content' => View::make('login.error'), 'title' => APPNAME, 'error' => 'Missing data...']);
+            } catch (Cartalyst\Sentry\Users\PasswordRequiredException $e) {
+                return view($this->layout, ['content' => View::make('login.error'), 'title' => APPNAME, 'error' => 'Missing data...']);
+            } catch (Cartalyst\Sentry\Users\WrongPasswordException $e) {
+                return view($this->layout, ['content' => View::make('login.error'), 'title' => APPNAME, 'error' => 'Missing data...']);
+            } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+                return view($this->layout, ['content' => View::make('login.error'), 'title' => APPNAME, 'error' => 'Missing data...']);
+            } catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {
+                return view($this->layout, ['content' => View::make('login.error'), 'title' => APPNAME, 'error' => 'Missing data...']);
+            } // The following is only required if the throttling is enabled
+            catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
+                $this->layout->content = View::make('login.error')->with('error', "User is suspended for too many login attempts. Redirecting in 5 seconds.");
+            } catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
+                echo 'User is banned.  Redirecting in 5 seconds.';
+            }
         }
-        catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
-        {
-            return view($this->layout, ['content' => View::make('login.error'), 'title'=> APPNAME, 'error' => 'Missing data...']);
-        }
-        catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
-        {
-            return view($this->layout, ['content' => View::make('login.error'), 'title'=> APPNAME, 'error' => 'Missing data...']);
-        }
-        catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
-        {
-            return view($this->layout, ['content' => View::make('login.error'), 'title'=> APPNAME, 'error' => 'Missing data...']);
-        }
-        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
-        {
-            return view($this->layout, ['content' => View::make('login.error'), 'title'=> APPNAME, 'error' => 'Missing data...']);
-        }
-        catch (Cartalyst\Sentry\Users\UserNotActivatedException $e)
-        {
-            return view($this->layout, ['content' => View::make('login.error'), 'title'=> APPNAME, 'error' => 'Missing data...']);
-        }
-
-// The following is only required if the throttling is enabled
-        catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e)
-        {
-            $this->layout->content = View::make('login.error')->with('error', "User is suspended for too many login attempts. Redirecting in 5 seconds.");
-        }
-        catch (Cartalyst\Sentry\Throttling\UserBannedException $e)
-        {
-            echo 'User is banned.  Redirecting in 5 seconds.';
-        }
-
 	}
 
 

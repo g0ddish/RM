@@ -1,3 +1,9 @@
+<?php
+$msg = Session::get('message');
+if(isset($msg)){
+    $msg = "<div class='alert alert-success'>$msg</div>";
+}
+?>
 <div class="col-md-12 text-center" style="height: 50%; background-color: #55AA55;">
     <div class="col-md-4" style="margin-top: 30px">
         <a href="./login" class="btn btn-lg btn-block btn-custom">Login</a>
@@ -6,6 +12,7 @@
 
     <div class="col-md-4">
     <h1 style="color:#ffffff;">Research Monster</h1>
+            {!! $msg or '' !!}
          <img style="position:relative;z-index: 100; margin-top:30px" src="{{asset('img/monsters/bigmon.png')}}" alt="Monster 1" />
     </div>
 

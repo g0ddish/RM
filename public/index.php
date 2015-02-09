@@ -5,7 +5,7 @@
  * @package  Laravel
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
-define("APPNAME", "ResearchMonster v0.9");
+define("APPNAME", "ResearchMonster v1.0");
 
 /*
 |--------------------------------------------------------------------------

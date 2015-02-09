@@ -24,7 +24,7 @@
                              </div>
                          </div>
                          <div class="info col-xs-8 col-sm-7">
-                             {!! str_limit($project->title, 35) !!}
+                             {!! link_to("projects/$project->id",str_limit($project->title, 35)) !!}
                              <div class="visible-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elitero..</div>
                              <div class="hidden-xs">
                                  <ul class="nav nav-tabs" role="tablist">
@@ -61,8 +61,16 @@
 
                                  <strong>{!! $creator !!}</strong>
                                  <article>Founder of this project</article>
-                                 <div class="links hidden-sm" style="margin:3px">
-                                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                 <div class="links hidden-sm" style="margin:3px; color:white;">
+                             <?php
+                             if($project->status_id == 1){
+                                 echo "<span class='glyphicon glyphicon-search' aria-hidden='true'></span>";
+                             }else if($project->status_id == 2){
+                                 echo "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>";
+                             }else if($project->status_id == 3){
+                                 echo "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
+                             }   ?>
+
                                  </div>
                                  <a href="./projects/{!! $project->id !!}" class="btn btn-success">More Info</a>
                              </div>

@@ -12,6 +12,10 @@
     background-color: #55AA55;
       font-family: 'Oswald', sans-serif;
     }
+    a, a:hover {
+      color: inherit; /* blue colors for links too */
+      text-decoration: inherit; /* no underline */
+    }
     .event .panel-body {
       color: #ffffff;
       background: #A0CFA0;
@@ -331,8 +335,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <?php
-            echo "<li>".link_to('projects', "Search Projects", $attributes = array(), $secure = null)."</li>";
-                  echo "<li class='divider'></li>";
+            echo "<li>".link_to('/', "Search Projects", $attributes = array(), $secure = null)."</li>";
+
             endif;
             ?>
           <?php
@@ -341,7 +345,11 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
         <li>{!! link_to('projects/create', "Add Project", $attributes = array(), $secure = null) !!}</li>
+
             <?php
+            echo "<li class='divider'></li>";
+           echo "<li>". link_to('applicants', "View Applicants", $attributes = array(), $secure = null)."</li>";
+
             endif;
             ?>
           <!--  <li class="divider"></li>
@@ -353,7 +361,7 @@
        <li class="<?php  if(Request::segment(2)== Sentry::getUser()->student_id)echo "active"; ?>"><?php
          echo link_to('profile/'.$user->student_id, $user->student_id, $attributes = array(), $secure = null);
          ?></li>
-       <?php  if(Request::segment(2)== Sentry::getUser()->student_id){ echo "<li><a href=\"./edit\">Edit Profile</a></li>";} ?>
+      <li class="<?php  if(Request::segment(2)== "edit")echo "active"; ?>"><?php echo link_to('profile/edit', "Edit Profile");?></li>
        <li><?php echo link_to('logout', "Logout");?></li>
       </ul>
 </ul>

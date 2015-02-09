@@ -138,6 +138,8 @@ return [
 		'GrahamCampbell\HTMLMin\HTMLMinServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
+		'Jenssegers\Agent\AgentServiceProvider',
+
 		/*
 		 * Application Service Providers...
 		 */
@@ -197,7 +199,9 @@ return [
 		'HTMLMin' => 'GrahamCampbell\HTMLMin\Facades\HTMLMin',
 		'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Form'=> 'Illuminate\Html\FormFacade',
-		'HTML'=> 'Illuminate\Html\HtmlFacade'
+		'HTML'=> 'Illuminate\Html\HtmlFacade',
+		'Agent'            => 'Jenssegers\Agent\Facades\Agent',
+
 
 
 	],

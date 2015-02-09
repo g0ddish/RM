@@ -4,6 +4,7 @@ namespace ResearchMonster\Http\Controllers;
 use View;
 use Sentry;
 use Project;
+use Interest;
 use Redirect;
 use Skill;
 use Input;
@@ -55,10 +56,12 @@ class ProjectController extends Controller {
 			$skills = Input::get('skills');
 			$desc = Input::get('desc');
 			$start = Input::get('start');
+			$status = Input::get('status');
 			$project = new Project();
 			$project->title = $title;
 			$project->description = $desc;
 			$project->start_date = strtotime($start);
+			$project->status_id = $status;
 			$project->user()->associate(Sentry::getUser());
 			$project->save();
 			if (isset($skills)){
@@ -140,10 +143,12 @@ class ProjectController extends Controller {
 				$skills = Input::get('skills');
 				$desc = Input::get('desc');
 				$start = Input::get('start');
+				$status = Input::get('status');
 			//	$project = new Project();
 				$project->title = $title;
 				$project->description = $desc;
 				$project->start_date = strtotime($start);
+				$project->status_id = $status;
 				//$project->user()->associate(Sentry::getUser());
 				$project->save();
 				$skillarr = array();
@@ -168,6 +173,11 @@ class ProjectController extends Controller {
 			//	return view($this->layout, ['content' =>  View::make('main.project.single')->with('message', "Updated project $id"), 'title'=> APPNAME]);
 			}
 
+		}elseif(Input::has('interested')){
+			$pid  = Input::get('interested');
+			$project = Project::find($pid);
+			$user->interestedProjects()->attach($project);
+			return redirect('/')->with('message', 'Registered interest in project ' . str_limit($project->title, 75) . var_dump($interest));
 		}
 	}
 

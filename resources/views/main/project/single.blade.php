@@ -29,6 +29,20 @@
       <div class="panel panel-default">
          <div class="panel-body">
 
+
+
+                     <?php
+                     if($project->status_id == 1){
+                         echo "<div class='alert alert-info' role='alert'>This project is currently looking for people; you may apply below.</div>";
+                     }else if($project->status_id == 2){
+                         echo "<div class='alert alert-danger' role='alert'>This project is currently closed; you will be unable to apply.</div>";
+
+                     }else if($project->status_id == 3){
+                         echo "<div class='alert alert-success' role='alert'>This project has already been successfully filled; you will be unable to apply.</div>";
+
+                     }   ?>
+
+
                  <div class="panel panel-default event">
                      <div class="panel-body">
                          <div class="rsvp col-xs-2 col-sm-2">
@@ -64,21 +78,45 @@
 
                                      </div>
                                      <div role="tabpanel" class="tab-pane" id="skills-">
+
                                      </div>
+
                                  </div>
+
                              </div>
                       </div>
                          </div>
 
 
+
                  </div>
 
-             <?php      if($user->hasProjectCRUDPermission()):  ?>
-                <div class="col-md-2 pull-right">
-             <button data-toggle="modal" data-target="#myModal" class="btn btn-block btn-warning">Edit</button>
-                </div>
-             <?php endif; ?>
-         </div>
+
+             <?php      if($user->hasProjectCRUDPermission()){
+                             echo "  <div class='col-md-2 pull-right'>
+             <button data-toggle='modal' data-target='#myModal' class='btn btn-block btn-warning'>Edit</button>
+                </div>";
+                         }else{
+                             $test = $project->interestedUsers()->get();
+                             foreach($test->all() as $object){
+                                 if($object instanceof User){
+                                     if($object->id == $user->id){
+                                         $already = true;
+                                     }}
+                             }
+
+                             if($project->status_id == 1 && !isset($already)){
+                             echo " <div class='col-md-2 pull-right'>".Form::open(['route' => ['projects.update', $project->id], 'method' => 'put']).
+                                     "<button type='submit' name='interested' value='$project->id' class='btn btn-block btn-lg btn-success'>I'm Interested</button>
+".Form::close()."</div>";
+                         }elseif(isset($already)){
+                                 echo " <div class='col-md-2 pull-right'>You've applied for this project already.</div>";
+                             }
+
+                             } ?>
+
+
+
 
       </div>
    </div>
@@ -131,6 +169,14 @@
                                     <label for="desc">Description</label>
                                     <textarea name="desc" class="form-control">{!! $project->description !!}</textarea>
 
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="1">Open</option>
+                                        <option value="2">Closed</option>
+                                        <option value="3">Completed</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="start">Start Date</label>

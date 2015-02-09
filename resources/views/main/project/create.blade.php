@@ -44,6 +44,13 @@
 
           </div>
       <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" id="status" name="status">
+              <option value="1">Open</option>
+              <option value="2">Closed</option>
+          </select>
+      </div>
+      <div class="form-group">
           <label for="start">Start Date</label>
           <input type="text" class="form-control" name="start" id="start" placeholder="">
 

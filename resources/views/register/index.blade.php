@@ -1,10 +1,10 @@
 <div class="col-md-12" style="height: 50%; background-color: #55AA55;">
 <div class="col-md-6 col-md-offset-3" style="margin-top: 20px">
   <div class="panel" style="padding: 13px;">
-   {{ Form::open(array('action' => 'RegisterController@store')) }}
+   {!! Form::open(array('action' => 'RegisterController@store')) !!}
    <div class="form-group">
     <label for="id">Student ID</label>
-    <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID">
+    <input type="text" class="form-control" maxlength="9" id="id" name="id" placeholder="Enter ID">
    </div>
    <div class="form-group">
     <label for="email">Email</label>

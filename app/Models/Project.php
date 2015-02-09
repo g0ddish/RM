@@ -11,4 +11,9 @@ class Project extends Eloquent {
     {
         return $this->belongsTo('User', 'user_id', 'id');
     }
+
+    public function interestedUsers()
+    {
+        return $this->belongsToMany('User');
+    }
 }

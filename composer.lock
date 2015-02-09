@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "181b026c46261fc8c0c837be1bfdcb37",
+    "hash": "96dd7761cd2c9c311511e214cb690006",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -66,12 +66,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cartalyst/sentry.git",
-                "reference": "bc7179e6571abf7eea85062f3a1d89e47451da97"
+                "reference": "78c4dd21d1ddd41c2b2c54301b9e5771e1e42bf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/bc7179e6571abf7eea85062f3a1d89e47451da97",
-                "reference": "bc7179e6571abf7eea85062f3a1d89e47451da97",
+                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/78c4dd21d1ddd41c2b2c54301b9e5771e1e42bf4",
+                "reference": "78c4dd21d1ddd41c2b2c54301b9e5771e1e42bf4",
                 "shasum": ""
             },
             "require": {
@@ -161,7 +161,7 @@
                 "source": "https://github.com/cartalyst/sentry/tree/feature/laravel-5",
                 "issues": "https://github.com/cartalyst/sentry/issues"
             },
-            "time": "2015-02-01 23:05:23"
+            "time": "2015-02-06 21:30:43"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -735,6 +735,56 @@
             "time": "2014-07-14 20:59:35"
         },
         {
+            "name": "jenssegers/agent",
+            "version": "v2.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/laravel-agent.git",
+                "reference": "3f7a3b2e5ae420296bb55b644f689d1ec8658b02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/laravel-agent/zipball/3f7a3b2e5ae420296bb55b644f689d1ec8658b02",
+                "reference": "3f7a3b2e5ae420296bb55b644f689d1ec8658b02",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.*|5.*",
+                "mobiledetect/mobiledetectlib": "2.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Agent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "http://jenssegers.be"
+                }
+            ],
+            "description": "A user agent class for Laravel",
+            "keywords": [
+                "Agent",
+                "browser",
+                "laravel",
+                "mobile",
+                "platform",
+                "user agent",
+                "useragent"
+            ],
+            "time": "2015-01-22 22:44:57"
+        },
+        {
             "name": "jeremeamia/SuperClosure",
             "version": "2.0.0",
             "source": {
@@ -794,16 +844,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.0",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "44c61252b5762ff53ad181ed416e3006c50a6a9b"
+                "reference": "30391aa20874c30725f653bea1ea5b895a5217cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/44c61252b5762ff53ad181ed416e3006c50a6a9b",
-                "reference": "44c61252b5762ff53ad181ed416e3006c50a6a9b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/30391aa20874c30725f653bea1ea5b895a5217cf",
+                "reference": "30391aa20874c30725f653bea1ea5b895a5217cf",
                 "shasum": ""
             },
             "require": {
@@ -915,7 +965,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-02-04 13:59:07"
+            "time": "2015-02-06 23:14:12"
         },
         {
             "name": "league/flysystem",
@@ -1055,6 +1105,59 @@
                 "debug"
             ],
             "time": "2015-02-05 07:51:20"
+        },
+        {
+            "name": "mobiledetect/mobiledetectlib",
+            "version": "2.8.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/serbanghita/Mobile-Detect.git",
+                "reference": "c68901fb09227dcf04872f0d6a27b9f6e75ecf1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/c68901fb09227dcf04872f0d6a27b9f6e75ecf1f",
+                "reference": "c68901fb09227dcf04872f0d6a27b9f6e75ecf1f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "johnkary/phpunit-speedtrap": "~1.0@dev",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Mobile_Detect.php"
+                ],
+                "psr-0": {
+                    "Detection": "namespaced/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Serban Ghita",
+                    "email": "serbanghita@gmail.com",
+                    "homepage": "http://mobiledetect.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Mobile_Detect is a lightweight PHP class for detecting mobile devices. It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.",
+            "homepage": "https://github.com/serbanghita/Mobile-Detect",
+            "keywords": [
+                "detect mobile devices",
+                "mobile",
+                "mobile detect",
+                "mobile detector",
+                "php mobile detect"
+            ],
+            "time": "2014-11-23 13:08:17"
         },
         {
             "name": "monolog/monolog",

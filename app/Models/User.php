@@ -13,6 +13,11 @@ class User extends SentryModel {
         return $this->belongsToMany('Skill', 'users_skills', 'user_id', 'skill_id');
     }
 
+    public function interestedProjects()
+    {
+        return $this->belongsToMany('Project');
+    }
+
     public function hasAdminPermission(){
         foreach($this->getMergedPermissions() as $perm => $val){
             if($perm == "admin"){
