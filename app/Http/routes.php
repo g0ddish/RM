@@ -30,7 +30,7 @@ Route::post('/profile/edit', 'ProfileController@storeUser');
 Route::get('/logout', function()
 {
     Sentry::logout();
-    return Redirect::to('./')->with('message', "<div class='alert alert-success'>Logged out</div>");
+    return Redirect::to('./')->with('message', "Logged out");
 });
 
 Route::get('/applicants', 'ApplicantController@index');

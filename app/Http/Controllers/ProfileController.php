@@ -152,6 +152,11 @@ class ProfileController extends BaseController {
             $user->last_name = $lname;
 
         }
+        if(Input::has('password')){
+            $pass = Input::get('password');
+            $user->password = $pass;
+        }
+
 
         if (Input::hasFile('photo') && Input::file('photo')->isValid())
         {

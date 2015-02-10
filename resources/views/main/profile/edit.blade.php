@@ -56,6 +56,10 @@ $progs[] = $program->ProgramName;
                   <label for="lname">Last Name</label>
                   <input type="text" value="<?php echo $user->last_name; ?>" class="form-control" id="lname" name="lname" placeholder="Enter Last Name">
                 </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Leave blank for unchanged">
+      </div>
         <div class="form-group">
                <label for="email">Email address</label>
                <input type="email" class="form-control" value="<?php echo $user->email; ?>" id="email" name="email" placeholder="Enter Email">
