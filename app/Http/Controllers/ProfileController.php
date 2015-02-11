@@ -173,13 +173,13 @@ class ProfileController extends BaseController {
 
             foreach($formatTable as $mimecheck){
                 if($mime == $mimecheck){
-                    $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
-                    $destinationPath = "public/uploads";
+                    $filename = str_random(20) . '.' . $file->getClientOriginalExtension();
+                    $destinationPath = "uploads";
 
                     $succes = $file->move($destinationPath, $filename);
-                    $bodytag = str_replace("public/", "", $succes->getPathname());
+                    $bodytag = str_replace("", "", $succes->getPathname());
                     $user->avatar = $bodytag;
-                    var_dump($bodytag);
+                   // var_dump($bodytag);
                    // $img = Image::make($bodytag)->resize(612, 612)->save();
                 }
             }

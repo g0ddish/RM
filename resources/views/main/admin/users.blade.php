@@ -145,7 +145,7 @@
      });
 
       $(".delete-btn").click(function() {
-       $("#deleteModalLabel").text("Delete Group " + ($(this).val()));
+       $("#deleteModalLabel").text("Delete User " + ($(this).val()));
               $("#deleteModal").modal({
                   show: true
               });

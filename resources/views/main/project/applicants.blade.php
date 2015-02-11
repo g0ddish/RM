@@ -19,15 +19,17 @@
                                 <th>Student ID</th>
                                 <th>Name</th>
                                 <th>E-Mail</th>
-                              </tr>
-                              <tr>";
+                              </tr>";
+
                      foreach($interestedusers as $iuser){
+                        echo " <tr>";
                          echo "<td><a href='./profile/$iuser->student_id'>$iuser->student_id</a></td>";
                          echo "<td><a href='./profile/$iuser->student_id'>$iuser->first_name $iuser->last_name</a></td>";
                          echo "<td><a href='./profile/$iuser->student_id'>$iuser->email</a></td>";
+                         echo"  </tr>";
+
                      }
-                            echo"  </tr>
-                            </table>";
+                        echo"    </table>";
 
                  }
 

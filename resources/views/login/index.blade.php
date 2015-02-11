@@ -1,6 +1,7 @@
 <div class="col-md-12" style="height: 100%; background-color: #55AA55;">
 <div class="col-md-6 col-md-offset-3" style="margin-top: 20px">
-  <div class="panel panel-default">
+    <img class="img-responsive center-block" style="max-height: 300px;" src="{{asset('img/monsters/login2.png')}}" alt="Monster 1" />
+    <div class="panel panel-default">
     <div class="panel-body">
 {!! Form::open(array('action' => 'LoginController@store')) !!}
    <div class="form-group">
