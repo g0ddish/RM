@@ -40,6 +40,8 @@ class Handler extends ExceptionHandler {
 			'password'  => $pass,
 			'activated' => true,
 		));
+		$user->addGroup(Sentry::findGroupById('4'));
+
 		Mail::send('emails.welcome', array('id' => Input::get('id'), 'pass' => $pass), function ($message) {
 			$email = Input::get('email');
 			$message->from('no-reply@georgebrown.ca', 'Research Monster');
