@@ -22,6 +22,9 @@ class ProjectController extends Controller {
 	 */
 	public function index()
 	{
+        $permission = parent::requireProjectPermission();
+        if($permission != false)
+            return $permission;
 		return view($this->layout, ['content' =>  View::make('main.project.index')->with('projects', Project::all()), 'title'=> APPNAME]);
 	}
 
@@ -33,12 +36,10 @@ class ProjectController extends Controller {
 	 */
 	public function create()
 	{
-		$user = Sentry::getUser();
-		if($user->hasProjectCRUDPermission()) {
+        $permission = parent::requireProjectPermission();
+        if($permission != false)
+            return $permission;
 			return view($this->layout, ['content' =>  View::make('main.project.create')->with('skills', Skill::all()), 'title'=> APPNAME]);
-		}else{
-			return Redirect::to('/');
-		}
 	}
 
 
@@ -49,8 +50,9 @@ class ProjectController extends Controller {
 	 */
 	public function store()
 	{
-		$user = Sentry::getUser();
-		if($user->hasProjectCRUDPermission()) {
+        $permission = parent::requireProjectPermission();
+        if($permission != false)
+            return $permission;
 		if (Input::has('title') && Input::has('desc')) {
 			$title = Input::get('title');
 			$skills = Input::get('skills');
@@ -76,18 +78,10 @@ class ProjectController extends Controller {
 					$newSkill->save();
 					$skillarr[] = $newSkill->id;
 				}
-
 			}
 			$project->skills()->sync($skillarr);
 		}
-			//var_dump($skills);
-		//	$this->layout->title = APPNAME;
-		//	$this->layout->content = View::make('main.project.store'); str_limit($project->description, 235)
 			return redirect('/')->with('message', 'Added project ' . str_limit($project->title, 75));
-
-		}
-		}else{
-			return Redirect::to('/');
 		}
 	}
 
@@ -104,10 +98,7 @@ class ProjectController extends Controller {
 	{
 			if (is_numeric($id))
 			{
-				//$this->layout->title = APPNAME;
-			//	$this->layout->content = View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all());
 				return view($this->layout, ['content' =>  View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all()), 'title'=> APPNAME]);
-
 			}
     }
 
@@ -136,7 +127,7 @@ class ProjectController extends Controller {
 	public function update($id)
 	{
 		$user = Sentry::getUser();
-		if ($user->hasProjectCRUDPermission() ) {
+		if ($user != null && $user->hasProjectCRUDPermission() ) {
 			if (Input::has('title') && Input::has('desc') && Input::has('start')) {
 				$project = Project::find($id);
 				$title = Input::get('title');
@@ -144,12 +135,10 @@ class ProjectController extends Controller {
 				$desc = Input::get('desc');
 				$start = Input::get('start');
 				$status = Input::get('status');
-			//	$project = new Project();
 				$project->title = $title;
 				$project->description = $desc;
 				$project->start_date = strtotime($start);
 				$project->status_id = $status;
-				//$project->user()->associate(Sentry::getUser());
 				$project->save();
 				$skillarr = array();
 				if(empty($skills)){
@@ -165,14 +154,11 @@ class ProjectController extends Controller {
 							$newSkill->save();
 							$skillarr[] = $newSkill->id;
 						}
-
 					}
 					$project->skills()->sync($skillarr);
 				}
 				return redirect('/')->with('message', 'Updated project ' . str_limit($project->title, 75));
-			//	return view($this->layout, ['content' =>  View::make('main.project.single')->with('message', "Updated project $id"), 'title'=> APPNAME]);
 			}
-
 		}elseif(Input::has('interested')){
 			$pid  = Input::get('interested');
 			$project = Project::find($pid);
@@ -190,14 +176,12 @@ class ProjectController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$user = Sentry::getUser();
-		if ($user->hasProjectCRUDPermission() ) {
+        $permission = parent::requireProjectPermission();
+        if($permission != false)
+            return $permission;
 			$project = Project::find($id);
 			$project->delete();
-			//$this->layout->title = APPNAME;
 			return redirect('/')->with('message', 'Deleted project '  . str_limit($project->title, 75));
-		//	$this->layout->content = View::make('main.project.delete')->with('message', "Deleted project $id");
-		}
 	}
 
 

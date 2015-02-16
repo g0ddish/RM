@@ -6,7 +6,7 @@ use Sentry;
 use Project;
 use Redirect;
 use Input;
-class AdminController extends BaseController {
+class AdminController extends Controller {
     /**
      * The layout that should be used for responses.
      */
@@ -19,19 +19,10 @@ class AdminController extends BaseController {
 	 */
 	public function index()
 	{
-        $user =  Sentry::getUser();
-        if ($user != null && $user->hasAnyAccess(['admin']) )
-        {
-          //  $this->layout->title = APPNAME;
-            return view($this->layout, ['content' => View::make('main.admin.index'), 'title'=> APPNAME]);
-         //   $this->layout->content = View::make('main.admin.index');
-        }elseif ($user != null && $user->hasAnyAccess(['users']) )
-        {
-            return Redirect::to('/');
-        }else{
-            return Redirect::to('/');
-        }
-
+        $permission = parent::requireAdminPermission();
+        if($permission != false)
+            return $permission;
+        return view($this->layout, ['content' => View::make('main.admin.index'), 'title'=> APPNAME]);
 	}
 
 
@@ -59,7 +50,9 @@ class AdminController extends BaseController {
 
     public function storeUser()
     {
-    //    $this->layout->title = APPNAME;
+        $permission = parent::requireAdminPermission();
+        if($permission != false)
+            return $permission;
         if (Input::has('sid') && Input::has('email') && Input::has('pass') && !Input::has('edit-field'))
         {
            $sid = Input::get('sid');
@@ -167,9 +160,10 @@ class AdminController extends BaseController {
 
 
         public function storeGroup(){
-
-      //  $this->layout->title = APPNAME;
-        if (Input::has('groupname') && !Input::has('editid'))
+            $permission = parent::requireAdminPermission();
+            if($permission != false)
+                return $permission;
+            if (Input::has('groupname') && !Input::has('editid'))
         {
             $name = Input::get('groupname');
             $am = Input::get('adminmenu');
@@ -248,7 +242,10 @@ class AdminController extends BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{ //GET
+	{
+        $permission = parent::requireAdminPermission();
+        if($permission != false)
+            return $permission;
         if($id == "groups") {
           //  $this->layout->title = APPNAME;
             $groups = Sentry::findAllGroups();

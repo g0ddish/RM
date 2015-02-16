@@ -1,3 +1,8 @@
+<?php
+$message2 = Session::pull('message');
+if(isset($message2)){
+    $msg = "<div class='alert alert-success'>$message2</div>";
+} ?>
 
         <div class="col-md-12 text-center" style="margin-bottom: 20px;">
             <h1 style="color:#ffffff;">Research Monster</h1>

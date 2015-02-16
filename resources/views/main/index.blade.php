@@ -55,7 +55,11 @@
                          </div>
                          <div class="author col-xs-2 col-sm-3">
                              <div class="profile-image">
-                                 <img src="{!! $primary->avatar !!}"/>
+
+
+                                {!! HTML::image($primary->avatar, 'avatar')  !!}
+
+
                              </div>
                              <div class="profile hidden-xs">
 
