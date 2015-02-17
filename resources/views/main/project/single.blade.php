@@ -62,10 +62,8 @@
                                  <div class="tab-content">
                                      <div role="tabpanel" class="tab-pane active" id="desc-">
                                          {!! $project->description !!}
-
                                      </div>
-                                     <div role="tabpanel" class="tab-pane" id="skills-">
-                                                              </div>
+                                     <div role="tabpanel" class="tab-pane" id="skills-"></div>
                                  </div> <ul class="nav nav-tabs" role="tablist">
                                      <li role="presentation"><a href="#skills-" aria-controls="skills-" role="tab">Skills</a></li>
                                  </ul>
@@ -75,7 +73,6 @@
                                          @foreach ($project->skills()->get() as $skill)
                                              <p class="label label-success">{!! $skill->name !!}</p>
                                          @endforeach
-
                                      </div>
                                      <div role="tabpanel" class="tab-pane" id="skills-">
 
@@ -83,15 +80,186 @@
 
                                  </div>
 
+                                 <ul class="nav nav-tabs" role="tablist">
+                                     <li role="presentation" class="active"><a aria-controls="desc-" role="tab">Files</a></li>
+                                 </ul>
+                                 <div class="tab-content">
+                                     <div role="tabpanel" class="tab-pane active" id="desc-">
+                                         @foreach ($project->files()->get() as $pfile)
+
+                                             <?php $types = explode("/", $pfile->file_type);
+                                                    switch($types[0]){
+                                                        case "application":
+                                                            switch($types[1]){
+                                                                case "pdf":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src = '$link' allowfullscreen webkitallowfullscreen></iframe>";
+                                                                    echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                    echo "<p>Download PDF</p></div></div>";
+                                                                    break;
+                                                                case "msword":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src='$link' allowfullscreen webkitallowfullscreen></iframe>";
+                                                                    echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                    echo "<p>Download Word Document</p></div></div>";
+                                                                    break;
+                                                                case "vnd.android.package-archive":  //Apk
+                                                                    echo HTML::link($pfile->file_location, "Dowload APK", array('id' => 'linkid','download' => $pfile->file_name));
+
+                                                                    break;
+                                                                case "json":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<pre>{{$data }}</pre>";
+                                                                    break;
+                                                                case "x-msaccess":
+                                                                    break;
+                                                                case "vnd.ms-excel":
+                                                                    echo HTML::link($pfile->file_location, "Dowload Excel", array('id' => 'linkid','download' => $pfile->file_name));
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src = '$link' allowfullscreen webkitallowfullscreen></iframe>";
+
+                                                                    break;
+                                                                case "vnd.ms-powerpoint":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src = '$link' allowfullscreen webkitallowfullscreen></iframe>";
+                                                                     echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                    echo "<p>Download PowerPoint</p></div></div>";
+                                                                    break;
+                                                                case "vnd.ms-project":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src = '$link' allowfullscreen webkitallowfullscreen></iframe>";
+
+                                                                    break;
+                                                                case "x-mspublisher":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src = '$link' allowfullscreen webkitallowfullscreen></iframe>";
+
+                                                                    break;
+                                                                case "vnd.visio":
+                                                                    break;
+                                                                case "vnd.oasis.opendocument.presentation":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src = '$link' allowfullscreen webkitallowfullscreen></iframe>";
+                                                                    break;
+                                                                case "vnd.oasis.opendocument.spreadsheet":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src = '$link' allowfullscreen webkitallowfullscreen></iframe>";
+                                                                    break;
+                                                                case "vnd.oasis.opendocument.text":
+                                                                    $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
+                                                                    echo "<iframe style='width: 100%; height: 450px' src = '$link' allowfullscreen webkitallowfullscreen></iframe>";
+                                                                    break;
+                                                                case "x-rar":
+                                                                    echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<a class='text-center' href='". asset($pfile->file_location) ."'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                    echo "<p>Download Rar</p></div></div>";
+                                                                    break;
+                                                                case "rtf":
+                                                                    $data = file_get_contents(base_path()."\\".$pfile->file_location);
+                                                                    echo "<pre>{{$data }}</pre>";
+                                                                    break;
+                                                                case "x-tar":
+                                                                    echo HTML::link($pfile->file_location, "Dowload Tar", array('id' => 'linkid','download' => $pfile->file_name));
+                                                                    break;
+                                                                case "vnd.wordperfect":
+                                                                    break;
+                                                                case "xml":
+                                                                    break;
+                                                                case "zip":
+                                                                    echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<a class='text-center' href='". asset($pfile->file_location) ."'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                    echo "<p>Download Zip</p></div></div>";
+                                                                    break;
+                                                            }
+                                                            break;
+                                                        case "image":
+                                                            switch($types[1]){
+                                                                case "jpeg":
+                                                                    echo HTML::image($pfile->file_location, 'a picture', array('class' => 'img-responsive'));
+                                                                   echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                    echo "<p>Download Image</p></div></div>";
+
+                                                                    break;
+                                                                case "png":
+                                                                    echo HTML::image($pfile->file_location, 'a picture', array('class' => 'img-responsive'));
+                                                                    echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                   echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                   echo "<p>Download Image</p></div></div>";
+
+                                                                    break;
+                                                                case "gif":
+                                                                    echo HTML::image($pfile->file_location, 'a picture', array('class' => 'img-responsive'));
+                                                                echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                               echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                               echo "<p>Download Image</p></div></div>";
+
+
+                                                                    break;
+                                                                case 'tga':
+                                                                    echo HTML::image($pfile->file_location, 'a picture', array('class' => 'img-responsive'));
+                                                                       echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                      echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                      echo "<p>Download Image</p></div></div>";
+
+                                                                    break;
+                                                                case 'tif':
+                                                                    echo HTML::image($pfile->file_location, 'a picture', array('class' => 'img-responsive'));
+                                                                    echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                   echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                   echo "<p>Download Image</p></div></div>";
+
+                                                                    break;
+                                                                case 'bmp':
+                                                                    echo HTML::image($pfile->file_location, 'a picture', array('class' => 'img-responsive'));
+                                                                     echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                    echo "<p>Download Image</p></div></div>";
+
+                                                                    break;
+                                                            }
+                                                            break;
+                                                        case "text":
+                                                            switch($types[1]){
+                                                                case "css":
+                                                                    echo HTML::link($pfile->file_location, "Dowload CSS", array('id' => 'linkid','download' => $pfile->file_name));
+                                                                    $data = file_get_contents(base_path()."/".$pfile->file_location);
+                                                                    echo "<pre>{{$data }}</pre>";
+                                                                    break;
+                                                                case "richtext":
+                                                                    echo HTML::link($pfile->file_location, "Dowload Rich Text", array('id' => 'linkid','download' => $pfile->file_name));
+                                                                    $data = file_get_contents(base_path()."/".$pfile->file_location);
+                                                                    echo "<pre>{{$data }}</pre>";
+                                                                    break;
+                                                                case "plain":
+                                                                    $data = file_get_contents(base_path()."/".$pfile->file_location);
+                                                                    echo "<pre>".  str_limit($data, 400)."</pre>";
+                                                                     echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
+                                                                    echo "<p>Download Image</p></div></div>";
+
+                                                                    break;
+                                                                case 'yaml':
+                                                                    break;
+                                                            }
+                                                            break;
+
+                                                    }
+
+                                             ?>
+
+                                         @endforeach
+                                     </div>
+                                     <div role="tabpanel" class="tab-pane" id="skills-"></div>
+                                 </div>
+
                              </div>
                       </div>
                          </div>
-
-
-
                  </div>
-
-
              <?php      if($user->hasProjectCRUDPermission()){
                              echo "  <div class='col-md-2 pull-right'>
              <button data-toggle='modal' data-target='#myModal' class='btn btn-block btn-warning'>Edit</button>
@@ -104,7 +272,6 @@
                                          $already = true;
                                      }}
                              }
-
                              if($project->status_id == 1 && !isset($already)){
                              echo " <div class='col-md-2 pull-right'>".Form::open(['route' => ['projects.update', $project->id], 'method' => 'put']).
                                      "<button type='submit' name='interested' value='$project->id' class='btn btn-block btn-lg btn-success'>I'm Interested</button>
@@ -114,10 +281,6 @@
                              }
 
                              } ?>
-
-
-
-
       </div>
    </div>
 
@@ -146,11 +309,8 @@
     }
 </style>
 
-                {!! Form::open(['route' => ['projects.update', $project->id], 'method' => 'put']) !!}
-
-
-
-                                <div class="form-group">
+                {!! Form::open(['route' => ['projects.update', $project->id], 'method' => 'put', 'files' => true]) !!}
+                <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" name="title" id="title" value="{!!$project->title!!}" placeholder="">
                                     <p class="help-block">Ex. Web Design for Prestige Worldwide</p>
@@ -185,7 +345,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Associated Files</label>
-                                    <input type="file" id="exampleInputFile">
+                                    {!!  Form::file('pfile')     !!}
                                     <p class="help-block">Diagrams, Images, PDF...</p>
                                 </div>
             </div>

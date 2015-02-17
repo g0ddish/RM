@@ -30,13 +30,13 @@
         <h3 class="panel-title">Basic Info</h3>
       </div>
       <div class="panel-body">
-      <p><h4 style="margin-bottom: 18px;"><span class="label label-default"><?php echo $user->first_name . " " . $user->last_name; ?></span></h4></p>
+      <p><h4 style="margin-bottom: 3px;"><?php echo $user->first_name . " " . $user->last_name; ?></h4></p>
        <?php
        $groups = $user->getGroups();
        $uprograms = $user->programs()->get();
        $skills = $user->skills;
        foreach($uprograms as $program){
-       echo "<p><span class='label label-default'>$program->ProgramName</span></p>";
+       echo "<p>$program->ProgramName</p>";
        }
        foreach($groups as $group):
         ?>

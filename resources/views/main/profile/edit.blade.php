@@ -77,7 +77,7 @@ $progs[] = $program->ProgramName;
 
      <div class="form-group">
          <label for="photo">Avatar</label>
-             {!! HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive', 'style' => 'max-width:200px; max-height:200px;')) !!}
+         {!! HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive', 'style' => 'max-width:200px; max-height:200px;')) !!}
             <div style="margin-top: 20px"> {!! Form::file('photo') !!} </div>
      </div>
       <div class="form-group">

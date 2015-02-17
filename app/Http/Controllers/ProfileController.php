@@ -5,6 +5,7 @@ use Skill;
 use Program;
 use Sentry;
 use View;
+use Config;
 use Input;
 class ProfileController extends BaseController {
     /**
@@ -174,13 +175,16 @@ class ProfileController extends BaseController {
             foreach($formatTable as $mimecheck){
                 if($mime == $mimecheck){
                     $filename = str_random(20) . '.' . $file->getClientOriginalExtension();
-                    $destinationPath = "uploads";
-
+                    if(Config::get('app.debug')){
+                        $destinationPath = "public\\uploads\\".$user->student_id;
+                        unlink("public\\".$user->avatar);
+                    }else{
+                        $destinationPath = "uploads\\".$user->student_id;
+                        unlink($user->avatar);
+                    }
                     $succes = $file->move($destinationPath, $filename);
-                    $bodytag = str_replace("", "", $succes->getPathname());
+                    $bodytag = str_replace("public\\", "", $succes->getPathname());
                     $user->avatar = $bodytag;
-                   // var_dump($bodytag);
-                   // $img = Image::make($bodytag)->resize(612, 612)->save();
                 }
             }
         }

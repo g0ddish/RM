@@ -16,4 +16,9 @@ class Project extends Eloquent {
     {
         return $this->belongsToMany('User');
     }
+
+    public function files()
+    {
+        return $this->hasMany('PFile', 'project_files');
+    }
 }

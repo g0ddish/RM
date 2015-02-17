@@ -17,6 +17,7 @@ By Alex Hughes and Keegan Caradonna
 - Twitter Bootstrap
 - jQuery
 - CKEditor
+- viewerjs 0.5.5
 
 After cloning the repository run
 

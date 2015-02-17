@@ -8,6 +8,9 @@ use Interest;
 use Redirect;
 use Skill;
 use Input;
+use Config;
+use PFile;
+use Request;
 class ProjectController extends Controller {
     /**
      * The layout that should be used for responses.
@@ -54,6 +57,7 @@ class ProjectController extends Controller {
         if($permission != false)
             return $permission;
 		if (Input::has('title') && Input::has('desc')) {
+            $user = Sentry::getUser();
 			$title = Input::get('title');
 			$skills = Input::get('skills');
 			$desc = Input::get('desc');
@@ -66,6 +70,75 @@ class ProjectController extends Controller {
 			$project->status_id = $status;
 			$project->user()->associate(Sentry::getUser());
 			$project->save();
+
+            if (Request::hasFile('pfile') && Request::file('pfile')->isValid())
+            {
+                $formatTable = array(
+                    'image/jpeg',       //Images
+                    'image/png',
+                    'image/gif',
+                    'image/tga',
+                    'image/tif',
+                    'image/bmp',
+
+                    'text/css',         //Text
+                    'text/richtext',
+                    'text/plain',
+                    'text/yaml',
+
+                    'application/pdf',      //Applications
+                    'application/msword',
+                    'application/vnd.android.package-archive',
+                    'application/json',
+                    'application/x-msaccess',
+                    'application/vnd.ms-excel',
+                    'application/vnd.ms-powerpoint',
+                    'application/vnd.ms-project',
+                    'application/x-mspublisher',
+                    'application/vnd.visio',
+                    'application/vnd.oasis.opendocument.presentation',
+                    'application/vnd.oasis.opendocument.spreadsheet',
+                    'application/vnd.oasis.opendocument.text',
+                    'application/x-rar-compressed',
+                    'application/x-rar',
+                    'application/rar',
+                    'application/octet-stream',
+                    'application/rtf',
+                    'application/x-tar',
+                    'application/vnd.wordperfect',
+                    'application/xml',
+                    'application/zip',
+                    'application/x-zip',
+                    'application/x-zip-compressed',
+                    'application/x-compressed',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+
+
+                );
+                $file = Request::file('pfile');
+                $mime = $file->getMimeType();
+
+                foreach($formatTable as $mimecheck){
+                    if($mime == $mimecheck){
+                        $filename = str_random(20) . '.' . $file->getClientOriginalExtension();
+                        if(Config::get('app.debug')){
+                            $destinationPath = "public\\uploads\\".$user->student_id;
+                        }else{
+                            $destinationPath = "uploads\\".$user->student_id;
+                        }
+                        $succes = $file->move($destinationPath, $filename);
+                        $bodytag = str_replace("public\\", "", $succes->getPathname());
+
+                        $nfile = new PFile();
+                        $nfile->file_name = $filename;
+                        $nfile->file_location = $bodytag;
+                        $nfile->file_type = $mimecheck;
+                        $nfile->save();
+                        $project->files()->attach($nfile);
+                    }
+                }
+            }
+
 			if (isset($skills)){
 				$skillarr = array();
 			foreach ($skills as $skillName) {
@@ -96,10 +169,14 @@ class ProjectController extends Controller {
 	 */
 	public function show($id)
 	{
-			if (is_numeric($id))
-			{
-				return view($this->layout, ['content' =>  View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all()), 'title'=> APPNAME]);
-			}
+        $user = Sentry::getUser();
+        if ($user != null) {
+            if (is_numeric($id)) {
+                return view($this->layout, ['content' => View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all()), 'title' => APPNAME]);
+            }
+        }else{
+          return  Redirect::to('/');
+        }
     }
 
 
@@ -140,6 +217,72 @@ class ProjectController extends Controller {
 				$project->start_date = strtotime($start);
 				$project->status_id = $status;
 				$project->save();
+
+                if (Request::hasFile('pfile') && Request::file('pfile')->isValid())
+                {
+                    $formatTable = array(
+                        'image/jpeg',       //Images
+                        'image/png',
+                        'image/gif',
+                        'image/tga',
+                        'image/tif',
+                        'image/bmp',
+
+                        'text/css',         //Text
+                        'text/richtext',
+                        'text/plain',
+                        'text/yaml',
+
+                        'application/pdf',      //Applications
+                        'application/msword',
+                        'application/vnd.android.package-archive',
+                        'application/json',
+                        'application/x-msaccess',
+                        'application/vnd.ms-excel',
+                        'application/vnd.ms-powerpoint',
+                        'application/vnd.ms-project',
+                        'application/x-mspublisher',
+                        'application/vnd.visio',
+                        'application/vnd.oasis.opendocument.presentation',
+                        'application/vnd.oasis.opendocument.spreadsheet',
+                        'application/vnd.oasis.opendocument.text',
+                        'application/x-rar-compressed',
+                        'application/x-rar',
+                        'application/rar',
+                        'application/octet-stream',
+                        'application/rtf',
+                        'application/x-tar',
+                        'application/vnd.wordperfect',
+                        'application/xml',
+                        'application/zip',
+                        'application/x-zip',
+                        'application/x-zip-compressed',
+                        'application/x-compressed',
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+
+                    );
+                    $file = Request::file('pfile');
+                    $mime = $file->getMimeType();
+                 //   echo $mime;
+                  //  die();
+
+                    foreach($formatTable as $mimecheck){
+                        if($mime == $mimecheck){
+                            $filename = str_random(20) . '.' . $file->getClientOriginalExtension();
+                            $destinationPath = "uploads/".$user->student_id ."/project";
+                            $succes = $file->move($destinationPath, $filename);
+                            $bodytag = str_replace("public/", "", $succes->getPathname());
+
+                            $nfile = new PFile();
+                            $nfile->file_name = $filename;
+                            $nfile->file_location = $bodytag;
+                            $nfile->file_type = $mimecheck;
+                            $nfile->save();
+                            $project->files()->save($nfile);
+                        }
+                    }
+                }
+
 				$skillarr = array();
 				if(empty($skills)){
 					$project->skills()->detach();

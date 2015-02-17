@@ -5,7 +5,7 @@ use View;
 use Sentry;
 use Skill;
 use Project;
-class ApplicantController extends BaseController {
+class ApplicantController extends Controller {
 
 	/*
 	|	Route::get('/', 'HomeController@showWelcome');
@@ -22,15 +22,9 @@ class ApplicantController extends BaseController {
      */
     public function index()
     {
-        if ( ! Sentry::check())
-        {
-			 return Redirect::route('/');
-        }
-        else
-        {
+        $permission = parent::requireProjectPermission();
+        if($permission != false)
+            return $permission;
             return view($this->layout, ['content' => View::make('main.project.applicants')->with('projects', Project::take(20)->get())->with('skills', Skill::take(15)->get()), 'title'=> APPNAME]);
-        }
-
-
     }
 }

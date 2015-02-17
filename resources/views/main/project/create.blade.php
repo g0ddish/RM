@@ -25,7 +25,7 @@
     <h3 class="panel-title">Create Project</h3>
   </div>
   <div class="panel-body">
-      {!! Form::open(array('url' => 'projects')) !!}
+      {!! Form::open(array('url' => 'projects', 'files' => true)) !!}
           <div class="form-group">
               <label for="title">Title</label>
               <input type="text" class="form-control" name="title" id="title" placeholder="">
@@ -57,7 +57,7 @@
       </div>
           <div class="form-group">
               <label for="exampleInputFile">Associated Files</label>
-              <input type="file" id="exampleInputFile">
+              <input type="file" name="file" id="exampleInputFile">
               <p class="help-block">Diagrams, Images, PDF...</p>
           </div>
           <button type="submit" class="btn btn-success btn-lg">List My Project</button>
