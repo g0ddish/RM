@@ -2,18 +2,44 @@
 
 ![alt text](https://travis-ci.org/g0ddish/RM.svg "Travis CI")
 
-This project, like most PHP projects, requires [Composer](https://getcomposer.org)
-composer 
+Research Monster, like most PHP projects, requires [Composer](https://getcomposer.org)
 By Alex Hughes and Keegan Caradonna
-Research Monster supports several file types associated with projects such as 
 
-- Popular image formats. JPEG, PNG, GIF, TGA, TIF & BMP.
-- Popular text formats. Plain text, Rich text, XML, JSON Code snippets & YAML.
+ Projects supports several file types associated with projects such as 
+
+- Popular image formats
+    * JPEG
+    * PNG
+    * GIF
+    * TGA
+    * TIF
+    * BMP
+- Popular text formats.
+    * Plain text
+    * Rich text
+    * XML
+    * JSON
+    * Code snippets
+    * YAML
+
+- Microsoft Office
+    * Word
+    * Access
+    * Excel
+    * Powerpoint
+    * Project
+    * Publisher 
+    * Visio
+- OpenOffice
+    * Presentation
+    * Spreadsheet
+    * Text Document
 - PDF
-- Microsoft Word, Access, Excel, Powerpoint, Project, Publisher & Visio
-- Android Application Package
-- OpenOffice Presentation, Spreadsheet & Text
-- RAR, ZIP & Tar
+- APK
+- RAR
+- ZIP
+- Tar
+
 
 ###Dependencies
 
