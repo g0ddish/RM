@@ -22,7 +22,7 @@
       border: 1px solid #55AA55;
       padding:0;
       margin:0;
-      height:86px;
+      height:auto;
     }
     .event .panel-body > div {
       padding: 0 10px;
@@ -329,15 +329,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="<?php  if($segment=="")echo "active"?>">{!! link_to('', "Home", $attributes = array(), $secure = null) !!}</li>
-          <?php
-          if(!$user->hasProjectCRUDPermission()): ?>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <?php
-            echo "<li>".link_to('/', "Search Projects", $attributes = array(), $secure = null)."</li>";
+            echo "<li>".link_to('/projects', "Search Projects", $attributes = array(), $secure = null)."</li></ul>";
 
-            endif;
             ?>
           <?php
           if($user->hasProjectCRUDPermission()): ?>

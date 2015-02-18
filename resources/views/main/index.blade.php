@@ -5,7 +5,9 @@
    <?php endif;     $message = Session::get('message');
     if(isset($message)){
         $message = "<div class='alert alert-success'>$message</div>";
-    }?>
+    }
+
+    ?>
 
    <div class="col-md-9">
        {!! $message or '' !!}
@@ -13,10 +15,17 @@
          <div class="panel-body">
              <?php $i = 0; ?>
                  @foreach ($projects as $project)
-                     <?php $i++; ?>
+                     <?php $i++;
+                     $authors = $project->user()->get();
+                     foreach ($authors as $author){
+                         $creator = $author->first_name . " " . $author->last_name;
+                         $primary = $author;
+                         break;
+                     }
+                     ?>
                  <div class="panel panel-default event">
                      <div class="panel-body">
-                         <div class="rsvp col-xs-2 col-sm-2">
+                         <div class="rsvp col-xs-2 col-sm-2 hidden-xs">
                              <i> {!! date("j", $project->start_date)  !!}</i>
                              <i> {!! date("F", $project->start_date)  !!}</i>
                              <div class="hidden-xs">
@@ -42,18 +51,12 @@
                                              <p class="label label-success">{!! $skill->name !!}</p>
                                          @endforeach                                     </div>
                                  </div>
-                             </div><?php
-                             $authors = $project->user()->get();
-                             $primary;  //I was inebriated don't laugh
-                             $creator;
-                             foreach ($authors as $author){
-                                 $creator = $author->first_name . " " . $author->last_name;
-                                 $primary = $author;
-                                 break;
-                             }
-                                 ?>
+                             </div>
+
+
+
                          </div>
-                         <div class="author col-xs-2 col-sm-3">
+                         <div class="author col-xs-3 col-sm-3">
                              <div class="profile-image">
 
 
@@ -78,6 +81,7 @@
                                  </div>
                                  <a href="./projects/{!! $project->id !!}" class="btn btn-success">More Info</a>
                              </div>
+                             <a href="./projects/{!! $project->id !!}" class="btn btn-block btn-success visible-xs hidden-lg hidden-md hidden-sm" style="margin-top: 85px; margin-bottom: 4px;">More Info</a>
 
                          </div>
                      </div>
@@ -87,7 +91,7 @@
       </div>
    </div>
    <div class="col-md-3">
-      <div class="panel panel-success">
+      <div class="panel panel-success hidden-xs">
          <div class="panel-heading">
             <h3 class="panel-title">Project Tags</h3>
          </div>

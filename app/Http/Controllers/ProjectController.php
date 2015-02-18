@@ -25,10 +25,11 @@ class ProjectController extends Controller {
 	 */
 	public function index()
 	{
-        $permission = parent::requireProjectPermission();
-        if($permission != false)
-            return $permission;
-		return view($this->layout, ['content' =>  View::make('main.project.index')->with('projects', Project::all()), 'title'=> APPNAME]);
+        if (Input::has('mobile')) {
+            return json_encode(Project::take(20)->get());
+        }else {
+            return view($this->layout, ['content' => View::make('main.project.index')->with('projects', Project::all()), 'title' => APPNAME]);
+        }
 	}
 
 
@@ -171,6 +172,8 @@ class ProjectController extends Controller {
 	{
         $user = Sentry::getUser();
         if ($user != null) {
+
+
             if (is_numeric($id)) {
                 return view($this->layout, ['content' => View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all()), 'title' => APPNAME]);
             }

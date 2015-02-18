@@ -1,6 +1,6 @@
 #ResearchMonster
 
-![alt text](https://magnum.travis-ci.com/g0ddish/RM.svg?token=71LB4aGjdWr4qqUq2zPS&branch=master "Travis CI")
+![alt text](https://travis-ci.org/g0ddish/RM.svg "Travis CI")
 
 This project, like most PHP projects, requires [Composer](https://getcomposer.org)
 composer 

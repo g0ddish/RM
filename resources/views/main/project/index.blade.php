@@ -1,98 +1,54 @@
-<div class="col-md-12" style="background-color: #55AA55; padding-top:60px;"><?php $user = Sentry::getUser();
-            if(!isset($user->first_name) && !isset($user->last_name) && !isset($user->email) && !isset($user->avatar)):
-        ;?>
-   {{ "<div class='alert alert-warning'>You haven't filled out all of your profile yet. <a href='./profile/edit'>Do that here.</a></div>" }}
-   <?php endif;
-        $message = Session::get('message');
-    if(isset($message)){
-        $message = "<div class='alert alert-success'>$message</div>";
+<style>
+    #custom-search-form {
+        margin:0;
+        margin-top: 5px;
+        padding: 0;
     }
-    ?>
 
-   <div class="col-md-9">
-       {!! $message or '' !!}
-      <div class="panel panel-default">
-         <div class="panel-body">
-             <?php $i = 0; ?>
-                 @foreach ($projects as $project)
-                     <?php $i++; ?>
-                 <div class="panel panel-default event">
-                     <div class="panel-body">
-                         <div class="rsvp col-xs-2 col-sm-2">
-                             <i> {!! date("j", $project->start_date)  !!}</i>
-                             <i> {!! date("F", $project->start_date)  !!}</i>
-                             <div class="hidden-xs">
-                                 Deadline
-                             </div>
-                         </div>
-                         <div class="info col-xs-8 col-sm-7">
-                             {!! str_limit($project->title, 5) !!}
-                             <div class="visible-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elitero..</div>
-                             <div class="hidden-xs">
-                                 <ul class="nav nav-tabs" role="tablist">
-                                     <li role="presentation" class="active"><a href="#desc-{{$i}}" aria-controls="desc-{{$i}}" role="tab" data-toggle="tab">Description</a></li>
-                                     <li role="presentation"><a href="#skills-{{$i}}" aria-controls="skills-{{$i}}" role="tab" data-toggle="tab">Skills</a></li>
-                                 </ul>
-                                 <!-- Tab panes -->
-                                 <div class="tab-content">
-                                     <div role="tabpanel" class="tab-pane active" id="desc-{{$i}}">
-                                         {{{ str_limit($project->description, 235) }}}
+    #custom-search-form .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
 
-                                     </div>
-                                     <div role="tabpanel" class="tab-pane" id="skills-{{$i}}">
-                                         @foreach ($project->skills()->get() as $skill)
-                                             <p class="label label-success">{{{ $skill->name }}}</p>
-                                         @endforeach                                     </div>
-                                 </div>
-                             </div><?php $authors = $project->user()->get();
-                             $primary;  //I was inebriated don't laugh
-                             $creator;
-                             foreach ($authors as $author){
-                                 $creator = $author->first_name . " " . $author->last_name;
-                                 $primary = $author;
-                                 break;
-                             }
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
 
-                             ?>
-                         </div>
-                         <div class="author col-xs-2 col-sm-3">
-                             <div class="profile-image">
-                                 <img src="{{ $primary->avatar }}"/>
-                             </div>
-                             <div class="profile hidden-xs">
+    #custom-search-form button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
 
-                                 <strong>{{{ $creator }}}</strong>
-                                 <article>Founder of this project</article>
-                                 <div class="links hidden-sm">
-                                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                 </div>
-                             </div>
-                         <a href="./{!! $project->id !!}" class="btn btn-success">More Info</a>
+    .search-query:focus + button {
+        z-index: 3;
+    }
+</style>
+<div class="col-md-12" style="background-color: #55AA55; padding-top:60px;">
 
-                         </div>
-                     </div>
-                 </div>
-                 @endforeach
-         </div>
-      </div>
-   </div>
-   <div class="col-md-3">
-      <div class="panel panel-success">
-         <div class="panel-heading">
-            <h3 class="panel-title">Project Tags</h3>
-         </div>
-         <div class="panel-body">
-             <?php   $skills =  Skill::all(); $one = true; $noskill = true; ?>
-            <div class="list-group">
-                @foreach ($skills as $skill)
-                    <?php if($one && !$noskill): ?>
-                    <a href="#" class="list-group-item active">{{{ $skill->name }}}</a>
-                    <?php $one = false; else: ?>
-                        <a href="#" class="list-group-item">{{{ $skill->name }}}</a>
-                    <?php endif; ?>
-                @endforeach
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <form id="custom-search-form" class="form-search form-horizontal pull-right">
+                    <div class="input-append span12">
+                        <input type="text" class="search-query" placeholder="Search">
+                        <button type="submit" class="btn"><i class="icon-search"></i></button>
+                    </div>
+                </form>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
