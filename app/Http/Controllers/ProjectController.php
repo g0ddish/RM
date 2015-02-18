@@ -3,14 +3,14 @@ namespace ResearchMonster\Http\Controllers;
 
 use View;
 use Sentry;
-use Project;
-use Interest;
+use ResearchMonster\Models\Project;
 use Redirect;
-use Skill;
+use ResearchMonster\Models\Skill;
 use Input;
 use Config;
-use PFile;
+use ResearchMonster\Models\PFile;
 use Request;
+use DB;
 class ProjectController extends Controller {
     /**
      * The layout that should be used for responses.
@@ -28,7 +28,30 @@ class ProjectController extends Controller {
         if (Input::has('mobile')) {
             return json_encode(Project::take(20)->get());
         }else {
-            return view($this->layout, ['content' => View::make('main.project.index')->with('projects', Project::all()), 'title' => APPNAME]);
+
+
+            if(Input::has('keywords') && Input::has('skills')){
+                    /*
+                     *
+                     * $posts = Post::whereHas('comments', function($q)
+{
+    $q->where('content', 'like', 'foo%');
+
+})->get();
+                     */
+            }elseif(Input::has('keywords')){
+                $searchTerms = explode(" ", Input::get('keywords'));
+
+                foreach($searchTerms as $term)
+                {
+                    $one = Project::where('title', 'LIKE', "%$term%")->get()->all();
+                    $two = Project::where('description', 'LIKE', "%$term%")->get()->all();
+                    $projects = array_merge($one, $two);
+                }
+            }else{
+                $projects = Project::all();
+            }
+            return view($this->layout, ['content' => View::make('main.project.index')->with('projects', $projects)->with('skills', Skill::all()), 'title' => APPNAME]);
         }
 	}
 
@@ -170,10 +193,9 @@ class ProjectController extends Controller {
 	 */
 	public function show($id)
 	{
+
         $user = Sentry::getUser();
         if ($user != null) {
-
-
             if (is_numeric($id)) {
                 return view($this->layout, ['content' => View::make('main.project.single')->with('project', Project::find($id))->with('skills', Skill::all()), 'title' => APPNAME]);
             }
@@ -267,7 +289,7 @@ class ProjectController extends Controller {
                     $file = Request::file('pfile');
                     $mime = $file->getMimeType();
                  //   echo $mime;
-                  //  die();
+
 
                     foreach($formatTable as $mimecheck){
                         if($mime == $mimecheck){

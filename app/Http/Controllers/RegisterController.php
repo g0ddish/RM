@@ -43,44 +43,18 @@ class RegisterController extends BaseController {
 	{
 		if (Input::has('id') && Input::has('email'))
 		{
-			try
-			{
-				$user = Sentry::findUserByLogin(Input::get('id'));
-			}
-			catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
-			{
-				try
-				{
-					$pass = str_random(8);
-					$user = Sentry::createUser(array(
-						'student_id'     => Input::get('id'),
-						'email' => Input::get('email'),
-						'password'  => $pass,
-						'activated' => true,
-					));
-				}
-				catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
-				{
-					return Redirect::to('/')->with('message', 'Login field is required.');
+            $id = Input::get('id');
+            $email = Input::get('email');
+            if(is_numeric($id) && strlen($id) == 9 && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                try {
+                    $user = Sentry::findUserByLogin($id);
+                } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
 
-				}
-				catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
-				{
-					return Redirect::to('/')->with('message', 'Password field is required.');
-				}
-				catch (Cartalyst\Sentry\Users\UserExistsException $e)
-				{
-					return Redirect::to('/')->with('message', 'User with this login already exists.');
-				}
-				Mail::send('emails.welcome', array('id' => Input::get('id'), 'pass' => $pass), function ($message) {
-					$email = Input::get('email');
-					$message->from('no-reply@georgebrown.ca', 'Research Monster');
-					$message->to($email);
-				});
-				return Redirect::to('/')->with('message', 'Registered successfully, a password has been email to you.');
-			}
-
-			return Redirect::to('/')->with('message', 'ID Taken.');
+                }
+            }else{
+                return view($this->layout, ['content' => View::make('register.index')->with('message', 'Missing or incorrect info'), 'title'=> APPNAME]);
+            }
+            return view($this->layout, ['content' => View::make('register.index')->with('message', 'ID Taken.'), 'title'=> APPNAME]);
 		}
 
 		//return view($this->layout, ['content' => View::make('register.store'), 'title'=> APPNAME]);

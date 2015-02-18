@@ -1,5 +1,6 @@
 {!! HTML::script('js/tag-it.js') !!}
 {!! HTML::style('css/jquery.tagit.css') !!}
+
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <script>
         <?php

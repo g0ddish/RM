@@ -21,8 +21,7 @@
 	"autoload": {
 		"classmap": [
 			"database",
-			"app/Http/Controllers",
-			"app/Models"
+			"app/Http/Controllers"
 		],
 		"psr-4": {
 			"ResearchMonster\\": "app/"

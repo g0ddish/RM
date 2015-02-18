@@ -4,9 +4,8 @@
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <script>
     <?php
-         $array = array();
-    foreach($skills as $skill => $val){
-       $array[] = $val->name;
+    foreach($skills as $skill){
+       $array[] = $skill->name;
     }
     ?>
     $( document ).ready(function() {
@@ -70,7 +69,7 @@
                                  <!-- Tab panes -->
                                  <div class="tab-content">
                                      <div role="tabpanel" class="tab-pane active" id="desc-">
-                                         @foreach ($project->skills()->get() as $skill)
+                                         @foreach ($project->skills as $skill)
                                              <p class="label label-success">{!! $skill->name !!}</p>
                                          @endforeach
                                      </div>
@@ -85,7 +84,7 @@
                                  </ul>
                                  <div class="tab-content">
                                      <div role="tabpanel" class="tab-pane active" id="desc-">
-                                         @foreach ($project->files()->get() as $pfile)
+                                         @foreach ($project->files as $pfile)
 
                                              <?php $types = explode("/", $pfile->file_type);
                                                     switch($types[0]){
@@ -265,8 +264,8 @@
              <button data-toggle='modal' data-target='#myModal' class='btn btn-block btn-warning'>Edit</button>
                 </div>";
                          }else{
-                             $test = $project->interestedUsers()->get();
-                             foreach($test->all() as $object){
+                             $test = $project->interestedUsers;
+                             foreach($test as $object){
                                  if($object instanceof User){
                                      if($object->id == $user->id){
                                          $already = true;

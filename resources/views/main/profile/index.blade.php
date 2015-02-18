@@ -19,9 +19,9 @@
 <div class="col-md-12" style="height: 100%; background-color: #55AA55; padding-top:60px;">
     <div class="col-md-3">
     <?php if(!is_null($user->avatar)): ?>
-           {!! HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive', 'width' => '256px', 'height' => '256px')) !!}
+           {!! HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive img-rounded', 'width' => '256px', 'height' => '256px')) !!}
     <?php else: ?>
-    <img src="http://placehold.it/256x256">
+    <img class="img-rounded" src="http://placehold.it/256x256">
     <?php endif; ?>
     </div>
     <div class="col-md-3">

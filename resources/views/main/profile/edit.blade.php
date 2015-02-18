@@ -1,9 +1,8 @@
 {!! HTML::script('js/tag-it.js') !!}
 {!! HTML::style('css/jquery.tagit.css') !!}
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-<Script>
+<script>
     <?php
-         $array = array();
     foreach($skills as $skill => $val){
        $array[] = $val->name;
     }
@@ -15,7 +14,7 @@
             fieldName: "skills[]"
         });
     });
-</Script>
+</script>
 <?php
 $progs = array();
 foreach($programs as $program){

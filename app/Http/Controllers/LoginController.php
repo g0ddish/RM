@@ -57,11 +57,12 @@ class LoginController extends BaseController {
                 $user =  Sentry::authenticate($credentials, false);
                 return json_encode($user);
             }else {
+                if (Input::has('id') && Input::has('password')) {
                 try {
-                    if (Input::has('id') && Input::has('password')) {
+
                         $id = Input::get('id');
                         $pass = Input::get('password');
-                    }
+
                     $credentials = array(
                         'student_id' => $id,
                         'password' => $pass,
@@ -85,6 +86,9 @@ class LoginController extends BaseController {
                     $this->layout->content = View::make('login.error')->with('error', "User is suspended for too many login attempts. Redirecting in 5 seconds.");
                 } catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
                     echo 'User is banned.  Redirecting in 5 seconds.';
+                }
+              }else{
+                    return view($this->layout, ['content' => View::make('login.index')->with('message', 'Missing or incorrect info'), 'title'=> APPNAME]);
                 }
             }
 	}

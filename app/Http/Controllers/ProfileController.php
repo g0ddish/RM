@@ -1,13 +1,13 @@
 <?php
 namespace ResearchMonster\Http\Controllers;
 
-use Skill;
-use Program;
+use ResearchMonster\Models\Skill;
+use ResearchMonster\Models\Program;
 use Sentry;
 use View;
 use Config;
 use Input;
-class ProfileController extends BaseController {
+class ProfileController extends Controller {
     /**
      * The layout that should be used for responses.
      */
@@ -76,11 +76,14 @@ class ProfileController extends BaseController {
                 try {
                     //  $currentuser = Sentry::getUser();
                    $user = Sentry::findUserByLogin($id);
-                    $userprograms = $user->programs();
+                    if($user != null){
+                   // $userprograms = $user->programs()->all();
+                    return view($this->layout, ['content' => View::make('main.profile.index')->with('user', $user), 'title'=> APPNAME]);
+                    }
                 } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
                     echo 'User was not found.';
                 }
-                return view($this->layout, ['content' => View::make('main.profile.index')->with('user', $user), 'title'=> APPNAME]);
+
             //    $this->layout->content = View::make('main.profile.index')->with('user', $user);
             }
 

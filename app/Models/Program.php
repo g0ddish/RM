@@ -1,5 +1,6 @@
 <?php
-
+namespace ResearchMonster\Models;
+use Eloquent;
 class Program extends Eloquent {
 
     protected $table = 'programs';
@@ -7,7 +8,7 @@ class Program extends Eloquent {
 
     public function users()
     {
-        return $this->belongsToMany('User');
+        return $this->belongsToMany('ResearchMonster\Models\User');
     }
 
 }

@@ -4,6 +4,7 @@
     {!! HTML::script('js/jquery.min.js') !!}
     {!! HTML::script('js/bootstrap.min.js') !!}
     {!! HTML::style('css/bootstrap.min.css') !!}
+    {!! HTML::style('css/jquery-ui.css') !!}
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <style>
@@ -329,7 +330,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="<?php  if($segment=="")echo "active"?>">{!! link_to('', "Home", $attributes = array(), $secure = null) !!}</li>
-
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

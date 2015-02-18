@@ -120,7 +120,7 @@ return array(
 		|
 		*/
 
-		'model' => 'User',
+		'model' => 'ResearchMonster\Models\User',
 
 		/*
 		|--------------------------------------------------------------------------

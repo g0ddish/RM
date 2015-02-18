@@ -3,8 +3,9 @@ namespace ResearchMonster\Http\Controllers;
 
 use View;
 use Sentry;
-use Skill;
-use Project;
+use ResearchMonster\Models\Skill;
+use ResearchMonster\Models\Project;
+
 class HomeController extends BaseController {
 
 	/*

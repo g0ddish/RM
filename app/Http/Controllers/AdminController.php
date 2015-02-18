@@ -3,7 +3,7 @@ namespace ResearchMonster\Http\Controllers;
 
 use View;
 use Sentry;
-use Project;
+use ResearchMonster\Models\Project;
 use Redirect;
 use Input;
 class AdminController extends Controller {
