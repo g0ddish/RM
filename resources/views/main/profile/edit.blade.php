@@ -65,12 +65,11 @@ $progs[] = $program->ProgramName;
              </div>
        <div class="form-group" style="">
           <label for="tags" style="display: block;">Program</label>
-          <?php $prgs= $user->programs()->get();
+           <input class="form-control" style="margin-top: 10px" name="program" id="tags" value="<?php $prgs= $user->programs()->get();
            foreach($prgs as $program){
                  echo $program->ProgramName;
            }
-           ?>
-         <input class="form-control" style="margin-top: 10px" name="program" id="tags">
+           ?>" placeholder="Leave blank for unchanged">
         </div>
 
 
@@ -98,7 +97,7 @@ $progs[] = $program->ProgramName;
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Summary</h3>
+    <h3 style="" class="panel-title">Resume</h3>
   </div>
   <div class="panel-body">
 <textarea class="ckeditor" name="editor1">{!!$user->summary!!}</textarea>
@@ -114,8 +113,6 @@ $progs[] = $program->ProgramName;
 <textarea class="ckeditor" name="editor2">{!!$user->experience!!}</textarea>
 <button style="margin-top: 30px" class="btn btn-lg btn-block btn-success" type="submit">Save</button>
 {!! Form::close() !!}
-
-
   </div>
 </div>
 </div>

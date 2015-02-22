@@ -70,7 +70,7 @@ As of PHP 5.4.0 you can use the built in web server for development
 
 ### Version
 
-1.1.0
+1.5.0
 
 ### Todo's
 

@@ -44,4 +44,9 @@ class User extends SentryModel {
         }
     return false;
     }
+
+
+    public function __toString() {
+        return $this->id;
+    }
 }

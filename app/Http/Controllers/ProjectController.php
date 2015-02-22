@@ -3,7 +3,9 @@ namespace ResearchMonster\Http\Controllers;
 
 use View;
 use Sentry;
+use Mail;
 use ResearchMonster\Models\Project;
+use ResearchMonster\Models\User;
 use Redirect;
 use ResearchMonster\Models\Skill;
 use Input;
@@ -28,20 +30,30 @@ class ProjectController extends Controller {
         if (Input::has('mobile')) {
             return json_encode(Project::take(20)->get());
         }else {
-
-
-            if(Input::has('keywords') && Input::has('skills')){
-                    /*
-                     *
-                     * $posts = Post::whereHas('comments', function($q)
-{
-    $q->where('content', 'like', 'foo%');
-
-})->get();
-                     */
+            if(Input::has('skills')){
+                $skills = Input::get('skills');
+                $searchTerms = explode(" ", Input::get('keywords'));
+                if(!isset($searchTerms)){
+                    $skills = Input::get('skills');
+                    $projects = Project::whereHas('skills', function($query) use ($skills)
+                    {
+                        foreach($skills as $skill) {
+                            $query->where('name', 'LIKE', "%$skill%");
+                        }
+                    })->get();
+                }else {
+                    foreach ($searchTerms as $term) {
+                        $projects = Project::whereHas('skills', function ($query) use ($term, $skills) {
+                            foreach ($skills as $skill) {
+                                $query->where('name', 'LIKE', "%$skill%");
+                            }
+                        })->where('title', 'LIKE', "%$term%")
+                            ->orWhere('description', 'LIKE', "%$term%")
+                            ->get();
+                    }
+                }
             }elseif(Input::has('keywords')){
                 $searchTerms = explode(" ", Input::get('keywords'));
-
                 foreach($searchTerms as $term)
                 {
                     $one = Project::where('title', 'LIKE', "%$term%")->get()->all();
@@ -165,8 +177,18 @@ class ProjectController extends Controller {
 
 			if (isset($skills)){
 				$skillarr = array();
+                $mailU = array();
 			foreach ($skills as $skillName) {
 				$foundskill = Skill::where('name', '=', $skillName)->first();
+                if(Input::has('mail-students') && $project->status_id == 1) {
+
+                    $mailUsers = User::has('skills', '=', $skillName)->get();
+
+                    foreach($mailUsers as $mUser){
+                        $mailU[] = $mUser;
+                    }
+                }
+
 				if (isset($foundskill)) {
 					$skillarr[] = $foundskill->id;
 				} else {
@@ -176,6 +198,15 @@ class ProjectController extends Controller {
 					$skillarr[] = $newSkill->id;
 				}
 			}
+                $mailU = array_unique($mailU);
+                foreach($mailU as $mailUser){
+                    Mail::send('emails.project', array('user' => $mailUser, 'project' => $project), function ($message) use ($mUser) {
+                        $email = $mUser->email;
+                        $message->from('no-reply@georgebrown.ca', 'Research Monster');
+                        $message->to($email)->subject('A Project Matching Your Skills!');
+                    });
+                }
+
 			$project->skills()->sync($skillarr);
 		}
 			return redirect('/')->with('message', 'Added project ' . str_limit($project->title, 75));

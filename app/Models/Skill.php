@@ -11,6 +11,8 @@ class Skill extends Eloquent {
         return $this->belongsToMany('ResearchMonster\Models\User', 'users_skills');
     }
 
+
+
     public function projects()
     {
         return $this->belongsToMany('ResearchMonster\Models\Project', 'project_skills');

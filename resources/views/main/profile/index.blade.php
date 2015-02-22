@@ -72,7 +72,7 @@
 <div class="col-md-12" style="margin-top:5px;">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Summary</h3>
+    <h3 style="font-size: 2em" class="panel-title">Resume</h3>
   </div>
   <div class="panel-body">
     {!!$user->summary!!}
@@ -83,7 +83,7 @@
 <div class="col-md-12">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Experience</h3>
+      <h3 style="font-size: 2em" class="panel-title">Work Experience</h3>
   </div>
   <div class="panel-body">
     {!!$user->experience!!}

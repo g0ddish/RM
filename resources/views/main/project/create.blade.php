@@ -38,6 +38,11 @@
                   <!-- Existing list items will be pre-added to the tags -->
               </ul>
               <p class="help-block">Ex. AutoCAD, PHP, Java</p>
+              <div class="checkbox">
+                  <label>
+                      <input type="checkbox" name="mail-students"> Email students with these skills
+                  </label>
+              </div>
           </div>
           <div class="form-group">
               <label for="desc">Description</label>

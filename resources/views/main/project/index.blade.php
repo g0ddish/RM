@@ -55,20 +55,14 @@
     </div>
                     </div>
                 </div>
-</div>
-
-
-
-
+            </div>
             <?php $i = 0; ?>
             @foreach ($projects as $project)
                 <?php $i++;
-                $authors = $project->user->get();
-                foreach ($authors as $author){
-                    $creator = $author->first_name . " " . $author->last_name;
-                    $primary = $author;
-                    break;
-                }
+
+                $author = $project->user()->get()->first();
+                $creator = $author->first_name . " " . $author->last_name;
+                $primary = $author;
                 ?>
                 <div class="panel panel-default event">
                     <div class="panel-body">
@@ -94,26 +88,18 @@
 
                                     </div>
                                     <div role="tabpanel" class="tab-pane" id="skills-{{$i}}">
-                                        @foreach ($project->skills() as $skill)
+                                        @foreach ($project->skills()->get() as $skill)
                                             <p class="label label-success">{!! $skill->name !!}</p>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                         <div class="author col-xs-3 col-sm-3">
                             <div class="profile-image">
-
-
                                 {!! HTML::image($primary->avatar, 'avatar')  !!}
-
-
                             </div>
                             <div class="profile hidden-xs">
-
                                 <strong>{!! $creator !!}</strong>
                                 <article>Founder of this project</article>
                                 <div class="links hidden-sm" style="margin:3px;">

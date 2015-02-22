@@ -63,9 +63,9 @@ class Handler extends ExceptionHandler
                 return Redirect::to('/')->with('message', 'User with this login already exists.');
             } elseif ($e instanceof UserNotFoundException) {
                 return Redirect::to('/')->with('message', 'Incorrect info');
-            } else {
-                return parent::report($e);
             }
+        } else {
+             parent::report($e);
         }
 
     }
@@ -111,9 +111,9 @@ class Handler extends ExceptionHandler
                     return Redirect::to('/')->with('message', 'User with this login already exists.');
                 } elseif ($e instanceof UserNotFoundException) {
                     return Redirect::to('/')->with('message', 'Incorrect info');
-                } else {
-                    return parent::render($request, $e);
                 }
+            } else {
+                return parent::render($request, $e);
             }
 
         }
