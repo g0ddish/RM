@@ -45,6 +45,15 @@ class User extends SentryModel {
     return false;
     }
 
+    public function hasProjectRequestPermission(){
+        foreach($this->getMergedPermissions() as $perm => $val){
+            if($perm == "requestprojects"){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public function __toString() {
         return $this->id;

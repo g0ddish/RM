@@ -10,6 +10,7 @@
         }
         ?>
     $( document ).ready(function() {
+                $( "#datepicker" ).datepicker();
         $("#myTags").tagit({
             autocomplete: {delay: 0, minLength: 0},
             availableTags: {!! json_encode($array)  !!},
@@ -58,7 +59,7 @@
       </div>
       <div class="form-group">
           <label for="start">Start Date</label>
-          <input type="text" class="form-control" name="start" id="start" placeholder="">
+          <input type="text" id="datepicker" class="form-control" name="start" id="start" placeholder="">
 
       </div>
           <div class="form-group">

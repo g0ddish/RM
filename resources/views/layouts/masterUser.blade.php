@@ -334,11 +334,15 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <?php
-            echo "<li>".link_to('/projects', "Search Projects", $attributes = array(), $secure = null)."</li></ul>";
+            echo "<li>".link_to('/projects', "Search Projects", $attributes = array(), $secure = null)."</li>";
 
-            ?>
-          <?php
-          if($user->hasProjectCRUDPermission()): ?>
+              if($user->hasProjectRequestPermission()){
+                  echo "<li class='divider'></li>";
+                  echo "<li>".link_to('/projects/request', "Request Project", $attributes = array(), $secure = null)."</li>";
+              }
+
+                  echo "</ul>";
+               if($user->hasProjectCRUDPermission()): ?>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -359,6 +363,9 @@
        <li class="<?php  if(Request::segment(2)== Sentry::getUser()->student_id)echo "active"; ?>"><?php
          echo link_to('profile/'.$user->student_id, $user->student_id, $attributes = array(), $secure = null);
          ?></li>
+          <?php     if($user->hasAdminPermission()): ?>
+          <li class="<?php  if(Request::segment(1)== "control")echo "active"; ?>"><?php echo link_to('control', "Admin Panel");?></li>
+      <?php endif; ?>
       <li class="<?php  if(Request::segment(2)== "edit")echo "active"; ?>"><?php echo link_to('profile/edit', "Edit Profile");?></li>
        <li><?php echo link_to('logout', "Logout");?></li>
       </ul>

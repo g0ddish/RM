@@ -168,7 +168,10 @@ class AdminController extends Controller {
             $name = Input::get('groupname');
             $am = Input::get('adminmenu');
             $crudp = Input::get('crudprojects');
+            $requestp = Input::get('crudprojects');
+
             $crudp = isset($crudp) ? 1: 0;
+            $requestp = isset($requestp) ? 1: 0;
             $am = isset($am) ? 1 : 0;
             try {
                 $group = Sentry::createGroup(array(
@@ -176,7 +179,8 @@ class AdminController extends Controller {
                     'permissions' => array(
                         'admin' => $am,
                         'users' => 1,
-                        'crudprojects' => $crudp
+                        'crudprojects' => $crudp,
+                        'requestprojects' => $requestp
                     ),
                 ));
             }
@@ -194,6 +198,7 @@ class AdminController extends Controller {
                     'admin' => $am,
                     'users' => 1,
                     'crudprojects' => $crudp,
+                    'requestprojects' => $requestp,
                 );
         }
             $groups = Sentry::findAllGroups();
@@ -204,7 +209,9 @@ class AdminController extends Controller {
             $name = Input::get('groupname');
             $am = Input::get('adminmenu');
             $crudp = Input::get('crudprojects');
+            $requestp = Input::get('crudprojects');
             $crudp = isset($crudp) ? 1: 0;
+            $requestp = isset($requestp) ? 1: 0;
             $am = isset($am) ? 1 : 0;
             $group = Sentry::findGroupByName($id);
             $group->name = $name;
@@ -212,6 +219,7 @@ class AdminController extends Controller {
                 'admin' => $am,
                 'users' => 1,
                 'crudprojects' => $crudp,
+                'requestprojects' => $requestp,
             );
             if ($group->save())
             {

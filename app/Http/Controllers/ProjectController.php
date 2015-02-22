@@ -33,14 +33,19 @@ class ProjectController extends Controller {
             if(Input::has('skills')){
                 $skills = Input::get('skills');
                 $searchTerms = explode(" ", Input::get('keywords'));
-                if(!isset($searchTerms)){
-                    $skills = Input::get('skills');
-                    $projects = Project::whereHas('skills', function($query) use ($skills)
-                    {
-                        foreach($skills as $skill) {
-                            $query->where('name', 'LIKE', "%$skill%");
-                        }
-                    })->get();
+                $searchTerms = array_filter($searchTerms);
+
+                echo empty($searchTerms);
+
+                if(empty($searchTerms)){
+
+                    $sk = Input::get('skills');
+                    var_dump($sk);
+                    foreach($sk as $skill) {
+                       $projects = Project::whereHas('skills', function ($q) use ($skill) {
+                            $q->where('name', '=', $skill);
+                        })->get();
+                    }
                 }else {
                     foreach ($searchTerms as $term) {
                         $projects = Project::whereHas('skills', function ($query) use ($term, $skills) {

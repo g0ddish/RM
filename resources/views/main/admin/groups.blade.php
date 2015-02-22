@@ -40,7 +40,12 @@
                   </div>
                   <div class="checkbox">
                       <label>
-                          <input type="checkbox" name="crudprojects"> Add/Edit Projects
+                          <input type="checkbox" name="crudprojects"> Add/Edit/Delete All Projects & Approve Requested
+                      </label>
+                  </div>
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" name="requestprojects"> Request Projects
                       </label>
                   </div>
 
@@ -71,9 +76,19 @@
             <input type="text" class="form-control" id="groupname" name="groupname" placeholder="Enter Group Name">
           </div>
           <div class="checkbox">
-            <label>
-              <input type="checkbox" name="adminmenu"> Admin Menu
-            </label>
+              <label>
+                  <input type="checkbox" name="adminmenu"> Admin Menu
+              </label>
+          </div>
+          <div class="checkbox">
+              <label>
+                  <input type="checkbox" name="crudprojects"> Add/Edit/Delete All Projects & Approve Requested
+              </label>
+          </div>
+          <div class="checkbox">
+              <label>
+                  <input type="checkbox" name="requestprojects"> Request Projects
+              </label>
           </div>
       </div>
       <div class="modal-footer">
