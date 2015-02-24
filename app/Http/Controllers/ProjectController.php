@@ -366,8 +366,23 @@ class ProjectController extends Controller {
 		}elseif(Input::has('interested')){
 			$pid  = Input::get('interested');
 			$project = Project::find($pid);
-			$user->interestedProjects()->attach($project);
-			return redirect('/')->with('message', 'Registered interest in project ' . str_limit($project->title, 75));
+            foreach($user->interestedProjects()->get() as $iproject){
+
+                if($project->id == $iproject->id){
+                    $dontattach = 1;
+                }
+            }
+            if(isset($dontattach)){
+                return redirect('/')->with('message', 'You\'ve already applied to ' . str_limit($project->title, 75));
+            }else {
+                $user->interestedProjects()->attach($project);
+                Mail::send('emails.prof.interest', array('project' => $project, 'user' => $user, 'skills' => $user->skills, 'to' => $project->user()->get()->first()), function ($message) use ($project) {
+                    $email = $project->user()->get()->first()->email;
+                    $message->from('no-reply@georgebrown.ca', 'Research Monster');
+                    $message->to($email)->subject('A student is interested!');
+                });
+                return redirect('/')->with('message', 'Registered interest in project ' . str_limit($project->title, 75));
+            }
 		}
 	}
 

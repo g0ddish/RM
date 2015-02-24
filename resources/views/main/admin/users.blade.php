@@ -167,7 +167,6 @@
     <td class="active">First Name</td>
     <td class="active">Last Name</td>
     <td class="active">Email</td>
-    <td class="active">Avatar</td>
     <td class="active">Permissions</td>
     <td class="active">Last Login</td>
     <td class="active">Created At</td>
@@ -175,12 +174,11 @@
     <td class="active">Modify</td>
   </tr><?php if(isset($users)): foreach($users as $user):?>
     <tr>
-      <td class="active <?php echo $user->id;?>-id"><?php echo $user->id;?></td>
-      <td class="active <?php echo $user->id;?>-sid"><?php echo $user->student_id;?></td>
-      <td class="active <?php echo $user->id;?>-fn"><?php echo $user->first_name;?></td>
-            <td class="active <?php echo $user->id;?>-ln"><?php echo $user->last_name;?></td>
+      <td class="active"><a class="<?php echo $user->id;?>-id" href="../profile/{{$user->student_id}}"><?php echo $user->id;?></a></td>
+      <td class="active"><a class="<?php echo $user->id;?>-sid" href="../profile/{{$user->student_id}}"><?php echo $user->student_id;?></a></td>
+      <td class="active"><a class="<?php echo $user->id;?>-fn" href="../profile/{{$user->student_id}}"><?php echo $user->first_name;?></a></td>
+            <td class="active"><a class="<?php echo $user->id;?>-ln" href="../profile/{{$user->student_id}}"><?php echo $user->last_name;?></a></td>
        <td class="active <?php echo $user->id;?>-em"><?php echo $user->email;?></td>
-            <td class="active s-a"><?php echo $user->avatar;?></td>
             <td class="active"><?php
              foreach($user->getGroups() as $grp){
              echo "<p><span class='label label-default'>". $grp->name. "</span></p><br>";

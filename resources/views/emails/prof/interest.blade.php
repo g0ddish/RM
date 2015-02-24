@@ -7,10 +7,22 @@
 </head>
 <body>
 <div class="container-fluid text-center">
-    <div class="alert alert-warning">Hey {{$user->first_name . " " . $user->last_name}}, there was a project listed on Research Monster you may be interested in.</div>
+    <div class="alert alert-warning">Hey {{$to->first_name . " " . $to->last_name}}, a student has registered interest in your project.</div>
     <div class="panel panel-default">
-        <div class="panel-body"><p><a href="{{action('ProjectController@index'). "/" . $project->id}}">{{$project->title}}</a></p>
-            <p>{{str_limit($project->description, 250)}}</p>
+        <div class="panel-body">
+            <p>Project: <a href="{{action('ProjectController@index'). "/" . $project->id}}">{{$project->title}}</a></p>
+            <hr />
+            <h1>User</h1>
+            <p><a href="{{action('ProfileController@index'). "/" . $user->student_id}}">{{$user->first_name . " " . $user->last_name}}</a></p>
+            <p>Program: {{$user->programs()->get()->first()->ProgramName}}</p>
+            <p>Email: {{$user->email}}</p>
+            @foreach ($user->skills()->get() as $skill)
+                {{{ $skill->name .", " }}}
+            @endforeach
+            <h1>Resume</h1>
+            <p> {!!$user->summary!!}</p>
+            <h1>Work Experience</h1>
+            <p> {!!$user->experience!!}</p>
         </div>
     </div>
 </div>
