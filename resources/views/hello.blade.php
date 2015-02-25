@@ -5,16 +5,31 @@ if(isset($message2)){
 } ?>
 
         <div class="col-md-12 text-center" style="margin-bottom: 20px;">
-            <h1 style="color:#ffffff;">Research Monster</h1>
+            <h1 class=" animated bounceInUp" style="color:#ffffff;">Research Monster</h1>
             {!! $msg or '' !!}
-            <img class="img-responsive center-block" style="margin-top:10px; max-height: 300px;" src="{{asset('img/monsters/bigmon.png')}}" alt="Monster 1" />
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default animated bounceInLeft" style="animation-delay: 1s;  -webkit-animation-delay: 1s; ">
+                    <div class="panel-body">
+                        <p style="font-size: 1.25em" class="text-success">Congratulations as a student enrolled in George Brown College
+                            programs you can work on applied research projects, gaining <strong>valuable skills</strong> relevant to
+                            any future career and earn <strong>course credit</strong> or as a <strong>part time paid</strong> applied
+                            research assistant!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+            <img class="img-responsive center-block animated bounceInUp" style="margin-top:10px; max-height: 300px;" src="{{asset('img/monsters/bigmon.png')}}" alt="Monster 1" />
+            </div>
+
         </div>
-        <div class="col-md-4 col-md-offset-2">
-            <a href="./login" class="btn btn-lg btn-block btn-custom">Login</a>
-            <p class="text-center" style="color: #ffffff; font-size: 20px; margin-top: 20px;"><b> Already have an account? Click Login to participate in Research Projects</b></p>
+        <div class="col-md-4 col-md-offset-2 animated bounceInLeft" style="animation-delay: 1s;  -webkit-animation-delay: 1s; ">
+            <p class="text-center" style="color: #ffffff; font-size: 20px; margin-top: 20px;"><b>Welcome back!</b></p>
+
+            <a href="./login" class="btn btn-lg btn-block btn-custom"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Login</a>
         </div>
-        <div class="col-md-4">
-            <a href="./register" class="btn btn-lg btn-block btn-custom" style="">Register</a>
-            <p class="text-center" style="color: #ffffff; font-size: 20px; margin-top: 20px;"> <b>{{ $message or 'Need to register? Click Register' }}</b></p>
+        <div class="col-md-4 animated bounceInLeft" style="animation-delay: 1s;  -webkit-animation-delay: 1s; ">
+            <p class="text-center" style="color: #ffffff; font-size: 20px; margin-top: 20px;"> <b>{{ $message or 'How many projects have you missed out on?' }}</b></p>
+
+            <a href="./register" class="btn btn-lg btn-block btn-custom" style=""><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a>
         </div>
 
