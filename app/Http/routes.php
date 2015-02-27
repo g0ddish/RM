@@ -23,6 +23,8 @@ Route::resource('/control', 'AdminController');
 
 Route::post('/control/groups', 'AdminController@storeGroup');
 Route::post('/control/users', 'AdminController@storeUser');
+Route::post('/control/tags', 'AdminController@storeTag');
+
 Route::post('/profile/edit', 'ProfileController@storeUser');
 
 
@@ -30,7 +32,7 @@ Route::post('/profile/edit', 'ProfileController@storeUser');
 Route::get('/logout', function()
 {
     Sentry::logout();
-    return Redirect::to('./')->with('message', "Logged out");
+    return Redirect::to('./')->with('message', "Logged out successfully!");
 });
 
 Route::get('/applicants', 'ApplicantController@index');

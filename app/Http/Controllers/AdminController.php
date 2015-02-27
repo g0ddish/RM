@@ -6,6 +6,7 @@ use Sentry;
 use ResearchMonster\Models\Project;
 use Redirect;
 use Input;
+use ResearchMonster\Models\Skill;
 class AdminController extends Controller {
     /**
      * The layout that should be used for responses.
@@ -242,6 +243,31 @@ class AdminController extends Controller {
             return view($this->layout, ['content' =>  View::make('main.admin.groups')->with('groups', $groups), 'title'=> APPNAME]);
     }
 
+    public function storeTag(){
+        $permission = parent::requireAdminPermission();
+        if($permission != false)
+            return $permission;
+
+        if (Input::has('tagname') && !Input::has('editid'))
+        {
+            $tag = new Skill();
+            $tag->name = Input::get('tagname');
+            $tag->save();
+        }elseif(Input::has('editid')){
+            $tag = Skill::find(Input::get('editid'));
+            $tag->name = Input::get('tagname');
+            $tag->save();
+
+
+        }elseif(Input::has('delid')){
+            $tag = Skill::find(Input::get('delid'));
+            $tag->delete();
+        }
+
+        $skills = Skill::all();
+        return view($this->layout, ['content' =>  View::make('main.admin.skills')->with('skills', $skills), 'title'=> APPNAME]);
+    }
+
 
 	/**
 	 * Display the specified resource.
@@ -262,6 +288,12 @@ class AdminController extends Controller {
            // $this->layout->title = APPNAME;
             $users = Sentry::findAllUsers();
             return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users), 'title'=> APPNAME]);
+
+        }elseif($id == "tags"){
+            $skills = Skill::all();
+
+            return view($this->layout, ['content' =>  View::make('main.admin.skills')->with('skills', $skills), 'title'=> APPNAME]);
+
         }
 	}
 

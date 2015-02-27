@@ -19,7 +19,7 @@
     });
 
 </script>
-<div class="col-md-12" style="height: 100%; background-color: #55AA55; padding-top:60px;">
+<div class="col-md-12" style=" padding-top:60px;">
 
 <div class="col-md-6 col-md-offset-3">
 <div class="panel panel-success">

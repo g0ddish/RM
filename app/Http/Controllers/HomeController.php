@@ -36,7 +36,7 @@ class HomeController extends BaseController {
             // User is logged in
          //   $this->layout->title = APPNAME;
          //   $this->layout->content = View::make('main.index')->with('projects', Project::all());
-            return view($this->layout, ['content' => View::make('main.index')->with('projects', Project::take(20)->get())->with('skills', Skill::take(15)->get()), 'title'=> APPNAME]);
+            return view($this->layout, ['content' => View::make('main.index')->with('projects', Project::take(20)->where('status_id', 1)->get())->with('skills', Skill::take(15)->get()), 'title'=> APPNAME]);
 
             /*  $user = Sentry::getUser();
 

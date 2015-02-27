@@ -33,11 +33,29 @@ class ProjectController extends Controller {
             if(Input::has('skills')){
                 $skills = Input::get('skills');
                 $searchTerms = explode(" ", Input::get('keywords'));
-                $searchTerms = array_filter($searchTerms);
+              //  $searchTerms = array_filter($searchTerms);
 
-                echo empty($searchTerms);
 
-                if(empty($searchTerms)){
+                if(count($skills) == 1){
+                    $projects = Project::whereHas('skills', function($q) use ($skills)
+                    {
+                        $q->where('name', $skills);
+                    })->get();
+
+
+                    // var_dump($projects);
+                }elseif(is_array($skills)){
+                   // $projects = Project::has('skills');
+                    $projects = Project::whereHas('skills', function($q) use ($skills)
+                    {
+                        foreach($skills as $skill) {
+                            $q->where('name', $skill);
+                        }
+
+                    })->get();
+                 
+
+                }elseif(is_array($searchTerms)){
 
                     $sk = Input::get('skills');
                     var_dump($sk);
@@ -47,6 +65,7 @@ class ProjectController extends Controller {
                         })->get();
                     }
                 }else {
+
                     foreach ($searchTerms as $term) {
                         $projects = Project::whereHas('skills', function ($query) use ($term, $skills) {
                             foreach ($skills as $skill) {
@@ -66,6 +85,7 @@ class ProjectController extends Controller {
                     $projects = array_merge($one, $two);
                 }
             }else{
+
                 $projects = Project::all();
             }
             return view($this->layout, ['content' => View::make('main.project.index')->with('projects', $projects)->with('skills', Skill::all()), 'title' => APPNAME]);

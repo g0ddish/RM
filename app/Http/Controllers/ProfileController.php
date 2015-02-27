@@ -178,13 +178,12 @@ class ProfileController extends Controller {
             foreach($formatTable as $mimecheck){
                 if($mime == $mimecheck){
                     $filename = str_random(20) . '.' . $file->getClientOriginalExtension();
-                    if(Config::get('app.debug')){
-                        $destinationPath = "public\\uploads\\".$user->student_id;
-                        unlink("public\\".$user->avatar);
-                    }else{
-                        $destinationPath = "uploads\\".$user->student_id;
+
+                        $destinationPath = "uploads/".$user->student_id;
+                    if(!empty($user->avatar)) {
                         unlink($user->avatar);
                     }
+
                     $succes = $file->move($destinationPath, $filename);
                     $bodytag = str_replace("public\\", "", $succes->getPathname());
                     $user->avatar = $bodytag;

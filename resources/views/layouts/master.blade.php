@@ -11,22 +11,11 @@
     <style>
         body{
             background-color: #55AA55;
+            background: url("./img/test.png") no-repeat center;
+            background-size: cover;
             font-family: 'Oswald', sans-serif;
         }
-        .btn-custom {
-            color: #ffffff;
-            background-color: #448844;
-            border-color: #448844;
-        }
-        .btn-custom:hover,
-        .btn-custom:focus,
-        .btn-custom:active,
-        .btn-custom.active,
-        .open .dropdown-toggle.btn-custom {
-            color: #ffffff;
-            background-color: #3B773B;
-            border-color: #448844;
-        }
+
     </style>
 </head>
 <body>

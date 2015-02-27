@@ -8,10 +8,17 @@
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <style>
-
+        .ui-autocomplete {
+            z-index: 5000;
+        }
     body{
     background-color: #55AA55;
       font-family: 'Oswald', sans-serif;
+        background: url("{{asset('img/test.png')}}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
     a, a:hover {
       color: inherit; /* blue colors for links too */
@@ -24,6 +31,7 @@
       padding:0;
       margin:0;
       height:auto;
+
     }
     .event .panel-body > div {
       padding: 0 10px;
@@ -145,6 +153,7 @@
         border-left: 2px solid #55AA55;
         top: -5px;
         padding-left: 55px;
+          margin-right: 40px;
         height:auto;
         left: 10%;
       }
@@ -159,6 +168,7 @@
         padding-left: 0;
       }
       .event .profile .links {
+          padding-bottom: 5px;
         position: relative;
         bottom: 0;
       }
@@ -178,10 +188,12 @@
         box-sizing: content-box;
         z-index: 1;
         top:13px;
+          max-height: 90px;
       }
       .event .author img {
         width: 100%;
         border-radius: 50%;
+          max-height: 90px;
       }
     }
 
@@ -192,126 +204,71 @@
       }
     }
 
-    /* Large devices (large desktops, 1200px and up) */
-    @media (min-width: 1200px) {  }
-.navbar-custom {
-  background-color: #116611;
-  border-color: #0c4a0c;
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#189218), to(#116611));
-  background-image: -webkit-linear-gradient(top, #189218, 0%, #116611, 100%);
-  background-image: -moz-linear-gradient(top, #189218 0%, #116611 100%);
-  background-image: linear-gradient(to bottom, #189218 0%, #116611 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff189218', endColorstr='#ff116611', GradientType=0);
-}
-.navbar-custom .navbar-brand {
-  color: #ffffff;
-  padding-top:5px;
+    .navbar-default {
+        background-color: #00457d;
+        border-color: #00447D;
+    }
+    .navbar-default .navbar-brand {
+        color: #ffffff;
+    }
+    .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+        color: #b8d2de;
+    }
+    .navbar-default .navbar-text {
+        color: #ffffff;
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: #ffffff;
+    }
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+        color: #b8d2de;
+    }
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+        color: #b8d2de;
+        background-color: #005ca8;
+    }
+    .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+        color: #b8d2de;
+        background-color: #005ca8;
+    }
+    .navbar-default .navbar-toggle {
+        border-color: #005ca8;
+    }
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background-color: #005ca8;
+    }
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #ffffff;
+    }
+    .navbar-default .navbar-collapse,
+    .navbar-default .navbar-form {
+        border-color: #ffffff;
+    }
+    .navbar-default .navbar-link {
+        color: #ffffff;
+    }
+    .navbar-default .navbar-link:hover {
+        color: #b8d2de;
+    }
 
-}
-.navbar-custom .navbar-brand:hover,
-.navbar-custom .navbar-brand:focus {
-  color: #e6e6e6;
-  background-color: transparent;
-}
-.navbar-custom .navbar-text {
-  color: #ffffff;
-}
-.navbar-custom .navbar-nav > li > a {
-  color: #ffffff;
-}
-.navbar-custom .navbar-nav > li > a:hover,
-.navbar-custom .navbar-nav > li > a:focus {
-  color: #c0c0c0;
-  background-color: transparent;
-}
-.navbar-custom .navbar-nav > .active > a,
-.navbar-custom .navbar-nav > .active > a:hover,
-.navbar-custom .navbar-nav > .active > a:focus {
-  color: #c0c0c0;
-  background-color: #0c4a0c;
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#0c4a0c), to(#147514));
-  background-image: -webkit-linear-gradient(top, #0c4a0c, 0%, #147514, 100%);
-  background-image: -moz-linear-gradient(top, #0c4a0c 0%, #147514 100%);
-  background-image: linear-gradient(to bottom, #0c4a0c 0%, #147514 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0c4a0c', endColorstr='#ff147514', GradientType=0);
-}
-.navbar-custom .navbar-nav > .disabled > a,
-.navbar-custom .navbar-nav > .disabled > a:hover,
-.navbar-custom .navbar-nav > .disabled > a:focus {
-  color: #cccccc;
-  background-color: transparent;
-}
-.navbar-custom .navbar-toggle {
-  border-color: #dddddd;
-}
-.navbar-custom .navbar-toggle:hover,
-.navbar-custom .navbar-toggle:focus {
-  background-color: #dddddd;
-}
-.navbar-custom .navbar-toggle .icon-bar {
-  background-color: #cccccc;
-}
-.navbar-custom .navbar-collapse,
-.navbar-custom .navbar-form {
-  border-color: #0c470c;
-}
-.navbar-custom .navbar-nav > .dropdown > a:hover .caret,
-.navbar-custom .navbar-nav > .dropdown > a:focus .caret {
-  border-top-color: #c0c0c0;
-  border-bottom-color: #c0c0c0;
-}
-.navbar-custom .navbar-nav > .open > a,
-.navbar-custom .navbar-nav > .open > a:hover,
-.navbar-custom .navbar-nav > .open > a:focus {
-  background-color: #0c4a0c;
-  color: #c0c0c0;
-}
-.navbar-custom .navbar-nav > .open > a .caret,
-.navbar-custom .navbar-nav > .open > a:hover .caret,
-.navbar-custom .navbar-nav > .open > a:focus .caret {
-  border-top-color: #c0c0c0;
-  border-bottom-color: #c0c0c0;
-}
-.navbar-custom .navbar-nav > .dropdown > a .caret {
-  border-top-color: #ffffff;
-  border-bottom-color: #ffffff;
-}
-@media (max-width: 767) {
-  .navbar-custom .navbar-nav .open .dropdown-menu > li > a {
-    color: #ffffff;
-  }
-  .navbar-custom .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar-custom .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #c0c0c0;
-    background-color: transparent;
-  }
-  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #c0c0c0;
-    background-color: #0c4a0c;
-  }
-  .navbar-custom .navbar-nav .open .dropdown-menu > .disabled > a,
-  .navbar-custom .navbar-nav .open .dropdown-menu > .disabled > a:hover,
-  .navbar-custom .navbar-nav .open .dropdown-menu > .disabled > a:focus {
-    color: #cccccc;
-    background-color: transparent;
-  }
-}
-.navbar-custom .navbar-link {
-  color: #ffffff;
-}
-.navbar-custom .navbar-link:hover {
-  color: #c0c0c0;
-}
+    @media (max-width: 767px) {
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+            color: #ffffff;
+        }
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #b8d2de;
+        }
+        .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+            color: #b8d2de;
+            background-color: #005ca8;
+        }
+    }
     </style>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">

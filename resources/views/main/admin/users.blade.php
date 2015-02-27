@@ -172,7 +172,8 @@
     <td class="active">Created At</td>
     <td class="active">Updated At</td>
     <td class="active">Modify</td>
-  </tr><?php if(isset($users)): foreach($users as $user):?>
+  </tr>
+    <?php if(isset($users)): foreach($users as $user):?>
     <tr>
       <td class="active"><a class="<?php echo $user->id;?>-id" href="../profile/{{$user->student_id}}"><?php echo $user->id;?></a></td>
       <td class="active"><a class="<?php echo $user->id;?>-sid" href="../profile/{{$user->student_id}}"><?php echo $user->student_id;?></a></td>

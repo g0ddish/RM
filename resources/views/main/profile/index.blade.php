@@ -16,7 +16,7 @@
     }
 </style>
 
-<div class="col-md-12" style="height: 100%; background-color: #55AA55; padding-top:60px;">
+<div class="col-md-12" style=" padding-top:60px;">
     <div class="col-md-3">
     <?php if(!is_null($user->avatar)): ?>
            {!! HTML::image($user->avatar, 'avatar', array('class' => 'img-responsive img-rounded', 'width' => '256px', 'height' => '256px')) !!}
