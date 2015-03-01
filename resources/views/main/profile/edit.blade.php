@@ -13,6 +13,11 @@
             availableTags: {!! json_encode($array)  !!},
             fieldName: "skills[]"
         });
+
+    $(".extra-course").click(function () {
+            $(".course-container").append("<div style='margin-top: 10px;' class='col-md-6'><input type='text' class='form-control' id='' name='course' placeholder='Course Name'></div>"+
+        "<div class='col-md-6'><input  style='margin-top: 10px;'  type='text' class='form-control' id='' name='prof' placeholder='Professors Name'></div>");
+    });
     });
 </script>
 <?php
@@ -89,6 +94,20 @@ $progs[] = $program->ProgramName;
           </ul>
           <p class="help-block">Ex. AutoCAD, PHP, Java</p>
       </div>
+      <div class="form-group">
+          <label for="">Courses</label>
+            <div class="container-fluid course-container">
+          <div class="col-md-6">
+              <input type="text" class="form-control" id="" name="course" placeholder="Course Name">
+          </div>
+              <div class="col-md-6">
+          <input type="text" class="form-control" id="" name="prof" placeholder="Professors Name">
+          </div>
+            </div>
+          <a class="btn btn-success extra-course"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </a>
+          </div>
+
   </div>
 </div>
 </div>
