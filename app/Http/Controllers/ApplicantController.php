@@ -5,6 +5,7 @@ use View;
 use Sentry;
 use Input;
 use DB;
+use Mail;
 use ResearchMonster\Models\User;
 use ResearchMonster\Models\Skill;
 use ResearchMonster\Models\Project;
@@ -53,13 +54,13 @@ class ApplicantController extends Controller {
                     $applicantrow = DB::table('project_user')->where('user_id', $user->id)->where('project_id', $project->id)->update(['status' => 2]);
                     //Send an email here to the person telling them they are denied!!!
 
-                    /*
-                     *   Mail::send('emails.project', array('user' => $mailUser, 'project' => $project), function ($message) use ($mUser) {
-                        $email = $mUser->email;
+                    Mail::send('emails.deny', array('user' => $user, 'project' => $project), function ($message) use ($user) {
+                        $email = $user->email;
                         $message->from('no-reply@georgebrown.ca', 'Research Monster');
-                        $message->to($email)->subject('A Project Matching Your Skills!');
+
+                        $message->to($email)->subject('Sorry, a project has expired!');
                     });
-                     */
+
                 }
             }
         }
@@ -74,13 +75,12 @@ class ApplicantController extends Controller {
                     $applicantrow = DB::table('project_user')->where('user_id', $user->id)->where('project_id', $project->id)->update(['status' => 1]);
                     //Send an email here to the person telling them they are accepted!!!
 
-                    /*
-                     *   Mail::send('emails.project', array('user' => $mailUser, 'project' => $project), function ($message) use ($mUser) {
-                        $email = $mUser->email;
+                     Mail::send('emails.accept', array('user' => $user, 'project' => $project), function ($message) use ($user) {
+                        $email = $user->email;
                         $message->from('no-reply@georgebrown.ca', 'Research Monster');
-                        $message->to($email)->subject('A Project Matching Your Skills!');
+                        $message->to($email)->subject('You\'ve been accepted!');
                     });
-                     */
+
                 }
             }
 
