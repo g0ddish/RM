@@ -44,6 +44,15 @@
                                                                                                                                                              top: -5px" src="{{asset('img/monsters/mon2small.png')}}"/><?php endif; echo $group->name; ?></span>
 
     <?php endforeach; ?>
+          <ul class="list-unstyled">
+          <?php
+                  if(json_decode($user->courses) != null){
+          foreach(json_decode($user->courses) as $course => $prof){
+              echo "<li><div  style='display: inline-block' class='text-info'>".  $course . "</div> <div  style='display: inline-block'>with</div> <div  style='display: inline-block' class='text-success'>$prof</div></li>";
+          }
+                      }
+          ?>
+          </ul>
       </div>
     </div>
     </div>

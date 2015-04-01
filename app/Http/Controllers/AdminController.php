@@ -3,6 +3,8 @@ namespace ResearchMonster\Http\Controllers;
 
 use View;
 use Sentry;
+use ResearchMonster\Models\User;
+use ResearchMonster\Models\Program;
 use ResearchMonster\Models\Project;
 use Redirect;
 use Input;
@@ -51,6 +53,8 @@ class AdminController extends Controller {
 
     public function storeUser()
     {
+
+
         $permission = parent::requireAdminPermission();
         if($permission != false)
             return $permission;
@@ -156,6 +160,41 @@ class AdminController extends Controller {
             $user->delete();
             $users = Sentry::findAllUsers();
             return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users), 'title'=> APPNAME]);
+        }else{
+            if(Input::has('keyword')){
+                $keyword = Input::get('keyword');
+                $users1 = User::whereHas('programs', function($q) use ($keyword)
+                {
+                    $q->where('ProgramName', $keyword);
+                })->get()->all();
+
+                $users2 = User::where('courses', 'like', '%'. $keyword . '%')->get()->all() ;
+                $users = array_merge($users1, $users2);
+
+            }
+
+            if(Input::has('skills')){
+                $skills = Input::get('skills');
+
+                $users1 = User::whereHas('skills', function($q) use ($skills)
+                {
+                    foreach($skills as $keyword) {
+                        $q->where('name', $keyword);
+                    }
+                })->get()->all();
+
+                if(isset($users)){
+                    $users = array_merge($users, $users1);
+                }else{
+                    $users = $users1;
+                }
+
+            }
+            if(!isset($users)){
+                $users = Sentry::findAllUsers();
+            }
+            return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users)->with('programs', Program::all())->with('skills', Skill::all()), 'title'=> APPNAME]);
+
         }
     }
 
@@ -287,7 +326,7 @@ class AdminController extends Controller {
         }elseif($id == "users"){
            // $this->layout->title = APPNAME;
             $users = Sentry::findAllUsers();
-            return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users), 'title'=> APPNAME]);
+            return view($this->layout, ['content' =>  View::make('main.admin.users')->with('users', $users)->with('programs', Program::all())->with('skills', Skill::all()), 'title'=> APPNAME]);
 
         }elseif($id == "tags"){
             $skills = Skill::all();

@@ -5,6 +5,7 @@ use View;
 use Sentry;
 use ResearchMonster\Models\Skill;
 use ResearchMonster\Models\Project;
+use ResearchMonster\Models\Program;
 
 class HomeController extends BaseController {
 
@@ -31,21 +32,15 @@ class HomeController extends BaseController {
         }
         else
         {
-
-
-            // User is logged in
-         //   $this->layout->title = APPNAME;
-         //   $this->layout->content = View::make('main.index')->with('projects', Project::all());
+            $user = Sentry::getUser();
+            if(empty($user->first_name) && empty($user->last_name)){
+                return view($this->layout, ['content' => View::make('main.profile.edit')->with('user', $user)->with('programs', Program::all())->with('skills', Skill::all())->with('firstLogin','Please fill out your profile and choose a new password.'), 'title'=> APPNAME]);
+            }
             return view($this->layout, ['content' => View::make('main.index')->with('projects', Project::take(20)->where('status_id', 1)->get())->with('skills', Skill::take(15)->get()), 'title'=> APPNAME]);
 
-            /*  $user = Sentry::getUser();
 
-              $skillz = $user->skills;
 
-              foreach($skills as $skill){
-                  var_dump($skill);
-                  $user->skills()->sync($skills);
-              }*/
+
         }
 
        /* Sentry::register(array(

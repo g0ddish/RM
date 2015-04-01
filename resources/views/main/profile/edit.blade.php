@@ -14,10 +14,11 @@
             fieldName: "skills[]"
         });
 
-    $(".extra-course").click(function () {
-            $(".course-container").append("<div style='margin-top: 10px;' class='col-md-6'><input type='text' class='form-control' id='' name='course' placeholder='Course Name'></div>"+
-        "<div class='col-md-6'><input  style='margin-top: 10px;'  type='text' class='form-control' id='' name='prof' placeholder='Professors Name'></div>");
-    });
+        $(".extra-course").click(function () {
+                $(".course-container").append("<div style='margin-top: 10px;' class='col-md-6'><input type='text' class='form-control' id='' name='course[]' placeholder='Course Name'></div>"+
+            "<div class='col-md-6'><input  style='margin-top: 10px;'  type='text' class='form-control' id='' name='prof[]' placeholder='Professors Name'></div>");
+        });
+
     });
 </script>
 <?php
@@ -42,6 +43,10 @@ $progs[] = $program->ProgramName;
 <div class="col-md-12" style=" padding-top:60px;">
 
 <div class="col-md-6 col-md-offset-3">
+    <?php if(isset($firstLogin)){
+                echo "<div class='alert alert-warning'> $firstLogin </div>";
+            }
+    ?>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Basic Info</h3>
@@ -95,13 +100,33 @@ $progs[] = $program->ProgramName;
           <p class="help-block">Ex. AutoCAD, PHP, Java</p>
       </div>
       <div class="form-group">
-          <label for="">Courses</label>
+
+          <label for="">Relevant Courses</label>
             <div class="container-fluid course-container">
+                <?php
+
+                if(json_decode($user->courses) != null){
+
+                foreach(json_decode($user->courses) as $course => $prof){
+               // var_dump($prof);
+             //       var_dump($course);
+                   //die;
+                   echo "<div class='col-md-6'>
+             <input type='text' class='form-control' id='' name='course[]' value='$course' placeholder='Course Name'>
+         </div>";
+               echo "   <div class='col-md-6'>
+         <input type='text' class='form-control' id='' name='prof[]' value='$prof' placeholder='Professors Name'>
+         </div>";
+
+
+                }
+                    }
+                ?>
           <div class="col-md-6">
-              <input type="text" class="form-control" id="" name="course" placeholder="Course Name">
+              <input type="text" class="form-control" id="" name="course[]" placeholder="Course Name">
           </div>
               <div class="col-md-6">
-          <input type="text" class="form-control" id="" name="prof" placeholder="Professors Name">
+          <input type="text" class="form-control" id="" name="prof[]" placeholder="Professors Name">
           </div>
             </div>
           <a class="btn btn-success extra-course"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

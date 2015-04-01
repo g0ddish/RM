@@ -190,6 +190,33 @@ class ProfileController extends Controller {
                 }
             }
         }
+
+       if(Input::has('course') || Input::has('prof')){
+            $courses = array_filter(Input::get('course'));
+            $profs = array_filter(Input::get('prof'));
+
+          if(!empty($courses) && !empty($profs)){
+              if(count($courses) > 1 && count($profs) > 1){
+                  $user->courses = json_encode(array_combine($courses, $profs));
+
+              }else if(count($courses) > 0 && count($profs) > 0){   //I am the liquor
+                $data['fruits'] = array($courses[0]=>$profs[0]);
+                  $user->courses = json_encode($data['fruits']);
+              }else{
+                  $user->courses = null;
+              }
+          }else{
+              $user->courses = null;
+          }
+
+
+        }
+
+
+
+
+
+
         $user->save();
 
 

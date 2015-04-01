@@ -159,7 +159,7 @@
                                                                     break;
                                                                 case "msword":
                                                                     $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
-                                                                    echo "<iframe class='embed-responsive-item' src='$link' allowfullscreen webkitallowfullscreen></iframe>";
+                                                                    echo "<div class='col-md-12'><div class='  embed-responsive embed-responsive-16by9'> <iframe class='embed-responsive-item' src = '$link' allowfullscreen webkitallowfullscreen></iframe></div></div>";
                                                                     echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
                                                                     echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
                                                                     echo "<p>Download Word Document</p></div></div>";
@@ -183,7 +183,7 @@
                                                                     break;
                                                                 case "vnd.ms-powerpoint":
                                                                     $link = "http://docs.google.com/gview?url=".URL::to('/')."/". $pfile->file_location."&embedded=true";
-                                                                    echo "<iframe class='embed-responsive-item' src='$link' allowfullscreen webkitallowfullscreen></iframe>";
+                                                                    echo "<div class='col-md-12'><div class='  embed-responsive embed-responsive-16by9'> <iframe class='embed-responsive-item' src = '$link' allowfullscreen webkitallowfullscreen></iframe></div></div>";
                                                                      echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
                                                                     echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
                                                                     echo "<p>Download PowerPoint</p></div></div>";
@@ -293,9 +293,9 @@
                                                                 case "plain":
                                                                     $data = file_get_contents(base_path()."/".$pfile->file_location);
                                                                     echo "<pre>".  str_limit($data, 400)."</pre>";
-                                                                     echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
+                                                                    echo "<div class='panel panel-default center-block text-center'><div class='panel-body' style='background-color: #cccccc; border-color: white; color: #009926'>";
                                                                     echo "<a class='text-center' href='". asset($pfile->file_location) ."' download='$pfile->file_location'>".HTML::image('img/download.png', 'a picture', array( 'style' => 'max-height:100px; max-width:100px;'))."</a>";
-                                                                    echo "<p>Download Image</p></div></div>";
+                                                                    echo "<p>Download Full Text</p></div></div>";
 
                                                                     break;
                                                                 case 'yaml':
@@ -324,8 +324,11 @@
                                      }}
                              }
                              if($project->status_id == 1 && !isset($already)){
-                             echo "<div class='col-md-2 pull-right'>Form::open(['route' => ['projects.update', $project->id], 'method' => 'put'])<button type='submit' name='interested' value='$project->id' class='btn btn-block btn-lg btn-success'>I'm Interested</button>
-Form::close()</div>";
+                             echo "<div class='col-md-2 pull-right'>";
+                               echo  Form::open(['route' => ['projects.update', $project->id], 'method' => 'put']);
+                                echo"<button type='submit' name='interested' value='$project->id' class='btn btn-block btn-lg btn-success'>I'm Interested</button>";
+                                    echo Form::close();
+                                    echo "</div>";
                          }elseif(isset($already)){
                                  echo " <div class='col-md-2 pull-right'>You've applied for this project already.</div>";
                              }

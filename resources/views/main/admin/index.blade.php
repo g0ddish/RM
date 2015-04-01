@@ -13,7 +13,6 @@
                         <div class="col-xs-12 col-md-12 text-center">
                             <div class="row">
                           <a href="<?php echo action('AdminController@show', 'users');?>" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-wrench"></span> <br/>Manage Users</a>
-                          <a href="<?php echo action('AdminController@show', 'users');?>" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-search"></span> <br/>Search Users</a>
                           </div>
                             <div class="row">
                                 <a href="<?php echo action('AdminController@show', 'groups');?>" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-th-large"></span><span class="glyphicon glyphicon-wrench"></span> <br/>Manage Groups</a>

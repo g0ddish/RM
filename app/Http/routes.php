@@ -36,4 +36,5 @@ Route::get('/logout', function()
 });
 
 Route::get('/applicants', 'ApplicantController@index');
+Route::post('/applicants', 'ApplicantController@update');
 

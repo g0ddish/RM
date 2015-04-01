@@ -10,9 +10,9 @@ if(isset($message2)){
 
             <div class="col-md-12">
             <img class="img-responsive center-block animated bounceInUp" style="margin-top:10px; max-height: 200px;" src="{{asset('img/monsters/bigmon.png')}}" alt="Monster 1" />
-              <div class="animated fadeIn" style="animation-delay: 2s;  -webkit-animation-delay: 2s; ">  {!! $msg or '' !!}</div>
             </div>
             <div class="col-md-8 col-md-offset-2">
+                <div class="animated fadeIn" style="animation-delay: 2s;  -webkit-animation-delay: 2s; ">  {!! $msg or '' !!}</div>
                 <div class="panel panel-default animated bounceInLeft" style="animation-delay: 1s;  -webkit-animation-delay: 1s; ">
                     <div class="panel-body">
                         <p style="font-size: 1.25em" class="text-success">Congratulations as a student enrolled in George Brown College

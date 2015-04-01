@@ -1,4 +1,6 @@
 {!! HTML::script('js/tag-it.js') !!}
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+
 {!! HTML::style('css/jquery.tagit.css') !!}
 <style>
     .custom-search-form{
@@ -13,14 +15,17 @@
     <?php
     foreach($skills as $skill){
        $array[] = $skill->name;
+    //echo $skill->name;
     }
+    //die;
     ?>
-    $( document ).ready(function() {
+    $(document).ready(function() {
                 $("#myTags").tagit({
                     autocomplete: {delay: 0, minLength: 0},
                     availableTags: {!! json_encode($array)  !!},
             fieldName: "skills[]"
     });
+
     });
 </script>
 <div class="col-md-12" style=" padding-top:60px;">
@@ -50,6 +55,17 @@
     <div class="form-group">
         <label for="myTags">Required Skills</label>
         <ul id="myTags">
+        <?php
+
+            if(is_array($searchedSkills)){
+            foreach($searchedSkills as $sSkill){
+                echo "<li>$sSkill</li>";
+            }
+                }else{
+                echo "<li>$searchedSkills</li>";
+
+            }
+                ?>
         </ul>
     </div>
                     </div>

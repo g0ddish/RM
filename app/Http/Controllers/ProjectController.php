@@ -30,6 +30,7 @@ class ProjectController extends Controller {
         if (Input::has('mobile')) {
             return json_encode(Project::take(20)->get());
         }else {
+            $skills = null;
             if(Input::has('skills')){
                 $skills = Input::get('skills');
                 $searchTerms = explode(" ", Input::get('keywords'));
@@ -48,9 +49,9 @@ class ProjectController extends Controller {
                    // $projects = Project::has('skills');
                     $projects = Project::whereHas('skills', function($q) use ($skills)
                     {
-                        foreach($skills as $skill) {
-                            $q->where('name', $skill);
-                        }
+
+                            $q->whereIn('name', $skills);
+
 
                     })->get();
                  
@@ -61,7 +62,7 @@ class ProjectController extends Controller {
                     var_dump($sk);
                     foreach($sk as $skill) {
                        $projects = Project::whereHas('skills', function ($q) use ($skill) {
-                            $q->where('name', '=', $skill);
+                           $q->where('name', 'LIKE', "%$skill%");
                         })->get();
                     }
                 }else {
@@ -88,7 +89,7 @@ class ProjectController extends Controller {
 
                 $projects = Project::all();
             }
-            return view($this->layout, ['content' => View::make('main.project.index')->with('projects', $projects)->with('skills', Skill::all()), 'title' => APPNAME]);
+            return view($this->layout, ['content' => View::make('main.project.index')->with('projects', $projects)->with('skills', Skill::all())->with('searchedSkills', $skills), 'title' => APPNAME]);
         }
 	}
 

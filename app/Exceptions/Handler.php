@@ -53,17 +53,21 @@ class Handler extends ExceptionHandler
                         $message->from('no-reply@georgebrown.ca', 'Research Monster');
                         $message->to($email)->subject('Welcome!');
                     });
+                    Session::put('message', 'Registered successfully, a password has been email to you.');
+                    Session::flash('message', 'Registered successfully, a password has been email to you.');
 
-                    return Redirect::to('/')->with('message', 'Registered successfully, a password has been email to you.');
+                    return Redirect::to('/');
                 } else {
 
-                    return Redirect::to('/register')->with('message', 'Malformed info');
+                    return Redirect::to('/register')->with('message', 'Registered successfully, a password has been email to you.');
                 }
             } elseif ($e instanceof UserExistsException) {
                 return Redirect::to('/')->with('message', 'User with this login already exists.');
             } elseif ($e instanceof UserNotFoundException) {
                 return Redirect::to('/')->with('message', 'Incorrect info');
             }
+        } elseif ($e instanceof UserNotFoundException) {
+            return Redirect::to('/')->with('message', 'Incorrect info');
         } else {
              parent::report($e);
         }
@@ -102,16 +106,20 @@ class Handler extends ExceptionHandler
                             $message->to($email)->subject('Welcome!');
                         });
 
-                        return Redirect::to('/')->with('message', 'Registered successfully, a password has been email to you.');
+                        Session::put('message', 'Registered successfully, a password has been email to you.');
+                        Session::flash('message', 'Registered successfully, a password has been email to you.');
+                        return Redirect::to('/');
                     } else {
 
-                        return Redirect::to('/register')->with('message', 'Malformed info');
+                        return Redirect::to('/register')->with('message', 'Registered successfully, a password has been email to you.');
                     }
                 } elseif ($e instanceof UserExistsException) {
                     return Redirect::to('/')->with('message', 'User with this login already exists.');
                 } elseif ($e instanceof UserNotFoundException) {
                     return Redirect::to('/')->with('message', 'Incorrect info');
                 }
+            } elseif ($e instanceof UserNotFoundException) {
+                return Redirect::to('/')->with('message', 'Incorrect info');
             } else {
                 return parent::render($request, $e);
             }

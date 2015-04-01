@@ -1,3 +1,8 @@
+<?php
+$message2 = Session::pull('message');
+if(isset($message2)){
+    $msg = "<div class='alert alert-success'>$message2</div>";
+} ?>
 <?php if(isset($message)){
     $message = "<div class='alert alert-warning'>".$message."</div>";
 }
@@ -18,6 +23,8 @@
                     <input type="hidden" name="register" value="1">
                 </div>
                 {!! $message or '' !!}
+                <div class="animated fadeIn" style="animation-delay: 2s;  -webkit-animation-delay: 2s; ">  {!! $msg or '' !!}</div>
+
                 <button type="submit" class="btn btn-block btn-success">Register</button>
                 </form>
             </div>

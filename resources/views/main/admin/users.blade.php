@@ -1,3 +1,7 @@
+{!! HTML::script('js/tag-it.js') !!}
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+
+{!! HTML::style('css/jquery.tagit.css') !!}
 <!-- Delete User Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -130,7 +134,20 @@
     </div>
   </div>
 </div>
+<?php
+$progs = array();
+foreach($programs as $program){
+    $progs[] = $program->ProgramName;
+}?>
+
  <script>
+     $(function() {
+         var availableTags = <?php echo json_encode($progs); ?>;
+         $( "#tags" ).autocomplete({
+             source: availableTags
+         });
+     });
+
  $(function() {
      $(".edit-btn").click(function() {
             $("#editModalLabel").text("Edit User " + ($(this).val()));
@@ -154,12 +171,61 @@
 
  });
   </script>
-  <div class="col-md-2" style="padding-top:60px; padding-bottom: 10px;"><a href="./" class="btn btn-block btn-warning"><span class="glyphicon glyphicon-arrow-left"></span> Admin Panel</a></div>
-<div class="col-md-2 pull-right" style="padding-top:60px; padding-bottom: 10px;"><a  data-toggle="modal" data-target="#myModal" class="btn btn-block btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Add New User</a></div>
+<script>
+    <?php
+    foreach($skills as $skill){
+       $array[] = $skill->name;
+    //echo $skill->name;
+    }
+    //die;
+    ?>
+    $(document).ready(function() {
+                $("#myTags").tagit({
+                    autocomplete: {delay: 0, minLength: 0},
+                    availableTags: {!! json_encode($array)  !!},
+            fieldName: "skills[]"
+    });
+
+    });
+</script>
+<div class="container-fluid" style="margin-top:60px;">
+<div class="col-md-6 col-md-offset-3">
+    <form style="color: #ffffff" method="post">
+        <div class="form-group">
+            <label for="program">Program, Course or Professor</label>
+            <input type="text" class="form-control" id="tags" name="keyword" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="myTags">Skills</label>
+            <ul id="myTags">
+                <?php
+                    if(isset($searchedSkills)){
+                if(is_array($searchedSkills)){
+                    foreach($searchedSkills as $sSkill){
+                        echo "<li>$sSkill</li>";
+                    }
+                }else{
+                    echo "<li>$searchedSkills</li>";
+
+                }
+                    }
+                ?>
+            </ul>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+</div>
+  <div class="col-md-2" style="padding-top:10px; padding-bottom: 10px;"><a href="./" class="btn btn-block btn-warning"><span class="glyphicon glyphicon-arrow-left"></span> Admin Panel</a></div>
+<div class="col-md-2 pull-right" style="padding-top:10px; padding-bottom: 10px;"><a  data-toggle="modal" data-target="#myModal" class="btn btn-block btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Add New User</a></div>
 <div class="col-md-12">
-<p>
+
+
+
+    <p>
 <?php  if(isset($newuser)){ echo "<div class='alert alert-success'>New group created successfully!";}?>
 </p>
+
 <table class="table">
   <tr>
     <td class="active">ID</td>
